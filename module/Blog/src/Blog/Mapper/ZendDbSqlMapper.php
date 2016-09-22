@@ -87,12 +87,12 @@ class ZendDbSqlMapper implements PostMapperInterface
 
     if ($postObject->getId()) {
       // ID present, it's an Update
-      $action = new Update('post');
+      $action = new Update('posts');
       $action->set($postData);
       $action->where(array('id = ?' => $postObject->getId()));
     } else {
       // ID NOT present, it's an Insert
-      $action = new Insert('post');
+      $action = new Insert('posts');
       $action->values($postData);
     }
 

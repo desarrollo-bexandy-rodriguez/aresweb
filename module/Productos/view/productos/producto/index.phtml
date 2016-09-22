@@ -1,0 +1,26 @@
+<?php
+$title = 'Listado de Productos';
+$this->headTitle($title);
+?>
+<h1><?php echo $this->escapeHtml($title); ?></h1>
+<p><a href="<?php echo $this->url('producto', array('action'=>'add'));?>">Crear Nuevo Producto</a></p>
+
+<div class="row">
+    <?php foreach ($productos as $producto ): ?>
+
+        <div class="col-sm-4 col-md-3">
+            <a href="<?php echo $this->url('producto', array('action'=>'edit', 'id' => $producto->getId()));?>">
+                <div class="thumbnail">
+                    <img src="<?= $producto->getImagen() ?>" alt="<?= $producto->getNombre() ?>">
+                    <div class="caption">
+                        <h3 id="producto<?= $producto->getId() ?>"><?= $producto->getNombre() ?></h3>
+                        <p>Categoría:<?= $producto->getNombcategoria() ?></p>
+                        <p>Precio:<?= $producto->getPreciounidad() ?> BsF por  <?= $producto->getUnidadmedidaventas() ?></p>
+
+                    </div>
+                </div>
+            </a>
+        </div>
+
+    <?php endforeach ?>
+</div>

@@ -1,0 +1,20 @@
+<h1>Productos\ProductosController::indexAction()</h1>
+<div class="row">
+<?php foreach ($this->productos as $producto ): ?>
+
+    <div class="col-sm-4 col-md-3">
+        <a href="productos/editar/<?= $producto->getId() ?>">
+        <div class="thumbnail">
+            <img src="<?= $producto->getImagen() ?>" alt="<?= $producto->getNombre() ?>">
+            <div class="caption">
+                <h3 id="producto<?= $producto->getId() ?>"><?= $producto->getNombre() ?></h3>
+                <p>Categoría:<?= $producto->getIdcategoria() ?></p>
+                <p>Precio:<?= $producto->getPreciounidad() ?> BsF por  <?= $producto->getUnidadmedidaventas() ?></p>
+                
+            </div>
+        </div>
+        </a>
+    </div>
+
+<?php endforeach ?>
+</div>

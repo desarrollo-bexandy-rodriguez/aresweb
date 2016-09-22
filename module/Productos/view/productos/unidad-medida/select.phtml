@@ -1,0 +1,35 @@
+<div class="well">
+    <?php
+    $title = 'Seleccione la Unidad de Medida';
+    $this->headTitle($title);
+    ?>
+    <h1><?php echo $this->escapeHtml($title); ?></h1>
+
+    <div class="row">
+            <div class="col-sm-4 col-md-3">
+
+                <div class="btn-group" role="group" aria-label="...">
+                    <?php foreach ($this->unidadesMedida as $unidadMedida ): ?>
+                        <?php
+                        if ($tipo === 'det') {
+                            $urldet = $unidadMedida->getId();
+                        }
+                        if ($tipo === 'may') {
+                            $urlmay = $unidadMedida->getId();
+                        }
+                        ?>
+                        <a href="<?php echo $this->url($urlroute, array(
+                            'action'=>$urlaction,
+                            'id' => $urlid,
+                            'cat' => $urlcat,
+                            'det' => $urldet,
+                            'may' => $urlmay
+
+                        ));?>">
+                            <button type="button" class="btn btn-default"><?= $unidadMedida->getSimbolo() ?></button>
+                        </a>
+                    <?php endforeach ?>
+                </div>
+            </div>
+    </div>
+</div>

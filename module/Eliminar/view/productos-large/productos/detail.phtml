@@ -1,0 +1,22 @@
+<div class="jumbotron text-center">
+    <img src="<?php echo $this->producto->getImagen(); ?>" alt="<?php echo $this->escapeHtml($this->producto->getNombre()); ?>">
+    <h1><?php echo $this->escapeHtml($this->producto->getNombre()); ?></h1>
+</div>
+
+<div class="row marketing text-center">
+    <div class="col-lg-6">
+        <h4>Categoría</h4>
+        <p><?php echo $this->escapeHtml($this->producto->getCategoria()); ?></p>
+
+        <h4>Precio por Unidad</h4>
+        <p><?php echo $this->escapeHtml($this->producto->getPrecioUnidad()); ?></p>
+    </div>
+
+    <div class="col-lg-6">
+        <h4>Unidad de Medidas (Ventas Al Detal)</h4>
+        <p><?php echo $this->escapeHtml($this->producto->getUnidadMedidaVentas()); ?></p>
+
+        <h4>Unidad de Medidas (Almacén al Mayor)</h4>
+        <p><?php echo $this->escapeHtml($this->producto->getUnidadMedidaAlmacen()); ?></p>
+    </div>
+</div>

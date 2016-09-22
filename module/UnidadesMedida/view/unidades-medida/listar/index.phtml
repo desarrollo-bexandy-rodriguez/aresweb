@@ -1,0 +1,18 @@
+<h1>UnidadesMedida\ListarController::indexAction()</h1>
+<div class="row">
+<?php foreach ($this->unidadesMedida as $unidadMedida ): ?>
+
+    <div class="col-sm-4 col-md-3">
+        <a href="unidadesmedida/editar/<?= $unidadMedida->getId() ?>">
+        <div class="thumbnail">
+              <div class="caption">
+                <h3 id="unidadMedida<?= $unidadMedida->getId() ?>"><?= $unidadMedida->getNombre() ?></h3>
+                <p>Abreviatura:<?= $unidadMedida->getAbreviatura() ?></p>
+                <p>Símbolo:<?= $unidadMedida->getSimbolo() ?></p>
+            </div>
+        </div>
+        </a>
+    </div>
+
+<?php endforeach ?>
+</div>

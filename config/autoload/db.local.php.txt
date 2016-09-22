@@ -1,0 +1,18 @@
+<?php
+/**
+ * Created by PhpStorm.
+ * User: brodriguez
+ * Date: 15/09/16
+ * Time: 01:10 PM
+ */
+return array(
+    'db' => array(
+        'driver'         => 'Pdo',
+        'username'       => 'root',
+        'password'       => 'p3lk4x',  //edit this
+        'dsn'            => 'mysql:dbname=zf2-tutorial;host=localhost;charset=utf8',
+        'driver_options' => array(
+            \PDO::MYSQL_ATTR_INIT_COMMAND => 'SET NAMES \'UTF8\''
+        )
+    ),
+);

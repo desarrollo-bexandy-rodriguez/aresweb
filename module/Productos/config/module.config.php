@@ -7,31 +7,66 @@
  */
 
 return array(
-    'service_manager' => array(
-        'invokables' => array(
-            'Productos\Service\ProductosServiceInterface' => 'Productos\Service\ProductosService',
-        ),
-    ),
     'view_manager' => array(
         'template_path_stack' => array(
             __DIR__.'/../view',
         ),
     ),
     'controllers' => array(
-        'factories' => array(
-            'Productos\Controller\Productos' => 'Productos\Factory\ProductosControllerFactory',
+        'invokables' => array(
+            'Productos\Controller\Producto' => 'Productos\Controller\ProductoController',
+            'Productos\Controller\Categoria' => 'Productos\Controller\CategoriaController',
+            'Productos\Controller\UnidadMedida' => 'Productos\Controller\UnidadMedidaController',
         ),
     ),
     'router' => array(
         'routes' => array(
-            'productos' => array(
-                'type' => 'literal',
+            'producto' => array(
+                'type'    => 'Segment',
                 'options' => array(
-                    'route' => '/productos',
+                    'route'    => '/producto[/:action[/:id][/:cat][/:det][/:may]]',
                     'defaults' => array(
-                        'controller' => 'Productos\Controller\Productos',
-                        'action' => 'index',
+                        '__NAMESPACE__' => 'Productos\Controller',
+                        'controller'    => 'Producto',
+                        'action'        => 'index',
                     ),
+                ),
+                'constraints' => array(
+                    'action'    =>  '(add|edit|delete)',
+                    'id'    =>  '[0-9]*',
+                    'cat'    =>  '[0-9]*',
+                    'det'    =>  '[0-9]*',
+                    'may'    =>  '[0-9]*',
+                ),
+            ),
+            'categoria' => array(
+                'type'    => 'Segment',
+                'options' => array(
+                    'route'    => '/categoria[/:action[/:id]]',
+                    'defaults' => array(
+                        '__NAMESPACE__' => 'Productos\Controller',
+                        'controller'    => 'Categoria',
+                        'action'        => 'index',
+                    ),
+                ),
+                'constraints' => array(
+                    'action'    =>  '(add|edit|delete|select)',
+                    'id'    =>  '[1-9][0-9]*',
+                ),
+            ),
+            'unidad-medida' => array(
+                'type'    => 'Segment',
+                'options' => array(
+                    'route'    => '/unidad-medida[/:action[/:id][/:tipo]]',
+                    'defaults' => array(
+                        '__NAMESPACE__' => 'Productos\Controller',
+                        'controller'    => 'UnidadMedida',
+                        'action'        => 'index',
+                    ),
+                ),
+                'constraints' => array(
+                    'action'    =>  '(add|edit|delete|select)',
+                    'id'    =>  '[1-9][0-9]*',
                 ),
             ),
         ),

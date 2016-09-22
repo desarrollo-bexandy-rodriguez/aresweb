@@ -1,0 +1,14 @@
+<!-- Filename: /module/Productos/view/productos/modificar/nuevo.phtml -->
+<h1>ModificarController::editarAction()</h1>
+<?php
+$form = $this->form;
+$form->setAttribute('action', $this->url('productos-large/editar', array(), true));
+$form->prepare();
+
+$form->get('submit')->setValue('Actualizar Producto');
+
+echo $this->form()->openTag($form);
+
+echo $this->formCollection($form);
+
+echo $this->form()->closeTag();

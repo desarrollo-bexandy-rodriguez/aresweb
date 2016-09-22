@@ -1,0 +1,9 @@
+<h1>BorrarController::eliminarAction()</h1>
+<p>
+    Está seguro que quiere Eliminar
+    '<?php echo $this->escapeHtml($this->producto->getNombre()); ?>'
+</p>
+<form action="<?php echo $this->url('productos-large/eliminar', array(), true) ?>" method="post">
+    <input type="submit" name="confirmar_eliminacion" value="si">
+    <input type="submit" name="confirmar_eliminacion" value="no">
+</form>

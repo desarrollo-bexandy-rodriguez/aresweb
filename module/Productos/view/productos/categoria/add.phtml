@@ -1,0 +1,25 @@
+<?php
+$title = 'Crear Nueva Categoria';
+$this->headTitle($title);
+?>
+    <h1><?php echo $this->escapeHtml($title); ?></h1>
+
+<?php
+$form = $this->form;
+$form->setAttribute('action', $this->url('categoria', array('action' => 'add')));
+$form->get('submit')->setAttribute('value', 'Add');
+$form->prepare();
+
+echo $this->form()->openTag($form);
+echo $this->formHidden($form->get('id'));
+echo $this->formRow($form->get('nombre'));
+echo $this->formRow($form->get('imagen'));
+?>
+    <div>
+        <?php echo $this->formInput($form->get('submit')); ?>
+    </div>
+<?php
+echo $this->form()->closeTag($form);
+
+
+
