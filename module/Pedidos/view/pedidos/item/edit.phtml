@@ -1,0 +1,36 @@
+<div class="well">
+<?php
+$title = 'Añadir Item';
+$this->headTitle($title);
+?>
+    <h1><?php echo $this->escapeHtml($title); ?></h1>
+
+    <div>
+        <div class="thumbnail">
+            <img src="<?= $producto->getImagen() ?>" alt="<?= $producto->getNombre() ?>">
+            <div class="caption">
+                <h3 id="producto<?= $producto->getId() ?>"><?= $producto->getNombre() ?></h3>
+                <p>Categoría:<?= $producto->getNombcategoria() ?></p>
+                <p>Precio:<?= $producto->getPreciounidad() ?> BsF por  <?= $producto->getUnidadmedidaventas() ?></p>
+
+            </div>
+        </div>
+    </div>
+<?php
+$form = $this->form;
+$url = $this->url('item', array('action' => 'edit', 'pedido' => $idpedido, 'producto' => $idproducto));
+$form->setAttribute('action', $url);
+$form->get('submit')->setAttribute('value', 'Añadir Item');
+$form->prepare();
+
+echo $this->form()->openTag($form);
+echo $this->formHidden($form->get('pedido'));
+echo $this->formHidden($form->get('producto'));
+echo $this->formRow($form->get('cantidad'));
+?>
+    <div>
+        <?php echo $this->formInput($form->get('submit')); ?>
+    </div>
+<?php
+echo $this->form()->closeTag($form); ?>
+</div>

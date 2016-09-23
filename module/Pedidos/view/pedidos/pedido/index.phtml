@@ -1,0 +1,31 @@
+<?php
+$title = 'Listado de Pedidos';
+$this->headTitle($title);
+?>
+<h1><?php echo $this->escapeHtml($title); ?></h1>
+
+<div class="table-responsive">
+<table class="table table-striped">
+    <tr>
+        <th>Fecha</th>
+        <th>Hora</th>
+        <th>Código del Pedido</th>
+        <th>Nombre del Cliente</th>
+        <th>Estatus</th>
+        <th>Tomado Por</th>
+        <th>Atendido por</th>
+    </tr>
+    <?php foreach ($pedidos as $pedido): ?>
+        <tr>
+            <td><?php echo $pedido->getFecha(); ?>
+            <td><?php echo $pedido->getHora(); ?>
+            <td><strong><?php echo $pedido->getCodigo(); ?></strong></td>
+            <td><strong><?php echo $pedido->getCliente(); ?></strong></td>
+            <td><strong><?php echo $pedido->getMsgclientes(); ?></strong></td>
+            <td><?php echo $pedido->getNombvendedor(); ?>
+            <td><?php echo $pedido->getNombdespachador(); ?>
+
+        </tr>
+    <?php endforeach; ?>
+</table>
+</div>
