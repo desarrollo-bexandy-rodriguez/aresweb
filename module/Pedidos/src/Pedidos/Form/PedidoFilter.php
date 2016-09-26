@@ -52,6 +52,14 @@ class PedidoFilter extends InputFilter
         ));
 
         $this->add(array(
+            'name' => 'preciototal',
+            'required' => true,
+            'filters' => array(
+                array('name' => 'Int'),
+            ),
+        ));
+
+        $this->add(array(
             'name' => 'cliente',
             'required' => true,
             'filters' => array(

@@ -40,3 +40,7 @@ div.container a.brand {
     width: 150px;
     height: auto;
 }
+
+a:hover, a:focus {
+    text-decoration: none;
+}

@@ -45,22 +45,38 @@ class PedidoController extends AbstractActionController
     public function addAction()
     {
         $pedidoMapper = $this->getPedidoMapper();
-        $pedidoForm = new PedidoForm();
+        $lastCodigoToday = $pedidoMapper->getLastCodigoToday();
+        $codigo = $this->generateCodigo($lastCodigoToday);
         $pedidoEntity = new PedidoEntity();
-        $pedidoForm->bind($pedidoEntity);
 
-        $itemMapper = $this->getItemMapper();
-        $itemForm = new ItemForm();
-        $itemEntity = new ItemEntity();
-        //$itemForm->bind($itemEntity);
+        $pedidoEntity->setCodigo($codigo);
+        $pedidoEntity->setEstatus(1);
+        $pedidoEntity->setPreciototal(0);
+        $pedidoEntity->setFecha(date('Y-m-d'));
+        $pedidoEntity->setHora(date('H:i:s'));
 
-        $productoMapper = $this->getProductoMapper();
+        $pedidoMapper->savePedido($pedidoEntity);
 
-        return new ViewModel(array(
-            'pedidoForm' => $pedidoForm,
-            'itemEntity' => $itemEntity,
-            'productos' =>  $productoMapper->fetchAll(),
-        ));
+        $id = $pedidoEntity->getId();
+
+        if (!$id) {
+            return $this->redirect()->toRoute('pedido', array('action'=>'add'));
+        }
+
+        return $this->redirect()->toRoute('pedido', array('action'=>'edit', 'id' => $id));
+    }
+
+    public function generateCodigo($ultimoCodigo)
+    {
+        if (($ultimoCodigo == 0) || ($ultimoCodigo === 9999)){
+            $nuevoCodigo = (string) date('Ymd').'-0001';
+            return $nuevoCodigo;
+        } else {
+            $ultimaSecuencia = substr($ultimoCodigo,-4);
+            $nuevaSecuencia =  (int) $ultimaSecuencia + 1;
+            $nuevoCodigo = date('Ymd').'-'.str_pad($nuevaSecuencia,4,'0',STR_PAD_LEFT);
+            return $nuevoCodigo;
+        }
     }
 
     public function editAction()
@@ -68,22 +84,30 @@ class PedidoController extends AbstractActionController
         $id = (int)$this->params('id');
         $pedidoMapper = $this->getPedidoMapper();
         $pedidoForm = new PedidoForm();
-        $pedidoEntity = new PedidoEntity();
         $pedido = $pedidoMapper->getPedido($id);
-        $pedidoForm->bind($pedidoEntity);
+        $pedidoForm->bind($pedido);
 
         $itemMapper = $this->getItemMapper();
-        $itemForm = new ItemForm();
-        $itemEntity = new ItemEntity();
         $items = $itemMapper->getItemsPedido($id);
-        //$itemForm->bind($itemEntity);
 
         $productoMapper = $this->getProductoMapper();
+
+        $request = $this->getRequest();
+        if ($request->isPost()) {
+            $pedidoForm->setData($request->getPost());
+            if ($pedidoForm->isValid()) {
+                $pedido->setEstatus(2);
+                $this->getPedidoMapper()->savePedido($pedido);
+
+                return $this->redirect()->toRoute('pedido');
+            }
+        }
 
         return new ViewModel(array(
             'pedido' => $pedido,
             'items' => $items,
             'productos' =>  $productoMapper->fetchAll(),
+            'pedidoForm' => $pedidoForm,
         ));
     }
 }

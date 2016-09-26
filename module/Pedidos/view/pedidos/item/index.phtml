@@ -2,41 +2,71 @@
 $title = 'Items del Pedido';
 $this->headTitle($title);
 ?>
-<h1><?php echo $this->escapeHtml($title); ?></h1>
 
-<div class="row">
-    <div class="col-sm-6 col-md-6">
-        <h3>Código del Pedido: <td><?php echo $pedido->getCodigo(); ?></h3>
+<div class="well well-sm text-center">
+    <h1><?php echo $this->escapeHtml($title); ?></h1>
+</div>
+
+
+<div class="panel panel-default">
+    <div class="panel-heading">
+        <div class="row">
+            <div class="col-sm-6 col-md-2">
+                Fecha: <?php echo $pedido->getFecha(); ?><br>
+                Hora: <?php echo $pedido->getHora(); ?>
+            </div>
+
+
+            <div class="col-sm-6 col-md-8 text-center text-primary">
+                <strong>Pedido: <?php echo $pedido->getCodigo(); ?> <br>
+                    Cliente: <?php echo $pedido->getCliente(); ?></strong>
+            </div>
+
+
+            <div class="col-sm-6 col-md-2">
+                Tomado por: <?php echo $pedido->getNombvendedor(); ?><br>
+                Atendido por: <?php echo $pedido->getNombdespachador(); ?>
+            </div>
+        </div>
     </div>
-    <div class="col-sm-6 col-md-6">
-        <h3>Cliente: <td><?php echo $pedido->getCliente(); ?></h3>
+
+    <div class="panel-body">
+        <div class="list-group">
+            <?php foreach ($items as $item): ?>
+                <?php $idPedido = $item->getPedido();?>
+                <?php $idProducto = $item->getProducto();?>
+                <a href="<?php echo $this->url('item', array('action'=>'edit', 'pedido' => $idPedido, 'producto' => $idProducto));?>" class="list-group-item">
+                    <span class="badge">Subtotal: <br><?php echo $item->getSubtotal(); ?> BsF</span>
+                    <p class="text-left"><?php echo $item->getCantidad(); ?> <?php echo $item->getUnidmedprod(); ?> de <?php echo $item->getNombproducto(); ?></p>
+                </a>
+
+            <?php endforeach; ?>
+        </div>
+    </div>
+
+    <div class="panel-footer">
+        <div class="row">
+            <div class="col-sm-6 col-md-6 text-success text-center">
+                <strong>Estatus: <?php echo $pedido->getMsgclientes(); ?></strong>
+            </div>
+
+
+            <div class="col-sm-6 col-md-6 text-center text-primary">
+                <strong>Precio Total: <?php echo $pedido->getPreciototal(); ?></strong>
+            </div>
+        </div>
     </div>
 </div>
 
-<div class="table-responsive">
-    <table class="table table-striped">
-        <tr>
-            <th>Cantidad</th>
-            <th>Unidad Medida</th>
-            <th>Producto</th>
-            <th>Subtotal</th>
-        </tr>
-        <?php foreach ($items as $item): ?>
-            <tr>
-                <td><?php echo $item->getCantidad(); ?></td>
-                <td><?php echo $item->getUnidmedprod(); ?></td>
-                <td><?php echo $item->getNombproducto(); ?></td>
-                <td><?php echo $item->getSubtotal(); ?></td>
-            </tr>
-        <?php endforeach; ?>
-    </table>
-</div>
+<div class="well well-sm text-center">
+    <div class="row">
+        <div class="col-sm-6 col-md-6 text-center">
+            <a href="<?php echo $this->url('pedido');?>" class="btn btn-default">Volver al Listado</a>
+        </div>
 
-<div class="row">
-    <div class="col-sm-6 col-md-6">
-        <h2>Estatus: <td><?php echo $pedido->getMsgclientes(); ?></h2>
-    </div>
-    <div class="col-sm-6 col-md-6 text-left">
-        <h3>Total: <td><?php echo $pedido->getPreciototal(); ?></h3>
+
+        <div class="col-sm-6 col-md-6 text-center">
+            <a href="<?php echo $this->url('pedido', array('action'=>'edit', 'id' => $pedido->getId()));?>" class="btn btn-default">Editar Pedido</a>
+        </div>
     </div>
 </div>

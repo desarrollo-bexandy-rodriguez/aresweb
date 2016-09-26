@@ -1,9 +1,25 @@
-<div class="row well">
+<?php
+$title = 'Editar Pedido';
+$this->headTitle($title);
+?>
+<?php
+$form = $this->pedidoForm;
+$form->setAttribute('action', $this->url('pedido', array('action' => 'edit','id' => $pedido->getId())));
+$form->get('submit')->setAttribute('value', 'Enviar');
+$formLabel = $this->plugin('formLabel');
+$form->prepare();
+?>
+<?php echo $this->form()->openTag($form); ?>
+<?php echo $this->formHidden($form->get('id')->setValue($pedido->getId()));?>
+<?php echo $this->formHidden($form->get('vendedor'));?>
+<?php echo $this->formHidden($form->get('estatus'));?>
+
+<div class="row well well-sm">
     <div class="col-sm-6 col-md-6">
-        <h3>Código del Pedido: <td><?php echo $pedido->getCodigo(); ?></h3>
+        <h4><?php echo $this->formRow($form->get('codigo'));?></h4>
     </div>
     <div class="col-sm-6 col-md-6 text-right">
-        <h3>Cliente: <td><?php echo $pedido->getCliente(); ?></h3>
+        <h4><?php echo $this->formRow($form->get('cliente'));?></h4>
     </div>
 </div>
 
@@ -12,55 +28,66 @@
 
         <div class="col-sm-3 sidenav">
             <div class="row text-center">
-                <h3>Items</h3>
-            </div>
-            <div class="well">
-                <?php $total = 0;?>
-                <?php foreach ($items as $item ): ?>
-                    <div>
-                        <p><?php echo $item->getCantidad(); ?> <?php echo $item->getUnidmedprod(); ?> de <?php echo $item->getNombproducto(); ?></p>
-                        <p class="text-right">Subtotal: <?php echo $item->getSubtotal(); ?> BsF.</p>
-                        <br>
+                <div class="panel panel-default">
+
+                    <div class="panel-heading">
+                        <h3 class="panel-title">Items</h3>
                     </div>
-                    <?php $total = $total + (int) $item->getSubtotal(); ?>
-                <?php endforeach ?>
+
+                    <div class="panel-body text-center">
+                        <div class="list-group">
+                            <?php $total = 0;?>
+                                <?php foreach ($items as $item ): ?>
+                                    <a href="<?php echo $this->url('item', array('action'=>'edit', 'pedido' => $item->getPedido(), 'producto' => $item->getProducto()));?>" class="list-group-item">
+                                        <span class="badge">Subtotal: <br><?php echo $item->getSubtotal(); ?> BsF</span>
+                                        <p class="text-left"><?php echo $item->getCantidad(); ?> <?php echo $item->getUnidmedprod(); ?> de <?php echo $item->getNombproducto(); ?></p>
+                                    </a>
+                                <?php $total = $total + (int) $item->getSubtotal(); ?>
+                            <?php endforeach ?>
+                        </div>
+                    </div>
+
+                    <div class="panel-footer"><h4><?php echo $this->formRow($form->get('preciototal')->setValue($total));?></h4></div>
+
+                </div>
             </div>
-            <h2 class="text-right">Total: <?php echo $total;?> BsF</h2>
         </div>
 
         <div class="col-sm-9">
+            <div class="panel panel-default">
 
-            <div class="row text-center">
-                <h3>Seleccione el Producto</h3>
-            </div>
+                <div class="panel-heading">
+                    <h3 class="panel-title">Seleccione el Producto</h3>
+                </div>
 
-            <div class="row well" style="display:flex; flex-wrap: wrap;">
-                <?php foreach ($productos as $producto ): ?>
-                    <div class="col-sm-4 col-md-3">
-                        <a href="<?php echo $this->url('item', array('action'=>'add', 'pedido' => $pedido->getId(), 'producto' => $producto->getId()));?>">
-                            <div class="thumbnail" style="width:200px; height:150px">
-                                <img src="<?= $producto->getImagen() ?>" alt="<?= $producto->getNombre() ?>" style="width:50%; height:auto">
-                                <div class="caption">
-                                    <h4 id="producto<?= $producto->getId() ?>"><?= $producto->getNombre() ?></h4>
-                                    <p>Precio:<?= $producto->getPreciounidad() ?> BsF por  <?= $producto->getUnidadmedidaventas() ?></p>
 
-                                </div>
+                <div class="panel-body text-center">
+                    <div class="row well well-sm" >
+                        <?php foreach ($productos as $producto ): ?>
+                            <div class="col-sm-4 col-md-3">
+                                <a href="<?php echo $this->url('item', array('action'=>'add', 'pedido' => $pedido->getId(), 'producto' => $producto->getId()));?>" class="thumbnail" style="width:200px; height:150px">
+                                        <img src="<?= $producto->getImagen() ?>" alt="<?= $producto->getNombre() ?>" style="width:50%; height:auto">
+                                        <div class="caption">
+                                            <h4 id="producto<?= $producto->getId() ?>"><?= $producto->getNombre() ?></h4>
+                                            <p>Precio:<?= $producto->getPreciounidad() ?> BsF por  <?= $producto->getUnidadmedidaventas() ?></p>
+                                        </div>
+                                </a>
                             </div>
-                        </a>
+                        <?php endforeach ?>
                     </div>
-                <?php endforeach ?>
+                </div>
             </div>
-
         </div>
 
     </div>
 </div>
 
-<div class="row well">
+<div class="row well well-sm">
     <div class="col-sm-6 col-md-6">
-        <h2>Estatus: <td><?php echo $pedido->getMsgclientes(); ?></h2>
+        <h3><?php echo $this->formRow($form->get('msgventas'));?></h3>
     </div>
     <div class="col-sm-6 col-md-6 text-right">
-        <button class="btn btn-default btn-lg">Enviar</button>
+        <?php echo $this->formInput($form->get('submit')); ?>
     </div>
 </div>
+<?php echo $this->form()->closeTag($form); ?>

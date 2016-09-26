@@ -80,6 +80,26 @@ class PedidoMapper
         return $result;
     }
 
+    public function getLastCodigoToday()
+    {
+        $today = date('Y-m-d');
+        $select = $this->sql->select();
+        $select->columns(array('codigo'));
+        $select->where(array('fecha' => $today));
+        $select->order('id DESC');
+        $select->limit(1);
+
+        $statement = $this->sql->prepareStatementForSqlObject($select);
+        $result = $statement->execute()->current();
+
+        if (!$result) {
+            return 0;
+        } else {
+            return $result['codigo'];
+
+        }
+    }
+
     public function getPedido($id)
     {
         $this->sql->setTable('vista_pedidos');

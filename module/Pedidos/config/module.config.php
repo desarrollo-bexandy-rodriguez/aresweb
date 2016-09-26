@@ -37,7 +37,7 @@ return array(
             'item' => array(
                 'type'    => 'Segment',
                 'options' => array(
-                    'route'    => '/item[/:action]/:pedido/:producto',
+                    'route'    => '/item[/:action]/:pedido[/:producto]',
                     'defaults' => array(
                         '__NAMESPACE__' => 'Pedidos\Controller',
                         'controller'    => 'Item',
@@ -48,6 +48,24 @@ return array(
                     'action'    =>  '(add|edit|delete)',
                     'pedido'    =>  '[0-9]*',
                     'producto'    =>  '[0-9]*',
+                ),
+                'may_terminate' => true,
+                'child_routes' => array(
+                    'edit' => array(
+                        'type' => 'literal',
+                        'options' => array(
+                            'route' => '/:action[/:pedido/:prod]',
+                            'defaults' => array(
+                                '__NAMESPACE__' => 'Pedidos\Controller',
+                                'controller'    => 'Item',
+                            ),
+                            'constrainst' => array(
+                                'action'    =>  '(add|edit|delete)',
+                                'pedido'    =>  '[0-9]*',
+                                'prod'    =>  '[0-9]*',
+                            ),
+                        ),
+                    ),
                 ),
             ),
         ),

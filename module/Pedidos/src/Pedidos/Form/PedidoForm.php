@@ -35,14 +35,14 @@ class PedidoForm extends Form
             'name' => 'codigo',
             'type' => 'text',
             'options' => array(
-                'label' => 'Codigo del Pedido',
+                'label' => 'Código del Pedido',
             ),
             'attributes' => array(
                 'id' => 'codigo',
                 'maxlength' => 15,
                 'readonly' => true,
                 'disabled' => true,
-                'class' => 'form-control-static',
+                'class' => 'form-control-static text-center',
             )
         ));
 
@@ -69,13 +69,13 @@ class PedidoForm extends Form
             'name' => 'preciototal',
             'type' => 'text',
             'options' => array(
-                'label' => 'Precio Total',
+                'label' => 'Precio Total (BsF)',
             ),
             'attributes' => array(
                 'id' => 'preciototal',
-                'maxlength' => 100,
+                'maxlength' => 50,
                 'readonly' => true,
-                'class' => 'form-control-static',
+                'class' => 'form-control-static text-center',
             )
         ));
 
@@ -125,7 +125,7 @@ class PedidoForm extends Form
                 'id' => 'msgventas',
                 'maxlength' => 100,
                 'readonly' => true,
-                'class' => 'form-control-static',
+                'class' => 'form-control-static text-center',
             )
         ));
 
@@ -188,6 +188,15 @@ class PedidoForm extends Form
                 'readonly' => true,
                 'class' => 'form-control-static',
             )
+        ));
+
+        $this->add(array(
+            'name' => 'submit',
+            'attributes' => array(
+                'type'  => 'submit',
+                'value' => 'Go',
+                'class' => 'btn btn-success btn-lg',
+            ),
         ));
     }
 }
