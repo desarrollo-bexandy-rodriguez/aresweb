@@ -15,11 +15,14 @@ $this->headTitle($title);
                             <?php foreach ($pedidos as $pedido): ?>
                                         <li class="list-group-item text-center text-primary well">
                                             Pedido: <?php echo $pedido->getCodigo(); ?> <br>
-                                                Cliente: <?php echo $pedido->getCliente(); ?>                                                     <?php
-                                            $url = $this->url('despacho') ?>
+                                                Cliente: <?php echo $pedido->getCliente(); ?>
+                                            <?php $url = $this->url('despacho') ?>
                                             <form id="form<?= $pedido->getId() ?>" action="<?php echo $url; ?>" method="post">
                                                 <input type="hidden" name="idpedido" value="<?= $pedido->getId() ?>">
+                                                <input type="hidden" name="idpedido1" value="<?= $this->idpedido1 ?>">
+                                                <input type="hidden" name="idpedido2" value="<?= $this->idpedido2 ?>">
                                                 <input type="hidden" name="panel1" value="<?= $this->panel1 ?>">
+                                                <input type="hidden" name="panel2" value="<?= $this->panel2 ?>">
                                                 <input type="submit" name="submit" value="Atender">
                                             </form>
                                         </li>
@@ -34,8 +37,8 @@ $this->headTitle($title);
         <div class="col-sm-8 col-md-8">
             <div class="row">
                 <div class="col-sm-6 col-md-6">
-                    <?php if (isset($pedido1)) : ?>
-                        <div class="panel panel-primary">
+                    <?php if (isset($pedido1) && $panel1 === 'Ocupado') : ?>
+                        <div class="panel panel-success">
                             <div class="panel-heading">
                                 <div class="row">
 
@@ -53,8 +56,6 @@ $this->headTitle($title);
                             <div class="panel-body">
                                 <div class="list-group">
                                     <?php foreach ($items1 as $item1): ?>
-                                        <?php $idPedido = $item1->getPedido();?>
-                                        <?php $idProducto = $item1->getProducto();?>
                                         <a href="#" class="list-group-item">
                                             <span class="badge">Subtotal: <br><?php echo $item1->getSubtotal(); ?> BsF</span>
                                             <p class="text-left"><?php echo $item1->getCantidad(); ?> <?php echo $item1->getUnidmedprod(); ?> de <?php echo $item1->getNombproducto(); ?></p>
@@ -66,22 +67,70 @@ $this->headTitle($title);
 
                             <div class="panel-footer">
                                 <div class="row">
-                                    <div class="col-sm-6 col-md-6 text-success text-center">
-                                        <a href="#">Cancelar</a>
+                                    <?php $urlpanel1 = $this->url('despacho') ?>
+                                    <form id="form-panel1" action="<?php echo $urlpanel1; ?>" method="post">
+                                        <input type="hidden" name="idpedido" value="<?= $pedido->getId() ?>">
+                                        <input type="hidden" name="idpedido1" value="<?= $this->idpedido1 ?>">
+                                        <input type="hidden" name="idpedido2" value="<?= $this->idpedido2 ?>">
+                                        <input type="hidden" name="panel1" value="<?= $this->panel1 ?>">
+                                        <input type="hidden" name="panel2" value="<?= $this->panel2 ?>">
+                                        <input type="hidden" name="idfinalizado" value="panel1">
+                                        <input type="submit" name="submit" value="Finalizar">
+                                    </form>
                                     </div>
-
-
-                                    <div class="col-sm-6 col-md-6 text-center text-primary">
-                                        <a href="#">Finalizar</a>
-                                    </div>
-                                </div>
                             </div>
                         </div>
 
                     <?php endif ?>
                 </div>
 
-                <div class="col-sm-6 col-md-6"></div>
+                <div class="col-sm-6 col-md-6">
+                    <?php if (isset($pedido2) && $panel2 === 'Ocupado') : ?>
+                        <div class="panel panel-info">
+                            <div class="panel-heading">
+                                <div class="row">
+
+                                    <div class="col-sm-6 col-md-8 text-center text-uppercase ">
+                                        <strong>Pedido: <?php echo $pedido2->getCodigo(); ?> <br>
+                                            Cliente: <?php echo $pedido2->getCliente(); ?></strong>
+                                    </div>
+
+                                    <div class="col-sm-6 col-md-4">
+                                        <strong>Precio Total: <?php echo $pedido2->getPreciototal(); ?></strong>
+                                    </div>
+                                </div>
+                            </div>
+
+                            <div class="panel-body">
+                                <div class="list-group">
+                                    <?php foreach ($items2 as $item2): ?>
+                                        <a href="#" class="list-group-item">
+                                            <span class="badge">Subtotal: <br><?php echo $item2->getSubtotal(); ?> BsF</span>
+                                            <p class="text-left"><?php echo $item2->getCantidad(); ?> <?php echo $item2->getUnidmedprod(); ?> de <?php echo $item2->getNombproducto(); ?></p>
+                                        </a>
+
+                                    <?php endforeach; ?>
+                                </div>
+                            </div>
+
+                            <div class="panel-footer">
+                                <div class="row">
+                                    <?php $urlpanel2 = $this->url('despacho') ?>
+                                    <form id="form-panel2" action="<?php echo $urlpanel2; ?>" method="post">
+                                        <input type="hidden" name="idpedido" value="<?= $pedido->getId() ?>">
+                                        <input type="hidden" name="idpedido1" value="<?= $this->idpedido1 ?>">
+                                        <input type="hidden" name="idpedido2" value="<?= $this->idpedido2 ?>">
+                                        <input type="hidden" name="panel1" value="<?= $this->panel1 ?>">
+                                        <input type="hidden" name="panel2" value="<?= $this->panel2 ?>">
+                                        <input type="hidden" name="idfinalizado" value="panel2">
+                                        <input type="submit" name="submit" value="Finalizar">
+                                    </form>
+                                </div>
+                            </div>
+                        </div>
+
+                    <?php endif ?>
+                </div>
             </div>
         </div>
 

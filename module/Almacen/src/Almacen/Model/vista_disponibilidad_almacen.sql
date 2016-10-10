@@ -1,4 +1,4 @@
-CREATE vista_disponibilidad_almacen AS
+CREATE VIEW `vista_disponibilidad_almacen` AS
 SELECT
   `disponibilidad_x_almacen`.`id`,
   `disponibilidad_x_almacen`.`almacen` AS `idalmacen`,

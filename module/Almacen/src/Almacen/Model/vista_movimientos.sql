@@ -1,4 +1,4 @@
-CREATE `vista_movimientos` AS
+CREATE VIEW `vista_movimientos` AS
 SELECT
   `movimiento_almacen`.`id`,
   `movimiento_almacen`.`idalmacenmayor`,
@@ -16,4 +16,4 @@ FROM
 LEFT JOIN `almacen` AS `mayor` ON `movimiento_almacen`.`idalmacenmayor` = `mayor`.`id`
 LEFT JOIN `almacen` AS `detal` ON `movimiento_almacen`.`idalmacendetal` = `detal`.`id`
 LEFT JOIN `productos` ON `movimiento_almacen`.`idproducto` = `productos`.`id`
-LEFT JOIN `unidad_medida` ON `productos`.`unidadmedidaalmacen` = `unidad_medida`.`id`
+LEFT JOIN `unidad_medida` ON `productos`.`unidadmedidaalmacen` = `unidad_medida`.`id`;

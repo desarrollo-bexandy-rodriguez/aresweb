@@ -1,4 +1,4 @@
-CREATE `vista_productos` AS
+CREATE VIEW `vista_productos` AS
  SELECT
   `productos`.`id`,
   `productos`.`nombre`,
