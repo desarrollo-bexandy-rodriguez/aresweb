@@ -23,7 +23,7 @@ class ItemForm extends Form
         parent::__construct('item');
 
         $this->setAttribute('method', 'post');
-
+        $this->setInputFilter(new ItemFilter());
         $this->setHydrator(new ClassMethods());
 
         $this->add(array(
@@ -72,6 +72,18 @@ class ItemForm extends Form
         ));
 
         $this->add(array(
+            'name' => 'precio',
+            'type' => 'text',
+            'options' => array(
+                'label' => 'Precio: ',
+            ),
+            'attributes' => array(
+                'id' => 'cantidad',
+                'maxlength' => 100,
+            )
+        ));
+
+        $this->add(array(
             'name' => 'cantidad',
             'type' => 'text',
             'options' => array(
@@ -81,6 +93,18 @@ class ItemForm extends Form
                 'id' => 'cantidad',
                 'maxlength' => 100,
             )
+        ));
+
+        $this->add(array(
+            'type' => 'radio',
+            'name' => 'seleccion',
+            'options' => array(
+                'label' => 'Como desea realizar el pedido ?',
+                'value_options' => array(
+                    'cantidad' => 'Cantidad',
+                    'precio' => 'Precio',
+                ),
+            ),
         ));
 
         $this->add(array(

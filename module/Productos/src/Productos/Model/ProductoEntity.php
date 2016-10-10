@@ -21,6 +21,62 @@ class ProductoEntity
     protected $unidadmedidaalmacen;
     protected $nombunidmedalmacen;
     protected $imagen;
+    protected $idmarca;
+    protected $relacionunidad;
+    protected $nombmarca;
+
+    /**
+     * @return mixed
+     */
+    public function getNombmarca()
+    {
+        return $this->nombmarca;
+    }
+
+    /**
+     * @param mixed $nombmarca
+     */
+    public function setNombmarca($nombmarca)
+    {
+        $this->nombmarca = $nombmarca;
+    }
+
+
+    /**
+     * @return mixed
+     */
+    public function getIdmarca()
+    {
+        return $this->idmarca;
+    }
+
+    /**
+     * @param mixed $idmarca
+     */
+    public function setIdmarca($idmarca)
+    {
+        $this->idmarca = $idmarca;
+    }
+
+    /**
+     * @return mixed
+     */
+    public function getRelacionunidad()
+    {
+        return $this->relacionunidad;
+    }
+
+    /**
+     * @param mixed $relacionunidad
+     */
+    public function setRelacionunidad($relacionunidad)
+    {
+        $this->relacionunidad = $relacionunidad;
+    }
+
+    /**
+     * @return mixed
+     */
 
     public function getId()
     {

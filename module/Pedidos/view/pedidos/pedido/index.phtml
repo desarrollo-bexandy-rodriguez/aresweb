@@ -5,7 +5,7 @@ $this->headTitle($title);
 
 
 
-<div class="panel panel-default">
+<div class="panel panel-primary">
     <div class="panel-heading">Pedidos</div>
     <div class="panel-body">
         <!-- List group -->
@@ -33,6 +33,12 @@ $this->headTitle($title);
                 </a>
             <?php endforeach; ?>
         </div>
+    </div>
+
+    <div class="panel-footer text-center">
+
+            <a class="btn btn-primary" href="<?php echo $this->url('pedido', array('action'=>'add'));?>" >Nuevo Pedido</a>
+
     </div>
 </div>
 

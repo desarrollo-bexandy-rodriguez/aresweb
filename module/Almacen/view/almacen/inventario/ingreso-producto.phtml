@@ -1,0 +1,49 @@
+<?php
+$title = 'Ingreso de Producto a Almacén';
+$this->headTitle($title);
+?>
+
+<?php
+$form = $this->form;
+$form->setAttribute('action', $this->url('inventario', array('action' => 'ingreso-producto')));
+$form->get('submit')->setAttribute('value', 'Ingresar Producto a Inventario');
+$form->prepare();
+
+echo $this->form()->openTag($form);
+echo $this->formHidden($form->get('idproducto'));
+echo $this->formHidden($form->get('idalmacen'));
+?>
+
+<div class="row">
+    <div class="col-sm-3 col-md-3"></div>
+    <div class="col-sm-6 col-md-6">
+        <div class="panel panel-primary">
+            <div class="panel-heading"><?php echo $title?></div>
+            <div class="panel-body">
+
+                <?php
+                echo $this->formRow($form->get('fecha'));
+                echo '<br>';
+                echo $this->formRow($form->get('nombalmacen')); ?>
+                <a href="<?php echo $this->url('inventario', array('action' => 'select-almacen')) ?>">Seleccione Almacén</a>
+                <?php
+                echo '<br>';
+                echo $this->formRow($form->get('nombproducto')); ?>
+                <a href="<?php echo $this->url('inventario', array('action' => 'select-producto')) ?>">Seleccione Producto</a>
+                <?php
+                echo '<br>';
+                echo $this->formRow($form->get('cantidad'));
+                 ?>
+
+            </div>
+            <div class="panel-footer">
+                <a href="<?php echo $this->url('almacen') ?>" class="btn btn-default">Volver</a>
+                <?php echo $this->formRow($form->get('submit')); ?>
+            </div>
+        </div>
+    </div>
+    <div class="col-sm-3 col-md-3"></div>
+</div>
+
+<?php
+echo $this->form()->closeTag($form);

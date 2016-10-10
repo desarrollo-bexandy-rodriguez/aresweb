@@ -50,6 +50,8 @@ class ItemMapper
         $select->where(array('pedido' => $pedido));
 
         $statement = $this->sql->prepareStatementForSqlObject($select);
+        // echo $select->getSqlString($this->dbAdapter->getPlatform());
+
         $results = $statement->execute();
 
         if (!$results) {
@@ -68,13 +70,14 @@ class ItemMapper
         $hydrator = new ClassMethods();
         $data = $hydrator->extract($item);
 
-        if (!$item->getPedido() && !$item->getProducto()) {
+        if ( $this->getItem($item->getPedido(),$item->getProducto()) ) {
             // update action
             $action = $this->sql->update();
             unset($data['pedido']);
             unset($data['producto']);
             unset($data['nombproducto']);
             unset($data['unidmedprod']);
+            unset($data['seleccion']);
              $action->set($data);
             $action->where(array('pedido' => $item->getPedido(),'producto' => $item->getProducto()));
         } else {
@@ -82,9 +85,11 @@ class ItemMapper
             $action = $this->sql->insert();
             unset($data['nombproducto']);
             unset($data['unidmedprod']);
+            unset($data['seleccion']);
             $action->values($data);
         }
         $statement = $this->sql->prepareStatementForSqlObject($action);
+        // echo $action->getSqlString($this->dbAdapter->getPlatform()); die();
         $result = $statement->execute();
 
         return $result;
@@ -108,12 +113,24 @@ class ItemMapper
         return $item;
     }
 
+    public function deleteItems($pedido)
+    {
+        $this->sql->setTable('productos_x_pedido');
+        $delete = $this->sql->delete();
+        $delete->where(array('pedido' => $pedido));
+
+        $statement = $this->sql->prepareStatementForSqlObject($delete);
+        return $statement->execute();
+    }
+
     public function deleteItem($pedido,$producto)
     {
+        $this->sql->setTable('productos_x_pedido');
         $delete = $this->sql->delete();
         $delete->where(array('pedido' => $pedido, 'producto' => $producto));
 
         $statement = $this->sql->prepareStatementForSqlObject($delete);
+        //echo $delete->getSqlString($this->dbAdapter->getPlatform()); die();
         return $statement->execute();
     }
 }

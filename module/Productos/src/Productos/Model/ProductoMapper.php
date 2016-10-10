@@ -27,9 +27,14 @@ class ProductoMapper
         $this->sql->setTable($this->tableName);
     }
 
-    public function fetchAll()
+    public function fetchAll($verTodos = false)
     {
-        $this->sql->setTable('vista_productos');
+        if ($verTodos) {
+            $this->sql->setTable('vista_productos');
+        } else {
+            $this->sql->setTable('vista_productos_disponibles');
+        }
+
         $select = $this->sql->select();
         $statement = $this->sql->prepareStatementForSqlObject($select);
         $results = $statement->execute();
@@ -43,6 +48,7 @@ class ProductoMapper
 
     public function saveProducto(ProductoEntity $producto)
     {
+        $this->sql->setTable('productos');
         $hydrator = new ClassMethods();
         $data = $hydrator->extract($producto);
 
@@ -72,8 +78,14 @@ class ProductoMapper
         return $result;
     }
 
-    public function getProducto($id)
+    public function getProducto($id, $verTodos = false)
     {
+        if ($verTodos) {
+            $this->sql->setTable('vista_productos');
+        } else {
+            $this->sql->setTable('vista_productos_disponibles');
+        }
+
         $select = $this->sql->select();
         $select->where(array('id' => $id));
 
@@ -88,6 +100,29 @@ class ProductoMapper
         $hydrator->hydrate($result, $producto);
 
         return $producto;
+    }
+
+    public function getProductosCategoria($idcategoria, $verTodos = false)
+    {
+        if ($verTodos) {
+            $this->sql->setTable('vista_productos');
+        } else {
+            $this->sql->setTable('vista_productos_disponibles');
+        }
+        $select = $this->sql->select();
+        $select->where(array('idcategoria' => $idcategoria));
+
+        $statement = $this->sql->prepareStatementForSqlObject($select);
+        $results = $statement->execute();
+        if (!$results) {
+            return null;
+        }
+
+        $entityPrototype = new ProductoEntity();
+        $hydrator = new ClassMethods();
+        $resultset = new HydratingResultSet($hydrator, $entityPrototype);
+        $resultset->initialize($results);
+        return $resultset;
     }
 
     public function deleteProducto($id)

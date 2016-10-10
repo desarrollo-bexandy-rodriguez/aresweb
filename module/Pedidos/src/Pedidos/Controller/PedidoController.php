@@ -54,6 +54,7 @@ class PedidoController extends AbstractActionController
         $pedidoEntity->setPreciototal(0);
         $pedidoEntity->setFecha(date('Y-m-d'));
         $pedidoEntity->setHora(date('H:i:s'));
+        $pedidoEntity->setIdalmacen(2);
 
         $pedidoMapper->savePedido($pedidoEntity);
 
@@ -79,9 +80,16 @@ class PedidoController extends AbstractActionController
         }
     }
 
+    public function getCategoriaMapper()
+    {
+        $sm = $this->getServiceLocator();
+        return $sm->get('CategoriaMapper');
+    }
+
     public function editAction()
     {
         $id = (int)$this->params('id');
+        $categorias = $this->getCategoriaMapper()->fetchAll();
         $pedidoMapper = $this->getPedidoMapper();
         $pedidoForm = new PedidoForm();
         $pedido = $pedidoMapper->getPedido($id);
@@ -93,21 +101,74 @@ class PedidoController extends AbstractActionController
         $productoMapper = $this->getProductoMapper();
 
         $request = $this->getRequest();
+
         if ($request->isPost()) {
             $pedidoForm->setData($request->getPost());
-            if ($pedidoForm->isValid()) {
-                $pedido->setEstatus(2);
-                $this->getPedidoMapper()->savePedido($pedido);
+            $selcat = $request->getPost()->get('selcat');
 
-                return $this->redirect()->toRoute('pedido');
+            if (is_null($selcat)) {
+                if ($pedidoForm->isValid()) {
+                    $submit = $pedidoForm->get('submit')->getValue();
+
+                    if ($submit === "Enviar"){
+                        $pedido->setEstatus(2);
+                    }
+                    if ($submit === "Guardar"){
+                        $pedido->setEstatus(1);
+                    }
+                    $this->getPedidoMapper()->savePedido($pedido);
+
+                    return $this->redirect()->toRoute('pedido');
+                } else {
+                    $productos = $productoMapper->fetchAll();
+                }
+            } else {
+                $cat = str_replace(" ", "_", $selcat);
+                $idcat = $request->getPost()->get($cat);
+
+                if ($idcat === "0") {
+                    $productos = $productoMapper->fetchAll();
+                } else {
+                    $productos = $productoMapper->getProductosCategoria($idcat);
+                }
             }
+
+        } else {
+            $productos = $productoMapper->fetchAll();
         }
 
         return new ViewModel(array(
             'pedido' => $pedido,
             'items' => $items,
-            'productos' =>  $productoMapper->fetchAll(),
+            'productos' =>  $productos,
             'pedidoForm' => $pedidoForm,
+            'categorias' => $categorias,
         ));
+    }
+
+    public function deleteAction()
+    {
+        $id = $this->params('id');
+        $pedido = $this->getPedidoMapper()->getPedido($id);
+        $items = $this->getItemMapper()->getItemsPedido($id);
+        if (!$pedido) {
+            return $this->redirect()->toRoute('pedido');
+        }
+
+        $request = $this->getRequest();
+        if ($request->isPost()) {
+            if ($request->getPost()->get('del') == 'Si') {
+                $this->getItemMapper()->deleteItems($id);
+                $this->getPedidoMapper()->deletePedido($id);
+            }
+
+            return $this->redirect()->toRoute('pedido');
+        }
+
+        return array(
+            'id' => $id,
+            'pedido' => $pedido,
+            'items' => $items
+        );
     }
 }

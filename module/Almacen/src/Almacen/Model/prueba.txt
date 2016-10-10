@@ -1,0 +1,35 @@
+SELECT
+  `disponibilidad_x_almacen`.`id`,
+  `disponibilidad_x_almacen`.`almacen` AS `idalmacen`,
+  `almacen`.`nombre`,
+  `almacen`.`idtipoalmacen`,
+  `tipo_almacen`.`nombre` AS `tipoalmacen`,
+  `disponibilidad_x_almacen`.`producto` AS `idproducto`,
+  `productos`.`nombre` AS `nombproducto`,
+  `disponibilidad_x_almacen`.`cantidad`,
+  `disponibilidad_x_almacen`.`reservado`,
+  (`disponibilidad_x_almacen`.`cantidad` - `disponibilidad_x_almacen`.`reservado`) AS `disponible`,
+  `productos`.`unidadmedidaalmacen` AS `idunidmedalmacen`,
+  `unidmedalmacen`.`simbolo` AS `unidmed`,
+  `productos`.`unidadmedidaventas` AS `idunidmedventas`,
+  `unidmeddetal`.`simbolo` AS `unidmeddetal`
+FROM
+  `disponibilidad_x_almacen`
+  LEFT JOIN `almacen` ON `disponibilidad_x_almacen`.`almacen` = `almacen`.`id`
+  LEFT JOIN `tipo_almacen` ON `almacen`.`idtipoalmacen` = `tipo_almacen`.`id`
+  LEFT JOIN `productos` ON `disponibilidad_x_almacen`.`producto` = `productos`.`id`
+  LEFT JOIN `unidad_medida` AS `unidmedalmacen` ON `productos`.`unidadmedidaalmacen` = `unidmedalmacen`.`id`
+  LEFT JOIN `unidad_medida` AS `unidmeddetal` ON `productos`.`unidadmedidaventas` = `unidmeddetal`.`id`
+  LEFT JOIN
+  (
+  SELECT
+    `productos_x_pedido`.`producto`,
+    SUM(`productos_x_pedido`.`cantidad`) AS `cantreservada`,
+    `pedidos`.`estatus`
+  FROM
+     `productos_x_pedido`
+  LEFT JOIN `pedidos` ON `productos_x_pedido`.`pedido` = `pedidos`.`id`
+  WHERE `pedidos`.`estatus`= 2
+  GROUP BY `productos_x_pedido`.`producto`,`pedidos`.`estatus`
+  ) AS `temporal`
+  ON `disponibilidad_x_almacen`.`producto` = `temporal`.`producto`

@@ -45,6 +45,7 @@ class PedidoMapper
 
     public function savePedido(PedidoEntity $pedido)
     {
+        $this->sql->setTable('pedidos');
         $hydrator = new ClassMethods();
         $data = $hydrator->extract($pedido);
 
@@ -72,11 +73,19 @@ class PedidoMapper
             $action->values($data);
         }
         $statement = $this->sql->prepareStatementForSqlObject($action);
-        $result = $statement->execute();
+
+        try {
+            $result = $statement->execute();
+
+        } catch (\Exception $e) {
+            die($e->getMessage());
+        }
+
 
         if (!$pedido->getId()) {
             $pedido->setId($result->getGeneratedValue());
         }
+
         return $result;
     }
 
@@ -90,6 +99,14 @@ class PedidoMapper
         $select->limit(1);
 
         $statement = $this->sql->prepareStatementForSqlObject($select);
+
+        try {
+            $result = $statement->execute()->current();
+
+        } catch (\Exception $e) {
+            die($e->getMessage());
+        }
+
         $result = $statement->execute()->current();
 
         if (!$result) {
@@ -121,6 +138,7 @@ class PedidoMapper
 
     public function deletePedido($id)
     {
+        $this->sql->setTable('pedidos');
         $delete = $this->sql->delete();
         $delete->where(array('id' => $id));
 

@@ -32,6 +32,11 @@ class PedidoForm extends Form
         ));
 
         $this->add(array(
+            'name' => 'idalmacen',
+            'type' => 'hidden',
+        ));
+
+        $this->add(array(
             'name' => 'codigo',
             'type' => 'text',
             'options' => array(
@@ -194,9 +199,10 @@ class PedidoForm extends Form
             'name' => 'submit',
             'attributes' => array(
                 'type'  => 'submit',
-                'value' => 'Go',
+                'value' => 'Enviar',
                 'class' => 'btn btn-success btn-lg',
             ),
         ));
+
     }
 }

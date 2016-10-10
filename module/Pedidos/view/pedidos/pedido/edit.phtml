@@ -13,6 +13,7 @@ $form->prepare();
 <?php echo $this->formHidden($form->get('id')->setValue($pedido->getId()));?>
 <?php echo $this->formHidden($form->get('vendedor'));?>
 <?php echo $this->formHidden($form->get('estatus'));?>
+<?php echo $this->formHidden($form->get('idalmacen'));?>
 
 <div class="row well well-sm">
     <div class="col-sm-6 col-md-6">
@@ -28,7 +29,7 @@ $form->prepare();
 
         <div class="col-sm-3 sidenav">
             <div class="row text-center">
-                <div class="panel panel-default">
+                <div class="panel panel-primary">
 
                     <div class="panel-heading">
                         <h3 class="panel-title">Items</h3>
@@ -54,22 +55,40 @@ $form->prepare();
         </div>
 
         <div class="col-sm-9">
-            <div class="panel panel-default">
+            <div class="panel panel-primary">
 
                 <div class="panel-heading">
-                    <h3 class="panel-title">Seleccione el Producto</h3>
+                    <h3 class="panel-title">
+
+                        <div class="row">
+                            <div class="col-sm-3 col-md-3">
+                                <h3>Seleccione Categoría</h3>
+                            </div>
+
+                            <div class="col-sm-9 col-md-9">
+
+                                <div class="btn-group" >
+                                    <input type="submit" class="btn btn-primary" name="selcat" value="Todos" />
+                                    <input type="hidden" name="Todos" value="0" />
+                                    <?php foreach ($categorias as $categoria ): ?>
+                                        <input type="hidden" name="<?php echo $categoria->getNombre() ?>" value="<?php echo $categoria->getId() ?>" />
+                                        <input type="submit" class="btn btn-info" name="selcat" value="<?php echo $categoria->getNombre() ?>" />
+                                    <?php endforeach ?>
+                                </div>
+                            </div>
+                        </div>
                 </div>
 
 
                 <div class="panel-body text-center">
                     <div class="row well well-sm" >
                         <?php foreach ($productos as $producto ): ?>
-                            <div class="col-sm-4 col-md-3">
-                                <a href="<?php echo $this->url('item', array('action'=>'add', 'pedido' => $pedido->getId(), 'producto' => $producto->getId()));?>" class="thumbnail" style="width:200px; height:150px">
-                                        <img src="<?= $producto->getImagen() ?>" alt="<?= $producto->getNombre() ?>" style="width:50%; height:auto">
+                            <div class="col-sm-4 col-md-3 producto">
+                                <a href="<?php echo $this->url('item', array('action'=>'add', 'pedido' => $pedido->getId(), 'producto' => $producto->getId()));?>" class="thumbnail" >
+                                        <img src="<?= $producto->getImagen() ?>" alt="<?= $producto->getNombre() ?>" >
                                         <div class="caption">
                                             <h4 id="producto<?= $producto->getId() ?>"><?= $producto->getNombre() ?></h4>
-                                            <p>Precio:<?= $producto->getPreciounidad() ?> BsF por  <?= $producto->getUnidadmedidaventas() ?></p>
+                                            <p>Precio:<?= $producto->getPreciounidad() ?> BsF por  <?= $producto->getNombunidmedventas() ?></p>
                                         </div>
                                 </a>
                             </div>
@@ -87,7 +106,9 @@ $form->prepare();
         <h3><?php echo $this->formRow($form->get('msgventas'));?></h3>
     </div>
     <div class="col-sm-6 col-md-6 text-right">
-        <?php echo $this->formInput($form->get('submit')); ?>
+        <a href="<?php echo $this->url('pedido') ?>" class="btn btn-default pull-left">Listado de Pedidos</a>
+        <?php echo $this->formInput($form->get('submit')->setAttributes(array('class'=> 'btn btn-default', 'value' => 'Guardar'))); ?>
+        <?php echo $this->formInput($form->get('submit')->setAttributes(array('class'=> 'btn btn-success', 'value' => 'Enviar'))); ?>
     </div>
 </div>
 <?php echo $this->form()->closeTag($form); ?>

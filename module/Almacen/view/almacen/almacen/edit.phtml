@@ -1,0 +1,38 @@
+<?php
+$title = 'Editar Almacen';
+$this->headTitle($title);
+?>
+
+<?php
+$form = $this->form;
+$form->setAttribute('action', $this->url('almacen', array('action' => 'edit', 'id' => $id)));
+$form->get('submit')->setAttribute('value', 'Editar Almacén');
+$form->prepare();
+
+echo $this->form()->openTag($form);
+echo $this->formHidden($form->get('id'));
+echo $this->formHidden($form->get('idtipoalmacen'));
+?>
+
+    <div class="row">
+        <div class="col-sm-4 col-md-4"></div>
+        <div class="col-sm-4 col-md-4">
+            <div class="panel panel-primary">
+                <div class="panel-heading"><?php echo $this->escapeHtml($title); ?></div>
+                <div class="panel-body">
+                    <?php
+                    echo $this->formRow($form->get('nombtipoalmacen'));
+                    echo '<br>';
+                    echo $this->formRow($form->get('nombre'));
+                    ?>
+                </div>
+                <div class="panel-footer">
+                    <a href="<?php echo $this->url('almacen'); ?>" class="btn btn-default">Cancelar</a>
+                    <?php echo $this->formInput($form->get('submit')); ?></div>
+            </div>
+        </div>
+        <div class="col-sm-4 col-md-4"></div>
+    </div>
+
+<?php
+echo $this->form()->closeTag($form);

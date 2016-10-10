@@ -37,10 +37,88 @@ div.container a.brand {
 }
 
 .thumbnail img {
-    width: 150px;
+    width: 100px;
     height: auto;
 }
 
 a:hover, a:focus {
     text-decoration: none;
 }
+
+.thumbnail {
+    width: 170px;
+    height: 170px;
+    font-size: .85em;
+}
+
+.thumbnail h4,h3 {
+    font-size: 1em;
+    font-weight: bold;
+}
+
+.categorias {
+    width: 100px;
+    height: 100px;
+}
+
+.categorias img {
+    width: 50px;
+    height: auto;
+}
+
+.linkButton {
+    background: none;
+    border: none;
+    // color: #0066ff;
+    text-decoration: underline;
+    cursor: pointer;
+    font-size: 1.3em;
+}
+
+.button-link {
+    background-color: transparent;
+    border: none;
+}
+
+.button-link:hover {
+    color: blue;
+    text-decoration: underline;
+}
+
+/********************** Signin ********/
+
+.form-signin {
+    max-width: 330px;
+    padding: 15px;
+    margin: 0 auto;
+}
+.form-signin .form-signin-heading,
+.form-signin .checkbox {
+    margin-bottom: 10px;
+}
+.form-signin .checkbox {
+    font-weight: normal;
+}
+.form-signin .form-control {
+    position: relative;
+    height: auto;
+    -webkit-box-sizing: border-box;
+    -moz-box-sizing: border-box;
+    box-sizing: border-box;
+    padding: 10px;
+    font-size: 16px;
+}
+.form-signin .form-control:focus {
+    z-index: 2;
+}
+.form-signin input[type="email"] {
+    margin-bottom: -1px;
+    border-bottom-right-radius: 0;
+    border-bottom-left-radius: 0;
+}
+.form-signin input[type="password"] {
+    margin-bottom: 10px;
+    border-top-left-radius: 0;
+    border-top-right-radius: 0;
+}
+

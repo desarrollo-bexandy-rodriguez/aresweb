@@ -58,6 +58,15 @@ class ProductoFilter extends InputFilter
         ));
 
         $this->add(array(
+            'name' => 'idmarca',
+            'required' => true,
+            'filters' => array(
+                array('name' => 'Int'),
+            ),
+        ));
+
+
+        $this->add(array(
             'name' => 'idcategoria',
             'required' => true,
             'filters' => array(

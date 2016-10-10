@@ -20,4 +20,15 @@ class IndexController extends AbstractActionController
         return new ViewModel();
     }
 
+    public function tiendaAction()
+    {
+
+        return new ViewModel();
+    }
+
+    public function adminAction()
+    {
+
+        return new ViewModel();
+    }
 }

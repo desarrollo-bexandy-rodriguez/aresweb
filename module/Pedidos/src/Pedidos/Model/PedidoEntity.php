@@ -26,6 +26,36 @@ class PedidoEntity
     protected $nombdespachador;
     protected $fecha;
     protected $hora;
+    protected $idalmacen;
+
+    /**
+     * PedidoEntity constructor.
+     */
+    public function __construct()
+    {
+        $this->fecha = date('Y-m-d');
+        $this->hora = date('H:i:s');
+        $this->idalmacen = '2';
+        $this->estatus = '1';
+        $this->vendedor = '1';
+        $this->preciototal = '0';
+    }
+
+    /**
+     * @return mixed
+     */
+    public function getIdalmacen()
+    {
+        return $this->idalmacen;
+    }
+
+    /**
+     * @param mixed $idalmacen
+     */
+    public function setIdalmacen($idalmacen)
+    {
+        $this->idalmacen = $idalmacen;
+    }
 
     /**
      * @return mixed

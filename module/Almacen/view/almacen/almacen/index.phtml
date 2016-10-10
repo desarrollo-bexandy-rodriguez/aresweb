@@ -1,0 +1,45 @@
+<?php
+$title = 'Listado de Almacenes';
+$this->headTitle($title);
+?>
+<div class="row">
+    <div class="col-sm-2 col-md-2"></div>
+    <div class="col-sm-8 col-md-8">
+        <div class="panel panel-primary">
+            <div class="panel-heading"><?php echo $title?></div>
+            <div class="panel-body">
+                <?php foreach ($almacenes as $almacen) : ?>
+                    <ul class="list-group">
+                        <div class="row">
+                        <div class="col-sm-6 col-md-6">
+                            <li class="list-group-item">
+                                <span class="badge"><?php echo $almacen->getNombtipoalmacen(); ?></span>
+                                <?php echo $almacen->getNombre(); ?>
+                            </li>
+                        </div>
+                        <div class="col-sm-6 col-md-6">
+                            <a href="<?php echo $this->url('almacen', array('action' => 'edit', 'id' => $almacen->getId())); ?>" class="btn btn-primary btn-sm">Editar</a>
+                            <a href="<?php echo $this->url('almacen', array('action' => 'delete', 'id' => $almacen->getId())); ?>" class="btn btn-danger btn-sm">Eliminar</a>
+                            <?php if ($almacen->getIdtipoalmacen() === '1'): ?>
+                                <a href="<?php echo $this->url('inventario', array('action' => 'disponibilidad-almacen', 'idalmacen' => $almacen->getId())); ?>" class="btn btn-success btn-sm">Inventario</a>
+                                <a href="<?php echo $this->url('inventario', array('action' => 'ver-ingresos', 'idalmacen' => $almacen->getId())); ?>" class="btn btn-warning btn-sm">Ingresos</a>
+                                <a href="<?php echo $this->url('inventario', array('action' =>'ingreso-producto', 'idalmacen' => $almacen->getId())); ?>" class="btn btn-info btn-sm">Ingresar Productos</a>
+                            <?php endif; ?>
+                            <?php if ($almacen->getIdtipoalmacen() === '2'): ?>
+                                <a href="<?php echo $this->url('movimiento', array('action' => 'disponibilidad-detal', 'idmayor' => $almacen->getId())); ?>" class="btn btn-success btn-sm">Inventario</a>
+                                <a href="<?php echo $this->url('movimiento', array('action' => 'ver-movimientos', 'idmayor' => $almacen->getId())); ?>" class="btn btn-warning btn-sm">Movimientos</a>
+                                <a href="<?php echo $this->url('movimiento', array('action' =>'movimiento-producto','idmayor' => '1', 'iddetal' => $almacen->getId())); ?>" class="btn btn-info btn-sm">Movimiento Productos</a>
+                            <?php endif; ?>
+                        </div>
+                        </div>
+
+                    </ul>
+                <?php endforeach; ?>
+            </div>
+            <div class="panel-footer">
+                <a href="<?php echo $this->url('almacen',array('action' => 'add')); ?>" class="btn btn-primary"> Crear <Nuevo></Nuevo> Almacén</a>
+            </div>
+        </div>
+    </div>
+    <div class="col-sm-2 col-md-2"></div>
+</div>

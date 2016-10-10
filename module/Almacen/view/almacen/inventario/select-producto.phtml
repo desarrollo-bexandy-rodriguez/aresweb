@@ -1,0 +1,62 @@
+<?php
+$title = 'Listado de Productos';
+$this->headTitle($title);
+?>
+<div class="row"><h1><?php echo $this->escapeHtml($title); ?></h1></div>
+
+<div class="panel panel-primary">
+    <div class="panel-heading text-center">
+        <h3>Seleccione Categoría</h3>
+        <div class="row">
+
+            <form id="my_form" action="<?php $this->url('producto'); ?>" method="post">
+                <ol class="breadcrumb">
+                    <input type="hidden" name="urlidalmacen" value="<?php echo $this->urlidalmacen; ?>" />
+                    <input type="hidden" name="urlidproducto" value="<?php echo $this->urlidproducto; ?>" />
+                    <input type="hidden" name="urlroute" value="<?php echo $this->urlroute; ?>" />
+                    <input type="hidden" name="urlaction" value="<?php echo $this->urlaction; ?>" />
+                    <input type="hidden" name="Todos" value="0" />
+                    <li class="active"><input type="submit" class="btn btn-primary" name="selcat" value="Todos" /></li>
+                    <?php foreach ($categorias as $categoria ): ?>
+                        <input type="hidden" name="<?php echo $categoria->getNombre() ?>" value="<?php echo $categoria->getId() ?>" />
+                        <li><input type="submit" class="btn btn-info" name="selcat" value="<?php echo $categoria->getNombre() ?>" /></li>
+                    <?php endforeach ?>
+                </ol>
+
+            </form>
+
+        </div>
+    </div>
+    <div class="panel-body text-center">
+        <div class="row">
+            <h3>Productos Disponibles</h3>
+        </div>
+        <div class="row well text-center">
+            <?php foreach ($productos as $producto ): ?>
+
+                <div class="col-sm-6 col-md-2">
+                    <?php $urlidproducto = $producto->getId(); ?>
+                    <a href="<?php echo $this->url($urlroute, array(
+                        'action'=>$urlaction,
+                        'idalmacen' => $urlidalmacen,
+                        'idproducto' => $urlidproducto,
+                    ));?>" class="thumbnail">
+                        <img src="<?= $producto->getImagen() ?>" alt="<?= $producto->getNombre() ?>">
+                        <div class="caption">
+                            <h4 id="producto<?= $producto->getId() ?>"><?= $producto->getNombre() ?></h4>
+                            <p>Categoría:<?= $producto->getNombcategoria() ?></p>
+                            <p>Precio:<?= $producto->getPreciounidad() ?> BsF por  <?= $producto->getNombunidmedventas() ?></p>
+                        </div>
+                    </a>
+                </div>
+
+            <?php endforeach ?>
+        </div>
+    </div>
+    <div class="panel-footer text-right"></div>
+</div>
+
+
+
+
+

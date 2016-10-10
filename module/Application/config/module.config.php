@@ -61,6 +61,7 @@ return array(
         ),
         'factories' => array(
             'translator' => 'Zend\Mvc\Service\TranslatorServiceFactory',
+            'navigation' => 'Zend\Navigation\Service\DefaultNavigationFactory',
         ),
     ),
     'translator' => array(
@@ -98,6 +99,60 @@ return array(
     'console' => array(
         'router' => array(
             'routes' => array(
+            ),
+        ),
+    ),
+    'navigation' => array(
+        'default' => array(
+            array(
+                'label' => 'Home',
+                'route' => 'home',
+            ),
+            array(
+                'label' => 'Tienda',
+                'route' => 'application/default',
+                'controller' => 'index',
+                'action' => 'tienda',
+                'pages' => array(
+                    array(
+                        'label' => 'Pedidos',
+                        'route' => 'pedido',
+                        'action' => 'index',
+                    ),
+                    array(
+                        'label' => 'Despacho',
+                        'route' => 'pedido',
+                        'action' => 'index',
+                    ),
+                    array(
+                        'label' => 'Clientes',
+                        'route' => 'pedido',
+                        'action' => 'index',
+                    ),
+                ),
+            ),
+            array(
+                'label' => 'Administración',
+                'route' => 'application/default',
+                'controller' => 'index',
+                'action' => 'admin',
+                'pages' => array(
+                    array(
+                        'label' => 'Administracion',
+                        'route' => 'pedido',
+                        'action' => 'index',
+                    ),
+                    array(
+                        'label' => 'Reportes',
+                        'route' => 'pedido',
+                        'action' => 'index',
+                    ),
+                    array(
+                        'label' => 'Clientes',
+                        'route' => 'pedido',
+                        'action' => 'index',
+                    ),
+                ),
             ),
         ),
     ),

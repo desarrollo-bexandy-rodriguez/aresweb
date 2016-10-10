@@ -17,8 +17,30 @@ class ProductoController extends AbstractActionController
 {
     public function indexAction()
     {
+        $categorias = $this->getCategoriaMapper()->fetchAll();
         $mapper = $this->getProductoMapper();
-        return new ViewModel(array('productos' => $mapper->fetchAll()));
+
+
+        $request = $this->getRequest();
+        if ($request->isPost()) {
+            $selcat = $request->getPost()->get('selcat');
+            $cat = str_replace(" ", "_", $selcat);
+            $idcat = $request->getPost()->get($cat);
+
+            if ($idcat === "0") {
+                $productos = $mapper->fetchAll();
+            } else {
+                $productos = $mapper->getProductosCategoria($idcat, true);
+            }
+
+        } else {
+            $productos = $mapper->fetchAll(true);
+        }
+
+        return new ViewModel(array(
+            'productos' => $productos,
+            'categorias' => $categorias,
+            ));
     }
 
     public function getProductoMapper()
@@ -71,6 +93,7 @@ class ProductoController extends AbstractActionController
         if ($request->isPost()) {
             $form->setData($request->getPost());
             if ($form->isValid()) {
+
                 $this->getProductoMapper()->saveProducto($producto);
 
                 // Redirect to list of productos
@@ -88,7 +111,7 @@ class ProductoController extends AbstractActionController
         $det = (int)$this->params('det');
         $may = (int)$this->params('may');
 
-        $producto = $this->getProductoMapper()->getProducto($id);
+        $producto = $this->getProductoMapper()->getProducto($id, true);
 
         if ($producto->getIdCategoria()){
             $categoria = $this->getCategoriaMapper()->getCategoria($producto->getIdCategoria());

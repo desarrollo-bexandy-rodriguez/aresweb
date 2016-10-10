@@ -1,0 +1,74 @@
+<?php
+$title = 'Eliminar Pedido';
+$this->headTitle($title);
+?>
+<h1><?php echo $this->escapeHtml($title); ?></h1>
+
+
+
+<div class="panel panel-default">
+    <div class="panel-heading">
+        <div class="row">
+            <div class="col-sm-6 col-md-2">
+                Fecha: <?php echo $pedido->getFecha(); ?><br>
+                Hora: <?php echo $pedido->getHora(); ?>
+            </div>
+
+
+            <div class="col-sm-6 col-md-4 text-center text-primary">
+                <strong>Pedido: <?php echo $pedido->getCodigo(); ?> <br>
+                    Cliente: <?php echo $pedido->getCliente(); ?></strong>
+            </div>
+
+            <div class="col-sm-6 col-md-4 text-center text-primary">
+                <strong>Estatus: <?php echo $pedido->getMsgclientes(); ?></strong> <br>
+                <strong>Precio Total: <?php echo $pedido->getPreciototal(); ?></strong>
+            </div>
+
+
+            <div class="col-sm-6 col-md-2">
+                Tomado por: <?php echo $pedido->getNombvendedor(); ?><br>
+                Atendido por: <?php echo $pedido->getNombdespachador(); ?>
+            </div>
+        </div>
+    </div>
+
+    <div class="panel-body">
+        <ul class="list-group">
+            <?php foreach ($items as $item): ?>
+                <?php $idPedido = $item->getPedido();?>
+                <?php $idProducto = $item->getProducto();?>
+                <li class="list-group-item">
+                    <span class="badge">Subtotal: <br><?php echo $item->getSubtotal(); ?> BsF</span>
+                    <p class="text-left"><?php echo $item->getCantidad(); ?> <?php echo $item->getUnidmedprod(); ?> de <?php echo $item->getNombproducto(); ?></p>
+                </li>
+
+            <?php endforeach; ?>
+        </ul>
+    </div>
+
+    <div class="panel-footer">
+        <div class="row">
+            <div class="col-sm-3 col-md-3">
+            </div>
+
+            <div class="col-sm-6 col-md-6 text-danger text-center">
+                <p><strong>Está Seguro de Eliminar el Pedido
+                    '<?php echo $this->escapeHtml($pedido->getCodigo()); ?>' con todos sus Items?</strong>
+                </p>
+                <?php
+                $url = $this->url('pedido', array('action' => 'delete', 'id'=>$id)); ?>
+                <form action="<?php echo $url; ?>" method="post">
+                    <div>
+                        <input type="submit" class="btn btn-danger pull-left" name="del" value="Si" />
+                        <input type="submit" class="btn btn-primary pull-right" name="del" value="No" />
+                    </div>
+                </form>
+            </div>
+
+            <div class="col-sm-3 col-md-3">
+            </div>
+        </div>
+    </div>
+</div>
+

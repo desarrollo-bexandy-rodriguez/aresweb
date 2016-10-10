@@ -1,0 +1,31 @@
+<!--
+                    <ul class="nav nav-tabs">
+                        <input type="hidden" name="Todos" value="0" />
+                        <li><input type="submit" class="linkButton" name="selcat" value="Todos" /></li>
+                        <?php foreach ($categorias as $categoria ): ?>
+                            <input type="hidden" name="<?php echo $categoria->getNombre() ?>" value="<?php echo $categoria->getId() ?>" />
+                        <li><input type="submit" class="linkButton" name="selcat" value="<?php echo $categoria->getNombre() ?>" /></li>
+                        <?php endforeach ?>
+                    </ul>
+-->
+
+
+                <ul class="nav nav-tabs">
+                    <input type="hidden" name="Todos" value="0" />
+                    <li><input type="submit" class="btn btn-link" name="selcat" value="Todos" /></li>
+                    <?php foreach ($categorias as $categoria ): ?>
+                        <input type="hidden" name="<?php echo $categoria->getNombre() ?>" value="<?php echo $categoria->getId() ?>" />
+                        <li><input type="submit" class="btn btn-link" name="selcat" value="<?php echo $categoria->getNombre() ?>" /></li>
+                    <?php endforeach ?>
+                </ul>
+
+                                            <div class="col-sm-9 col-md-9">
+                                                <ol class="breadcrumb">
+                                                    <input type="hidden" name="Todos" value="0" />
+                                                    <li class="active"><input type="submit" class="btn btn-primary" name="selcat" value="Todos" /></li>
+                                                    <?php foreach ($categorias as $categoria ): ?>
+                                                        <input type="hidden" name="<?php echo $categoria->getNombre() ?>" value="<?php echo $categoria->getId() ?>" />
+                                                        <li><input type="submit" class="btn btn-info" name="selcat" value="<?php echo $categoria->getNombre() ?>" /></li>
+                                                    <?php endforeach ?>
+                                                </ol>
+                                            </div>

@@ -1,0 +1,68 @@
+<?php
+$title = 'Eliminar Item';
+$this->headTitle($title);
+?>
+
+<div class="panel panel-default">
+    <div class="panel-heading text-center"><h1><?php echo $this->escapeHtml($title); ?></h1></div>
+    <div class="panel-body">
+        <div class="row">
+            <div class="col-sm-8 col-md-8">
+                <div class="thumbnail well">
+                    <img src="<?= $producto->getImagen(); ?>" alt="<?= $producto->getNombre() ?>">
+                    <div class="caption text-center">
+                        <h3 id="producto<?= $producto->getId() ?>"><?= $producto->getNombre() ?></h3>
+                        <p>Categoría:<?= $producto->getNombcategoria() ?></p>
+                        <p>Precio:<?= $producto->getPreciounidad() ?> BsF por  <?= $producto->getNombunidmedventas() ?></p>
+
+                    </div>
+                </div>
+            </div>
+            <div class="col-sm-4 col-md-4">
+                <div class="well text-center">
+                    <div class="row">
+                        <h2>Datos del Pedido</h2>
+                    </div>
+                    <div class="row">
+                        <h3>Cantidad: <?php echo $item->getCantidad().' '.$producto->getNombunidmedventas(); ?></h3>
+
+                    </div>
+                    <div class="row">
+                       <h3>Subtotal: <?php echo $item->getSubtotal().' BsF' ; ?></h3>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+
+    </div>
+
+    <div class="panel-footer">
+        <div class="row">
+            <div class="col-sm-3 col-md-3">
+            </div>
+
+            <div class="col-sm-6 col-md-6 text-danger text-center">
+                <h4><strong>Está Seguro de Eliminar el Item del pedido :
+                        '<?php echo $this->escapeHtml($pedido->getCodigo()); ?>' ?</strong>
+                </h4>
+                <?php
+                $url = $this->url('item', array('action' => 'delete', 'pedido'=>$idpedido, 'producto' => $idproducto)); ?>
+                <form action="<?php echo $url; ?>" method="post">
+                    <div>
+                        <input type="submit" class="btn btn-danger btn-lg pull-left" name="del" value="Si" />
+                        <input type="submit" class="btn btn-primary pull-right btn-lg" name="del" value="No" />
+                    </div>
+                </form>
+            </div>
+
+            <div class="col-sm-3 col-md-3">
+            </div>
+        </div>
+    </div>
+</div>
+
+
+
+
+

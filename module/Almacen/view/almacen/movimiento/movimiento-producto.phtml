@@ -1,0 +1,59 @@
+<?php
+$title = 'Movimiento de Productos entre Almacénes';
+$this->headTitle($title);
+?>
+
+<?php
+$form = $this->form;
+$form->setAttribute('action', $this->url('movimiento', array('action' => 'movimiento-producto')));
+$form->get('submit')->setAttribute('value', 'Realizar Movimiento');
+$form->prepare();
+
+echo $this->form()->openTag($form);
+echo $this->formHidden($form->get('id'));
+echo $this->formHidden($form->get('idproducto'));
+echo $this->formHidden($form->get('idalmacenmayor'));
+echo $this->formHidden($form->get('idalmacendetal'));
+echo $this->formHidden($form->get('idusuario'));
+?>
+
+    <div class="row">
+        <div class="col-sm-3 col-md-3"></div>
+        <div class="col-sm-6 col-md-6">
+            <div class="panel panel-primary">
+                <div class="panel-heading"><?php echo $title?></div>
+                <div class="panel-body">
+
+                    <?php
+                    echo $this->formRow($form->get('fecha'));
+                    echo '<br>';
+                    echo $this->formRow($form->get('nombmayor')); ?>
+                    <a href="<?php echo $this->url('movimiento', array('action' => 'select-almacen-mayor')) ?>">Seleccione Almacén Mayor</a>
+                    <?php
+                    echo '<br>';
+                    echo $this->formRow($form->get('nombdetal')); ?>
+                    <a href="<?php echo $this->url('movimiento', array('action' => 'select-almacen-detal')) ?>">Seleccione Almacén Detal</a>
+                    <?php
+                    echo '<br>';
+                    echo $this->formRow($form->get('nombproducto')); ?>
+                    <a href="<?php echo $this->url('movimiento', array('action' => 'select-producto')) ?>">Seleccione Producto</a>
+                    <?php
+                    echo '<br>';
+                    echo $this->formRow($form->get('disponible')).' '.$this->formRow($form->get('unidmed')); ?>
+                    <?php
+                    echo '<br>';
+                    echo $this->formRow($form->get('cantidad'));
+                    ?>
+
+                </div>
+                <div class="panel-footer">
+                    <a href="<?php echo $this->url('almacen') ?>" class="btn btn-default">Volver</a>
+                    <?php echo $this->formRow($form->get('submit')); ?>
+                </div>
+            </div>
+        </div>
+        <div class="col-sm-3 col-md-3"></div>
+    </div>
+
+<?php
+echo $this->form()->closeTag($form);

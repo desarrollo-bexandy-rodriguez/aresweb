@@ -41,6 +41,7 @@ class TaskFilter extends InputFilter
             ),
         ));
 
+
         $this->add(array(
             'name' => 'completed',
             'required' => false,

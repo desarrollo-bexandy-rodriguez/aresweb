@@ -28,6 +28,14 @@ class PedidoFilter extends InputFilter
         ));
 
         $this->add(array(
+            'name' => 'idalmacen',
+            'required' => true,
+            'filters' => array(
+                array('name' => 'Int'),
+            ),
+        ));
+
+        $this->add(array(
             'name' => 'vendedor',
             'required' => true,
             'filters' => array(

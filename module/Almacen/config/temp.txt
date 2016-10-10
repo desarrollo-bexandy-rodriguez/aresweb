@@ -1,0 +1,28 @@
+            'disponibilidad' => array(
+                'type'    => 'Segment',
+                'options' => array(
+                    'route'    => '/inventario/:action/:idalmacen',
+                    'defaults' => array(
+                        '__NAMESPACE__' => 'Almacen\Controller',
+                        'controller'    => 'Inventario',
+                    ),
+                ),
+                'constraints' => array(
+                    'action' => '(disponibilidad-almacen|ver-ingresos)',
+                    'idalmacen'    =>  '[0-9]*',
+                ),
+            ),
+            'movimiento' => array(
+                'type'    => 'Segment',
+                'options' => array(
+                    'route'    => '/inventario/:action/:idalmacen',
+                    'defaults' => array(
+                        '__NAMESPACE__' => 'Almacen\Controller',
+                        'controller'    => 'Inventario',
+                    ),
+                ),
+                'constraints' => array(
+                    'action' => '(movimiento|ver-movimientos)',
+                    'idalmacen'    =>  '[0-9]*',
+                ),
+            ),

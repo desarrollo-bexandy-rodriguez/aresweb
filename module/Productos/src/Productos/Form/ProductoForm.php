@@ -42,7 +42,7 @@ class ProductoForm extends Form
                 'maxlength' => 100,
                 'readonly' => true,
                 'disabled' => true,
-                'class' => 'form-control-static',
+                'class' => 'form-control',
             )
         ));
 
@@ -55,6 +55,7 @@ class ProductoForm extends Form
             'attributes' => array(
                 'id' => 'nombre',
                 'maxlength' => 100,
+                'class' => 'form-control',
             )
         ));
 
@@ -74,7 +75,7 @@ class ProductoForm extends Form
                 'maxlength' => 100,
                 'readonly' => true,
                 'disabled' => true,
-                'class' => 'form-control-static',
+                'class' => 'form-control',
             )
         ));
 
@@ -95,7 +96,7 @@ class ProductoForm extends Form
                 'maxlength' => 100,
                 'readonly' => true,
                 'disabled' => true,
-                'class' => 'form-control-static',
+                'class' => 'form-control',
             )
         ));
 
@@ -108,6 +109,7 @@ class ProductoForm extends Form
             'attributes' => array(
                 'id' => 'nombre',
                 'maxlength' => 100,
+                'class' => 'form-control'
             )
         ));
 
@@ -117,6 +119,45 @@ class ProductoForm extends Form
             'options'   =>  array(
                 'label' =>  'Ruta de la Foto del Producto',
             ),
+            'attributes' => array(
+                'id' => 'imagen',
+                'maxlength' => 100,
+                'class' => 'form-control',
+            )
+        ));
+
+        $this->add(array(
+            'name' => 'idmarca',
+            'type' => 'hidden',
+        ));
+
+
+        $this->add(array(
+            'name' => 'nombmarca',
+            'type' => 'text',
+            'options' => array(
+                'label' => 'Marca del Producto',
+            ),
+            'attributes' => array(
+                'id' => 'nombmarca',
+                'maxlength' => 100,
+                'readonly' => true,
+                'disabled' => true,
+                'class' => 'form-control',
+            )
+        ));
+
+        $this->add(array(
+            'name' => 'relacionunidad',
+            'type' => 'text',
+            'options' => array(
+                'label' => 'Constante de Conversión Unid. Medida Mayor->Detal',
+            ),
+            'attributes' => array(
+                'id' => 'relacionunidad',
+                'maxlength' => 100,
+                'class' => 'form-control',
+            )
         ));
 
         $this->add(array(

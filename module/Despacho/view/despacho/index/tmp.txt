@@ -1,0 +1,59 @@
+            <div class="panel panel-primary">
+                <div class="panel-heading">
+                    <div class="row">
+                        <div class="col-sm-6 col-md-2">
+                            <strong>Estatus: <?php echo $pedido1->getMsgclientes(); ?></strong>
+                        </div>
+
+
+                        <div class="col-sm-6 col-md-8 text-center text-uppercase ">
+                            <strong>Pedido: <?php echo $pedido1->getCodigo(); ?> <br>
+                                Cliente: <?php echo $pedido1->getCliente(); ?></strong>
+                        </div>
+
+
+                        <div class="col-sm-6 col-md-2">
+                            <strong>Precio Total: <?php echo $pedido1->getPreciototal(); ?></strong>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="panel-body">
+                    <div class="list-group">
+                        <?php foreach ($items1 as $item1): ?>
+                            <?php $idPedido = $item1->getPedido();?>
+                            <?php $idProducto = $item1->getProducto();?>
+                            <a href="#" class="list-group-item">
+                                <span class="badge">Subtotal: <br><?php echo $item1->getSubtotal(); ?> BsF</span>
+                                <p class="text-left"><?php echo $item1->getCantidad(); ?> <?php echo $item1->getUnidmedprod(); ?> de <?php echo $item1->getNombproducto(); ?></p>
+                            </a>
+
+                        <?php endforeach; ?>
+                    </div>
+                </div>
+
+                <div class="panel-footer">
+                    <div class="row">
+                        <div class="col-sm-6 col-md-6 text-success text-center">
+                            <a href="#">Cancelar</a>
+                        </div>
+
+
+                        <div class="col-sm-6 col-md-6 text-center text-primary">
+                            <a href="#">Finalizar</a>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+
+            document.form<?= $pedido->getId() ?>.submit()
+
+                                                <div class="col-sm-3 col-md-3">
+                                                    <?php
+                                                    $url = $this->url('despacho', array( 'id'=>$pedido->getId())); ?>
+                                                    <form id="form<?= $pedido->getId() ?>" action="<?php echo $url; ?>" method="post">
+                                                        <input type="hidden" name="idpedido" value="<?= $pedido->getId() ?>">
+                                                        <input type="submit" name="submit" value="Atender">
+                                                    </form>
+                                                </div>

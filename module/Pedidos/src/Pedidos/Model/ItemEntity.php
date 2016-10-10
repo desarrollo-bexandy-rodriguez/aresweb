@@ -87,7 +87,7 @@ class ItemEntity
      */
     public function getCantidad()
     {
-        return $this->cantidad;
+        return (float) $this->cantidad;
     }
 
     /**
@@ -95,7 +95,7 @@ class ItemEntity
      */
     public function setCantidad($cantidad)
     {
-        $this->cantidad = $cantidad;
+        $this->cantidad = (float) $cantidad;
     }
 
     /**

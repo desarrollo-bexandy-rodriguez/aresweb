@@ -1,0 +1,40 @@
+<div class="row">
+    <div class="col-sm-2 col-md-2"></div>
+    <div class="col-sm-8 col-md-8">
+        <div class="panel panel-primary">
+            <div class="panel-heading"><h2 class="text-center">Historial de Movimientos de Productos en <?php echo $almacen->getNombre(); ?></h2></div>
+            <div class="panel-body">
+
+                <table class="table table-hover">
+                    <thead>
+                    <tr>
+                        <th>Fecha</th>
+                        <th>Desde</th>
+                        <th>Hasta</th>
+                        <th>Producto</th>
+                        <th>Cantidad del Movimiento</th>
+                        <th>Unidad Medida</th>
+                    </tr>
+                    </thead>
+                    <tbody>
+                    <?php foreach ($movimientos as $mov): ?>
+                        <tr>
+                            <td><?php echo $mov->getFecha(); ?></td>
+                            <td><?php echo $mov->getNombmayor(); ?></td>
+                            <td><?php echo $mov->getNombdetal(); ?></td>
+                            <td><?php echo $mov->getNombproducto(); ?></td>
+                            <td><?php echo $mov->getCantidad(); ?></td>
+                            <td><?php echo $mov->getUnidmed(); ?></td>
+                        </tr>
+                    <?php endforeach ?>
+                    </tbody>
+                </table>
+
+            </div>
+            <div class="panel-footer">
+                <a href="<?php echo $this->url('almacen') ?>" class="btn btn-default">Volver</a>
+            </div>
+        </div>
+    </div>
+    <div class="col-sm-2 col-md-2"></div>
+</div>
