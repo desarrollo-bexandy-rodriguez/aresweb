@@ -65,7 +65,6 @@ class InventarioController extends AbstractActionController
                     $disponibilidadAlmacen->setProducto($ingreso->getIdproducto());
                     $disponibilidadAlmacen->setAlmacen($ingreso->getIdalmacen());
                     $disponibilidadAlmacen->setCantidad($ingreso->getCantidad());
-                    $disponibilidadAlmacen->setReservado('0');
 
                     $this->getIngresoMapper()->actualizarDisponibilidadAlmacen($disponibilidadAlmacen);
                 }

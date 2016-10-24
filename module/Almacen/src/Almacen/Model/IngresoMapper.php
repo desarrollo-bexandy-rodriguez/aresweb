@@ -78,8 +78,11 @@ class IngresoMapper
             unset($data['idproducto']);
             unset($data['nombproducto']);
             unset($data['idunidmedalmacen']);
+            unset($data['idunidmedventas']);
+            unset($data['unidmeddetal']);
             unset($data['unidmed']);
             unset($data['disponible']);
+            unset($data['reservado']);
             unset($data['producto']);
             unset($data['almacen']);
             //$data['cantidad'] = $existeRegistro->getCantidad() + $disponibilidadAlmacen->getCantidad();
@@ -96,8 +99,11 @@ class IngresoMapper
             unset($data['idproducto']);
             unset($data['nombproducto']);
             unset($data['idunidmedalmacen']);
+            unset($data['idunidmedventas']);
+            unset($data['unidmeddetal']);
             unset($data['unidmed']);
             unset($data['disponible']);
+            unset($data['reservado']);
             $action->values($data);
         }
         $statement = $this->sql->prepareStatementForSqlObject($action);

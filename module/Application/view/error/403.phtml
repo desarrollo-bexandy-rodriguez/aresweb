@@ -1,0 +1,33 @@
+<div class="row well well-sm text-center text-primary">
+    <h1>Sistema de Pedidos Ares</h1>
+</div>
+
+<div class="container">
+
+    <div class="jumbotron text-center">
+        <h1>Acceso No Autorizado !!</h1>
+        <?php if (\BjyAuthorize\Guard\Controller::ERROR === $error) : ?>
+            <p class="lead">Usted está intentando acceder a una sección para la que no tiene los permisos adecuados.</p>
+            <p class="lead">Por Favor, inicie sesión con un usuario autorizado</p>
+            <p><a class="btn btn-lg btn-primary" href="<?php echo $this->url('zfcuser/login') ?>" role="button">Iniciar Sesión</a>
+        <?php elseif (\BjyAuthorize\Guard\Route::ERROR === $error)  : ?>
+            <p class="lead">Usted está intentando acceder a una sección para la que no tiene los permisos adecuados.</p>
+            <p class="lead">Por Favor, inicie sesión con un usuario autorizado</p>
+            <p><a class="btn btn-lg btn-primary" href="<?php echo $this->url('zfcuser/login') ?>" role="button">Iniciar Sesión</a>
+
+        <?php elseif ($error == 'error-unauthorized') : ?>
+        <p class="lead">Usted está intentando acceder a una sección para la que no tiene los permisos adecuados.</p>
+        <p class="lead">Por Favor, inicie sesión con un usuario autorizado</p>
+        <p><a class="btn btn-lg btn-primary" href="<?php echo $this->url('zfcuser/login') ?>" role="button">Iniciar Sesión</a>
+
+        <?php else : ?>
+            Ha ocurrido un error desconocido.
+        <?php endif;?>
+
+
+    </div>
+
+    <div class="row well well-sm text-center">
+        <br><br><br>
+    </div>
+

@@ -9,6 +9,7 @@
 
 namespace Application\Controller;
 
+use BjyAuthorize\Exception\UnAuthorizedException;
 use Zend\Mvc\Controller\AbstractActionController;
 use Zend\View\Model\ViewModel;
 
@@ -16,7 +17,12 @@ class IndexController extends AbstractActionController
 {
     public function indexAction()
     {
-
+        /*
+        *if (!$this->isAllowed('Inicio','acceder')) {
+        *    throw new UnAuthorizedException();
+        *}
+         *
+         */
         return new ViewModel();
     }
 

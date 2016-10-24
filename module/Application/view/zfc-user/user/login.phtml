@@ -1,0 +1,67 @@
+<div class="row well well-sm text-center text-primary">
+    <h1>Sistema de Pedidos Ares</h1>
+</div>
+
+
+<?php
+$form = $this->loginForm;
+$form->prepare();
+$form->setAttribute('action', $this->url('zfcuser/login'));
+$form->setAttribute('method', 'post');
+$form->setAttribute('class', 'form-signin');
+?>
+
+<div class="row">
+    <div class="col-sm-3 col-md-3"></div>
+    <div class="col-sm-6 col-md-6">
+        <div class="panel panel-primary">
+            <div class="panel-heading text-center">
+                <h2 class="form-signin-heading"><?php echo $this->translate('Autentificación de Usuario'); ?></h2>
+            </div>
+            <div class="panel-body">
+                <?php echo $this->form()->openTag($form) ?>
+                <?php foreach ($form as $element): ?>
+
+                    <div style="width: 330px;" class="form-group <?php if ($this->formElementErrors($element)) echo "has-error" ?>">
+                        <?php
+                        if ('submit' != $element->getAttribute('type')) { ?>
+                            <label class="control-label"><?php echo $this->translate($element->getLabel()); ?></label>
+                            <?php
+                            $element->setAttribute('class','form-control')->setAttribute('placeholder',$this->translate($element->getLabel()));
+                        } else {
+                            $element->setAttribute('class', 'btn btn-lg btn-primary btn-block');
+                        }
+
+                        echo $this->formElement($element);
+                        if ($this->formElementErrors($element)) : ?>
+                            <?php
+                            echo $this->formElementErrors()
+                                ->setMessageOpenFormat('<p class="help-block">')
+                                ->setMessageSeparatorString('</p><p class="help-block">')
+                                ->setMessageCloseString('</p>')
+                                ->render($element);
+                            ?>
+                        <?php endif; ?>
+                    </div>
+
+                <?php endforeach; ?>
+                <?php echo $this->form()->closeTag() ?>
+
+
+                <?php if ($this->enableRegistration) : ?>
+                    <div class="text-center">
+                        <?php echo $this->translate('Not registered?'); ?> <a href="<?php echo $this->url('zfcuser/register') . ($this->redirect ? '?redirect='.$this->escapeUrl($this->redirect) : '') ?>"><?php echo $this->translate('Sign up!'); ?></a>
+                    </div>
+                <?php endif; ?>
+
+            </div>
+        </div>
+    </div>
+    <div class="col-sm-3 col-md-3"></div>
+</div>
+
+
+
+<div class="row well well-sm text-center">
+    <br><br><br>
+</div>

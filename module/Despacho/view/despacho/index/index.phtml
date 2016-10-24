@@ -17,13 +17,31 @@ $this->headTitle($title);
                                             Pedido: <?php echo $pedido->getCodigo(); ?> <br>
                                                 Cliente: <?php echo $pedido->getCliente(); ?>
                                             <?php $url = $this->url('despacho') ?>
-                                            <form id="form<?= $pedido->getId() ?>" action="<?php echo $url; ?>" method="post">
+                                            <form name="form" id="form" action="<?php echo $url; ?>" method="post">
                                                 <input type="hidden" name="idpedido" value="<?= $pedido->getId() ?>">
                                                 <input type="hidden" name="idpedido1" value="<?= $this->idpedido1 ?>">
                                                 <input type="hidden" name="idpedido2" value="<?= $this->idpedido2 ?>">
+                                                <input type="hidden" name="idpedido3" value="<?= $this->idpedido3 ?>">
+                                                <input type="hidden" name="idpedido4" value="<?= $this->idpedido4 ?>">
                                                 <input type="hidden" name="panel1" value="<?= $this->panel1 ?>">
                                                 <input type="hidden" name="panel2" value="<?= $this->panel2 ?>">
-                                                <input type="submit" name="submit" value="Atender">
+                                                <input type="hidden" name="panel3" value="<?= $this->panel3 ?>">
+                                                <input type="hidden" name="panel4" value="<?= $this->panel4 ?>">
+                                                <?php if (!empty($despachadores[0])): ?>
+                                                <input type="submit" name="submit" id="applybutton" class="btn btn-sm btn-success" value="<?php echo $despachadores[0]; ?>">
+                                                <?php endif ?>
+                                                <?php if (!empty($despachadores[1])): ?>
+                                                    <input type="submit" name="submit" id="applybutton" class="btn btn-sm btn-info" value="<?php echo $despachadores[1]; ?>">
+                                                <?php endif ?>
+                                                <?php if (!empty($despachadores[2])): ?>
+                                                    <input type="submit" name="submit" id="applybutton" class="btn btn-sm btn-warning" value="<?php echo $despachadores[2]; ?>">
+                                                <?php endif ?>
+                                                <?php if (!empty($despachadores[3])): ?>
+                                                    <input type="submit" name="submit" id="applybutton" class="btn btn-sm btn-danger" value="<?php echo $despachadores[3]; ?>">
+                                                <?php endif ?>
+
+
+
                                             </form>
                                         </li>
 
@@ -36,6 +54,7 @@ $this->headTitle($title);
 
         <div class="col-sm-8 col-md-8">
             <div class="row">
+
                 <div class="col-sm-6 col-md-6">
                     <?php if (isset($pedido1) && $panel1 === 'Ocupado') : ?>
                         <div class="panel panel-success">
@@ -54,30 +73,37 @@ $this->headTitle($title);
                             </div>
 
                             <div class="panel-body">
-                                <div class="list-group">
+                                <ul class="list-group">
                                     <?php foreach ($items1 as $item1): ?>
-                                        <a href="#" class="list-group-item">
+                                        <li class="list-group-item">
                                             <span class="badge">Subtotal: <br><?php echo $item1->getSubtotal(); ?> BsF</span>
                                             <p class="text-left"><?php echo $item1->getCantidad(); ?> <?php echo $item1->getUnidmedprod(); ?> de <?php echo $item1->getNombproducto(); ?></p>
-                                        </a>
+                                        </li>
 
                                     <?php endforeach; ?>
-                                </div>
+                                </ul>
                             </div>
 
                             <div class="panel-footer">
-                                <div class="row">
+                                <div class="row text-center">
                                     <?php $urlpanel1 = $this->url('despacho') ?>
                                     <form id="form-panel1" action="<?php echo $urlpanel1; ?>" method="post">
-                                        <input type="hidden" name="idpedido" value="<?= $pedido->getId() ?>">
+
                                         <input type="hidden" name="idpedido1" value="<?= $this->idpedido1 ?>">
                                         <input type="hidden" name="idpedido2" value="<?= $this->idpedido2 ?>">
+                                        <input type="hidden" name="idpedido3" value="<?= $this->idpedido3 ?>">
+                                        <input type="hidden" name="idpedido4" value="<?= $this->idpedido4 ?>">
                                         <input type="hidden" name="panel1" value="<?= $this->panel1 ?>">
                                         <input type="hidden" name="panel2" value="<?= $this->panel2 ?>">
+                                        <input type="hidden" name="panel3" value="<?= $this->panel3 ?>">
+                                        <input type="hidden" name="panel4" value="<?= $this->panel4 ?>">
                                         <input type="hidden" name="idfinalizado" value="panel1">
-                                        <input type="submit" name="submit" value="Finalizar">
+                                        <input class="btn btn-default" type="submit" name="submit" value="Descartar">
+                                        <input class="btn btn-danger" type="submit" name="submit" value="Eliminar">
+                                        <input class="btn btn-primary" type="submit" name="submit" value="Finalizar">
                                     </form>
                                     </div>
+                                <div class="row text-center text-info">Atendido por: <?php echo utf8_encode($usuarios[0]->getDisplayName()) ?></div>
                             </div>
                         </div>
 
@@ -114,24 +140,147 @@ $this->headTitle($title);
                             </div>
 
                             <div class="panel-footer">
-                                <div class="row">
+                                <div class="row text-center">
                                     <?php $urlpanel2 = $this->url('despacho') ?>
                                     <form id="form-panel2" action="<?php echo $urlpanel2; ?>" method="post">
-                                        <input type="hidden" name="idpedido" value="<?= $pedido->getId() ?>">
+
                                         <input type="hidden" name="idpedido1" value="<?= $this->idpedido1 ?>">
                                         <input type="hidden" name="idpedido2" value="<?= $this->idpedido2 ?>">
+                                        <input type="hidden" name="idpedido3" value="<?= $this->idpedido3 ?>">
+                                        <input type="hidden" name="idpedido4" value="<?= $this->idpedido4 ?>">
                                         <input type="hidden" name="panel1" value="<?= $this->panel1 ?>">
                                         <input type="hidden" name="panel2" value="<?= $this->panel2 ?>">
+                                        <input type="hidden" name="panel3" value="<?= $this->panel3 ?>">
+                                        <input type="hidden" name="panel4" value="<?= $this->panel4 ?>">
                                         <input type="hidden" name="idfinalizado" value="panel2">
-                                        <input type="submit" name="submit" value="Finalizar">
+                                        <input class="btn btn-default" type="submit" name="submit" value="Descartar">
+                                        <input class="btn btn-danger" type="submit" name="submit" value="Eliminar">
+                                        <input class="btn btn-primary" type="submit" name="submit" value="Finalizar">
                                     </form>
                                 </div>
+                                <div class="row text-center text-info">Atendido por: <?php echo utf8_encode($usuarios[1]->getDisplayName()) ?></div>
                             </div>
                         </div>
 
                     <?php endif ?>
                 </div>
+
             </div>
+
+            <div class="row">
+
+                <div class="col-sm-6 col-md-6">
+                    <?php if (isset($pedido3) && $panel3 === 'Ocupado') : ?>
+                        <div class="panel panel-warning">
+                            <div class="panel-heading">
+                                <div class="row">
+
+                                    <div class="col-sm-6 col-md-8 text-center text-uppercase ">
+                                        <strong>Pedido: <?php echo $pedido3->getCodigo(); ?> <br>
+                                            Cliente: <?php echo $pedido3->getCliente(); ?></strong>
+                                    </div>
+
+                                    <div class="col-sm-6 col-md-4">
+                                        <strong>Precio Total: <?php echo $pedido3->getPreciototal(); ?></strong>
+                                    </div>
+                                </div>
+                            </div>
+
+                            <div class="panel-body">
+                                <div class="list-group">
+                                    <?php foreach ($items3 as $item3): ?>
+                                        <a href="#" class="list-group-item">
+                                            <span class="badge">Subtotal: <br><?php echo $item3->getSubtotal(); ?> BsF</span>
+                                            <p class="text-left"><?php echo $item3->getCantidad(); ?> <?php echo $item3->getUnidmedprod(); ?> de <?php echo $item3->getNombproducto(); ?></p>
+                                        </a>
+
+                                    <?php endforeach; ?>
+                                </div>
+                            </div>
+
+                            <div class="panel-footer">
+                                <div class="row text-center">
+                                    <?php $urlpanel3 = $this->url('despacho') ?>
+                                    <form id="form-panel1" action="<?php echo $urlpanel3; ?>" method="post">
+
+                                        <input type="hidden" name="idpedido1" value="<?= $this->idpedido1 ?>">
+                                        <input type="hidden" name="idpedido2" value="<?= $this->idpedido2 ?>">
+                                        <input type="hidden" name="idpedido3" value="<?= $this->idpedido3 ?>">
+                                        <input type="hidden" name="idpedido4" value="<?= $this->idpedido4 ?>">
+                                        <input type="hidden" name="panel1" value="<?= $this->panel1 ?>">
+                                        <input type="hidden" name="panel2" value="<?= $this->panel2 ?>">
+                                        <input type="hidden" name="panel3" value="<?= $this->panel3 ?>">
+                                        <input type="hidden" name="panel4" value="<?= $this->panel4 ?>">
+                                        <input type="hidden" name="idfinalizado" value="panel3">
+                                        <input class="btn btn-default" type="submit" name="submit" value="Descartar">
+                                        <input class="btn btn-danger" type="submit" name="submit" value="Eliminar">
+                                        <input class="btn btn-primary" type="submit" name="submit" value="Finalizar">
+                                    </form>
+                                </div>
+                                <div class="row text-center text-info">Atendido por: <?php echo utf8_encode($usuarios[2]->getDisplayName()) ?></div>
+                            </div>
+                        </div>
+
+                    <?php endif ?>
+                </div>
+
+                <div class="col-sm-6 col-md-6">
+                    <?php if (isset($pedido4) && $panel4 === 'Ocupado') : ?>
+                        <div class="panel panel-danger">
+                            <div class="panel-heading">
+                                <div class="row">
+
+                                    <div class="col-sm-6 col-md-8 text-center text-uppercase ">
+                                        <strong>Pedido: <?php echo $pedido4->getCodigo(); ?> <br>
+                                            Cliente: <?php echo $pedido4->getCliente(); ?></strong>
+                                    </div>
+
+                                    <div class="col-sm-6 col-md-4">
+                                        <strong>Precio Total: <?php echo $pedido4->getPreciototal(); ?></strong>
+                                    </div>
+                                </div>
+                            </div>
+
+                            <div class="panel-body">
+                                <div class="list-group">
+                                    <?php foreach ($items4 as $item4): ?>
+                                        <a href="#" class="list-group-item">
+                                            <span class="badge">Subtotal: <br><?php echo $item4->getSubtotal(); ?> BsF</span>
+                                            <p class="text-left"><?php echo $item4->getCantidad(); ?> <?php echo $item4->getUnidmedprod(); ?> de <?php echo $item4->getNombproducto(); ?></p>
+                                        </a>
+
+                                    <?php endforeach; ?>
+                                </div>
+                            </div>
+
+                            <div class="panel-footer">
+                                <div class="row text-center">
+                                    <?php $urlpanel4 = $this->url('despacho') ?>
+                                    <form id="form-panel2" action="<?php echo $urlpanel4; ?>" method="post">
+
+                                        <input type="hidden" name="idpedido1" value="<?= $this->idpedido1 ?>">
+                                        <input type="hidden" name="idpedido2" value="<?= $this->idpedido2 ?>">
+                                        <input type="hidden" name="idpedido3" value="<?= $this->idpedido3 ?>">
+                                        <input type="hidden" name="idpedido4" value="<?= $this->idpedido4 ?>">
+                                        <input type="hidden" name="panel1" value="<?= $this->panel1 ?>">
+                                        <input type="hidden" name="panel2" value="<?= $this->panel2 ?>">
+                                        <input type="hidden" name="panel3" value="<?= $this->panel3 ?>">
+                                        <input type="hidden" name="panel4" value="<?= $this->panel4 ?>">
+                                        <input type="hidden" name="idfinalizado" value="panel4">
+                                        <input class="btn btn-default" type="submit" name="submit" value="Descartar">
+                                        <input class="btn btn-danger" type="submit" name="submit" value="Eliminar">
+                                        <input class="btn btn-primary" type="submit" name="submit" value="Finalizar">
+                                    </form>
+                                </div>
+                                <div class="row text-center text-info">Atendido por: <?php echo utf8_encode($usuarios[3]->getDisplayName()) ?></div>
+                            </div>
+                        </div>
+
+                    <?php endif ?>
+                </div>
+
+            </div>
+
         </div>
 
     </div>

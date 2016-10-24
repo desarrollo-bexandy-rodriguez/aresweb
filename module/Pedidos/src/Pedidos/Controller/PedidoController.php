@@ -21,7 +21,7 @@ class PedidoController extends AbstractActionController
     public function indexAction()
     {
         $mapper = $this->getPedidoMapper();
-        return new ViewModel(array('pedidos' => $mapper->fetchAll()));
+        return new ViewModel(array('pedidos' => $mapper->fetchAllEstatus(array('1','2'))));
     }
 
     public function getPedidoMapper()
@@ -56,6 +56,11 @@ class PedidoController extends AbstractActionController
         $pedidoEntity->setHora(date('H:i:s'));
         $pedidoEntity->setIdalmacen(2);
 
+        if ($this->zfcUserAuthentication()->hasIdentity()) {
+            $userId = $this->zfcUserAuthentication()->getIdentity()->getId();
+        }
+        $pedidoEntity->setVendedor($userId);
+
         $pedidoMapper->savePedido($pedidoEntity);
 
         $id = $pedidoEntity->getId();
@@ -89,10 +94,14 @@ class PedidoController extends AbstractActionController
     public function editAction()
     {
         $id = (int)$this->params('id');
-        $categorias = $this->getCategoriaMapper()->fetchAll();
         $pedidoMapper = $this->getPedidoMapper();
-        $pedidoForm = new PedidoForm();
         $pedido = $pedidoMapper->getPedido($id);
+
+        if ($pedido->getEstatus() != '1'){
+            $this->redirect()->toRoute('item',array('pedido' => $id));
+        }
+        $categorias = $this->getCategoriaMapper()->fetchAll();
+        $pedidoForm = new PedidoForm();
         $pedidoForm->bind($pedido);
 
         $itemMapper = $this->getItemMapper();
@@ -116,6 +125,12 @@ class PedidoController extends AbstractActionController
                     if ($submit === "Guardar"){
                         $pedido->setEstatus(1);
                     }
+
+                    if ($this->zfcUserAuthentication()->hasIdentity()) {
+                        $userId = $this->zfcUserAuthentication()->getIdentity()->getId();
+                    }
+                    $pedido->setVendedor($userId);
+
                     $this->getPedidoMapper()->savePedido($pedido);
 
                     return $this->redirect()->toRoute('pedido');

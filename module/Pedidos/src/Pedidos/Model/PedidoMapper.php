@@ -43,6 +43,21 @@ class PedidoMapper
         return $resultset;
     }
 
+    public function fetchAllEstatus(array $estatus)
+    {
+        $this->sql->setTable('vista_pedidos');
+        $select = $this->sql->select();
+        $select->where(array('estatus' => $estatus));
+        $statement = $this->sql->prepareStatementForSqlObject($select);
+        $results = $statement->execute();
+
+        $entityPrototype = new PedidoEntity();
+        $hydrator = new ClassMethods();
+        $resultset = new HydratingResultSet($hydrator, $entityPrototype);
+        $resultset->initialize($results);
+        return $resultset;
+    }
+
     public function savePedido(PedidoEntity $pedido)
     {
         $this->sql->setTable('pedidos');

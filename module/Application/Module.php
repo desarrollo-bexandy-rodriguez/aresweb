@@ -9,6 +9,10 @@
 
 namespace Application;
 
+use Application\Model\MyAuthStorage;
+use BjyAuthorize\View\RedirectionStrategy;
+use Zend\Authentication\Adapter\DbTable as DbTableAuthAdapter;
+use Zend\Authentication\AuthenticationService;
 use Zend\Mvc\ModuleRouteListener;
 use Zend\Mvc\MvcEvent;
 
@@ -19,6 +23,9 @@ class Module
         $eventManager        = $e->getApplication()->getEventManager();
         $moduleRouteListener = new ModuleRouteListener();
         $moduleRouteListener->attach($eventManager);
+
+        $strategy = new RedirectionStrategy();
+        $eventManager->attach($strategy);
     }
 
     public function getConfig()
@@ -35,5 +42,10 @@ class Module
                 ),
             ),
         );
+    }
+
+    public function getServiceConfig()
+    {
+        return array();
     }
 }

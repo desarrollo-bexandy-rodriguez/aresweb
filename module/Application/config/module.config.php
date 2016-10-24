@@ -22,10 +22,6 @@ return array(
                     ),
                 ),
             ),
-            // The following is a route to simplify getting started creating
-            // new controllers and actions without needing to create a new
-            // module. Simply drop new controllers in, and you can access them
-            // using the path /application/:controller/:action
             'application' => array(
                 'type'    => 'Literal',
                 'options' => array(
@@ -76,7 +72,9 @@ return array(
     ),
     'controllers' => array(
         'invokables' => array(
-            'Application\Controller\Index' => Controller\IndexController::class
+            'Application\Controller\Index' => 'Application\Controller\IndexController',
+            'Application\Controller\Auth' => 'Application\Controller\AuthController',
+            'Application\Controller\Success' => 'Application\Controller\SuccessController'
         ),
     ),
     'view_manager' => array(
@@ -89,6 +87,7 @@ return array(
             'layout/layout'           => __DIR__ . '/../view/layout/layout.phtml',
             'application/index/index' => __DIR__ . '/../view/application/index/index.phtml',
             'error/404'               => __DIR__ . '/../view/error/404.phtml',
+            'error/403'               => __DIR__ . '/../view/error/403.phtml',
             'error/index'             => __DIR__ . '/../view/error/index.phtml',
         ),
         'template_path_stack' => array(
@@ -152,6 +151,20 @@ return array(
                         'route' => 'pedido',
                         'action' => 'index',
                     ),
+                ),
+            ),
+        ),
+    ),
+    'doctrine' => array(
+        'driver' => array(
+            'application_entities' => array(
+                'class' => 'Doctrine\ORM\Mapping\Driver\AnnotationDriver',
+                'cache' => 'array',
+                'paths' => (__DIR__.'/../src/Application/Entity'),
+            ),
+            'orm_default' => array(
+                'drivers' => array(
+                    'Application\Entity' => 'application_entities',
                 ),
             ),
         ),

@@ -3,15 +3,24 @@ $title = 'Listado de Pedidos';
 $this->headTitle($title);
 ?>
 
-
-
 <div class="panel panel-primary">
     <div class="panel-heading">Pedidos</div>
     <div class="panel-body">
         <!-- List group -->
         <div class="list-group">
             <?php foreach ($pedidos as $pedido): ?>
-                <a href="<?php echo $this->url('item', array('pedido' => $pedido->getId()));?>" class="list-group-item">
+            <?php if ($pedido->getEstatus() === '1') : ?>
+            <?php $classPedido = 'list-group-item list-group-item-info ' ;
+                    $classTexto='col-sm-6 col-md-8 text-center text-info well well-sm';
+                    $urllista = $this->url('pedido', array('action'=>'edit', 'id' => $pedido->getId()));
+                    ?>
+            <?php else  : ?>
+            <?php  $classPedido = 'list-group-item list-group-item-success' ;
+                    $classTexto='col-sm-6 col-md-8 text-center text-success well well-sm';
+                    $urllista = $this->url('item', array('pedido' => $pedido->getId()));
+                    ?>
+            <?php endif ?>
+                <a href="<?php echo $urllista?>" class="<?php echo $classPedido?>">
                     <div class="row">
                         <div class="col-sm-6 col-md-2">
                             Fecha: <?php echo $pedido->getFecha(); ?><br>
@@ -19,7 +28,7 @@ $this->headTitle($title);
                         </div>
 
 
-                        <div class="col-sm-6 col-md-8 text-center text-primary well well-sm">
+                        <div class="col-sm-6 col-md-8 <?php echo $classPedido?> text-center">
                             <strong>Pedido: <?php echo $pedido->getCodigo(); ?> Cliente: <?php echo $pedido->getCliente(); ?> <br>
                             Estatus: <?php echo $pedido->getMsgclientes(); ?></strong>
                         </div>

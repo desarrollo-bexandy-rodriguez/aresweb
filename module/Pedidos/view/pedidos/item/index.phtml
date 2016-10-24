@@ -34,17 +34,17 @@ $this->headTitle($title);
             </div>
 
             <div class="panel-body">
-                <div class="list-group">
+                <ul class="list-group">
                     <?php foreach ($items as $item): ?>
                         <?php $idPedido = $item->getPedido();?>
                         <?php $idProducto = $item->getProducto();?>
-                        <a href="<?php echo $this->url('item', array('action'=>'edit', 'pedido' => $idPedido, 'producto' => $idProducto));?>" class="list-group-item">
+                        <li class="list-group-item">
                             <span class="badge">Subtotal: <br><?php echo $item->getSubtotal(); ?> BsF</span>
                             <p class="text-left"><?php echo $item->getCantidad(); ?> <?php echo $item->getUnidmedprod(); ?> de <?php echo $item->getNombproducto(); ?></p>
-                        </a>
+                        </li>
 
                     <?php endforeach; ?>
-                </div>
+                </ul>
             </div>
 
             <div class="panel-footer">
@@ -64,22 +64,11 @@ $this->headTitle($title);
         <div class="well well-sm text-center">
             <div class="row">
                 <div class="col-sm-6 col-md-6 text-center">
+                    <a href="<?php echo $this->url('pedido', array('action'=>'delete', 'id' => $pedido->getId()));?>" class="btn btn-danger">Eliminar Pedido</a>
+                </div>
+                <div class="col-sm-6 col-md-6 text-center">
                     <a href="<?php echo $this->url('pedido');?>" class="btn btn-default">Volver al Listado</a>
                 </div>
-
-
-                <div class="col-sm-6 col-md-6 text-center">
-                    <div class="btn-toolbar">
-                        <div class="btn-group btn-group-sm pull-left" role="group">
-                            <a href="<?php echo $this->url('pedido', array('action'=>'delete', 'id' => $pedido->getId()));?>" class="btn btn-danger">Eliminar Pedido</a>
-                        </div>
-
-                        <div class="btn-group btn-group-sm pull-right" role="group">
-                            <a href="<?php echo $this->url('pedido', array('action'=>'edit', 'id' => $pedido->getId()));?>" class="btn btn-primary">Editar Pedido</a>
-                        </div>
-                    </div>
-                </div>
-
             </div>
         </div>
     </div>
