@@ -1,0 +1,24 @@
+<?php $this->headLink()
+    ->prependStylesheet($this->basePath() . '/css/StickyNotes.css'); ?>
+
+<?php echo $this->headScript()->appendFile($this->basePath().'/js/custom.js'); ?>
+
+<div id="caja" style="padding: 10px; background-color: #ff8800;">Haz click en un botón</div>
+<input type="button" value="Botón A" onclick="$('#caja').html('Has hecho clic en el botón <b>A</b>')">
+<input type="button" value="Botón B" onclick="$('#caja').html('Recibido un clic en el botón <b>B</b>')">
+
+<br>
+
+<div id="capa" style="padding: 10px; background-color: #ff8800;">Pon el ratón encima de esta capa</div>
+<div id="mensaje" style="display: none;">Haz puesto el ratón encima !! <br>(Ahora quítalo de la capa)</div>
+<br>
+<div id="sticky-notes">
+    <?php foreach($stickynotes as $stickynote): ?>
+    <div class="sticky-note">
+        <textarea id="stickynote-<?php echo $stickynote->getId() ?>" ><?php echo $stickynote->getNote() ?></textarea>
+        <a href="#" id="remove-<?php echo $stickynote->getId(); ?>" class="delete-sticky">X</a>
+    </div>
+    <?php endforeach; ?>
+    <div id="create">+</div>
+</div>
+<div class="clear-both"></div>

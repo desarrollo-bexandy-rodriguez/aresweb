@@ -1,0 +1,50 @@
+<script type="text/javascript">
+    var is_xmlhttprequest   = <?php echo $this->is_xmlhttprequest; ?>;
+</script>
+<?php echo $this->headScript()->appendFile($this->basePath().'/js/prueba.js'); ?>
+
+<?php
+$title = 'Listado de Productos';
+$this->headTitle($title);
+?>
+<div class="row"><h1><?php echo $this->escapeHtml($title); ?></h1></div>
+<div id="datos"></div>
+<div class="panel panel-primary">
+    <div class="panel-heading text-center">
+        <h3>Seleccione Categoría</h3>
+        <div id="categorias" class="row">
+                <ol class="breadcrumb">
+                    <a href="#" type="button" class="btn btn-primary category" id="categoria-0" >Todos</a>
+                    <?php foreach ($categorias as $categoria ): ?>
+                        <a href="#" type="button" class="btn btn-info category" id="categoria-<?php echo $categoria->getId() ?>"><?php echo $categoria->getNombre() ?></a>
+                    <?php endforeach ?>
+                </ol>
+        </div>
+    </div>
+
+    <div class="panel-body text-center">
+        <div class="row">
+            <h3>Productos Disponibles</h3>
+        </div>
+        <div id="productos" class="row well text-center">
+            <?php foreach ($productos as $producto ): ?>
+
+                <div class="col-sm-6 col-md-2">
+                    <a href="<?php echo $this->url('producto', array('action'=>'edit', 'id' => $producto->getId()));?>" class="thumbnail">
+                        <img src="<?= $producto->getImagen() ?>" alt="<?= $producto->getNombre() ?>">
+                        <div class="caption">
+                            <h4 id="producto<?= $producto->getId() ?>"><?= $producto->getNombre() ?></h4>
+                            <p>Categoría:<?= $producto->getNombcategoria() ?></p>
+                            <p>Precio:<?= $producto->getPreciounidad() ?> BsF por  <?= $producto->getNombunidmedventas() ?></p>
+                        </div>
+                    </a>
+                </div>
+
+            <?php endforeach ?>
+        </div>
+    </div>
+
+    <div class="panel-footer text-right">
+        <a href="<?php echo $this->url('producto', array('action'=>'add'));?>" class="btn btn-primary">Crear Nuevo Producto</a>
+    </div>
+</div>

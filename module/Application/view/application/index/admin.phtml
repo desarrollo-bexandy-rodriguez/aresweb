@@ -20,6 +20,11 @@
                             <a class="btn btn-default" href="<?php echo $this->url('unidad-medida');?>" >Unid/Medida</a>
                         </div>
                         <div class="btn-group btn-group-sm" role="group">
+                            <a class="btn btn-default" href="<?php echo $this->url('TestAjax/default', array('action' => 'prueba' , 'controller' => 'skeleton')); ?>" >Productos Ajax</a>
+                            <a class="btn btn-default" href="<?php echo $this->url('almacen');?>" >Almacén</a>
+                        </div>
+                        <div class="btn-group btn-group-sm" role="group">
+                            <a class="btn btn-default" href="<?php echo $this->url('my-form'); ?>" >Cambiar Precios</a>
                             <a class="btn btn-default" href="<?php echo $this->url('almacen');?>" >Almacén</a>
                         </div>
                     </div>
@@ -37,7 +42,11 @@
                     <i class="icon-analytics-piechart" style="font-size: 100px; "></i>
                     <div class="btn-toolbar">
                         <div class="btn-group" role="group">
-                            <a class="btn btn-default pull-right" href="<?php echo $this->url('producto');?>" >Listado de Productos</a>
+                            <a class="btn btn-default" href="<?php echo $this->url('Reportes');?>" >Combo</a>
+                            <a class="btn btn-default" href="<?php echo $this->url('Reportes', array('controller' => 'Reportes/default','action' => 'headmap'));?>" >HeadMap</a>
+                            <a class="btn btn-default" href="<?php echo $this->url('Reportes', array('action' => 'column-stacked'));?>" >Column-Stacked</a>
+                            <a class="btn btn-default" href="<?php echo $this->url('Reportes', array('action' => 'pedidosDespachador'));?>" >Pedidos x Despachador</a>
+                            <a class="btn btn-default" href="<?php echo $this->url('Reportes', array('action' => 'torta'));?>" >Torta</a>
                         </div>
                     </div>
                 </div>

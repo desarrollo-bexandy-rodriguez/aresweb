@@ -8,7 +8,6 @@
 
 namespace Productos\Model;
 
-
 class ProductoEntity
 {
     protected $id;
@@ -177,4 +176,6 @@ class ProductoEntity
     {
         $this->imagen = $imagen;
     }
+
+
 }

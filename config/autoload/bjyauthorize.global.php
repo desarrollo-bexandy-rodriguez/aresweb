@@ -63,6 +63,22 @@ return array(
                     'controller' => array('Productos\Controller\Producto','Productos\Controller\Categoria','Productos\Controller\UnidadMedida'),
                     'roles' => array('administrador')
                 ),
+                array(
+                    'controller' => array('StickyNotes\Controller\StickyNotes'),
+                    'roles' => array('guest', 'autenticado')
+                ),
+                array(
+                    'controller' => array('TestAjax\Controller\Skeleton'),
+                    'roles' => array('guest', 'autenticado')
+                ),
+                array(
+                    'controller' => array('Reportes\Controller\Reportes'),
+                    'roles' => array('guest', 'autenticado')
+                ),
+                array(
+                    'controller' => array('Productos\Controller\MyForm'),
+                    'roles' => array('guest', 'autenticado')
+                ),
                 array('controller' => 'zfcuser', 'roles' => array()),
                 array('controller' => 'HtProfileImage\ProfileImage', 'roles' => array()),
                 array('controller' => 'zfcuseradmin', 'roles' => array()),

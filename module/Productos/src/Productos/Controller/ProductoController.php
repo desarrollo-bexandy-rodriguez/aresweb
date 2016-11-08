@@ -198,4 +198,30 @@ class ProductoController extends AbstractActionController
             'producto' => $producto
         );
     }
+
+    public function actualizarPreciosAction()
+    {
+        $productoMapper = $this->getProductoMapper();
+
+        $request = $this->getRequest();
+
+        if ($request->isPost()) {
+            $selcat = $request->getPost()->get('selcat');
+            $cat = str_replace(" ", "_", $selcat);
+            $idcat = $request->getPost()->get($cat);
+
+            if ($idcat === "0") {
+                $productos = $productoMapper->getPrecios();
+            } else {
+                $productos = $productoMapper->getPrecios();
+            }
+
+        } else {
+            $productos = $productoMapper->getPrecios();
+        }
+
+        return new ViewModel(array(
+            'productos' => $productos,
+        ));
+    }
 }

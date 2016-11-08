@@ -17,6 +17,7 @@ return array(
             'Productos\Controller\Producto' => 'Productos\Controller\ProductoController',
             'Productos\Controller\Categoria' => 'Productos\Controller\CategoriaController',
             'Productos\Controller\UnidadMedida' => 'Productos\Controller\UnidadMedidaController',
+            'Productos\Controller\MyForm' => 'Productos\Controller\MyFormController',
         ),
     ),
     'router' => array(
@@ -67,6 +68,22 @@ return array(
                 'constraints' => array(
                     'action'    =>  '(add|edit|delete|select)',
                     'id'    =>  '[1-9][0-9]*',
+                ),
+            ),
+            'my-form' => array(
+                'type'    => 'Segment',
+                'options' => array(
+                    'route'    => '/myform[/:action[/:categoria][/:marca]]',
+                    'defaults' => array(
+                        '__NAMESPACE__' => 'Productos\Controller',
+                        'controller'    => 'MyForm',
+                        'action'        => 'index',
+                    ),
+                    'constraints' => array(
+                        'action'    =>  '(categoria|marca)',
+                        'categoria'    =>  '[1-9][0-9]*',
+                        'marca'    =>  '[1-9][0-9]*',
+                    ),
                 ),
             ),
         ),

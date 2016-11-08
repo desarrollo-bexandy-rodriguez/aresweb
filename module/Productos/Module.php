@@ -7,7 +7,9 @@
  */
 namespace Productos;
 
+use Productos\Form\CreateProduct;
 use Productos\Model\CategoriaMapper;
+use Productos\Model\MarcaMapper;
 use Productos\Model\ProductoMapper;
 use Productos\Model\UnidadMedidaMapper;
 use Zend\ModuleManager\Feature\AutoloaderProviderInterface;
@@ -22,7 +24,6 @@ class Module implements
         return array(
             'Zend\Loader\StandardAutoloader' => array(
                 'namespaces' => array(
-                    // Autoload all classes from namespace 'Blog' from '/module/Blog/src/Blog'
                     __NAMESPACE__ => __DIR__ . '/src/' . __NAMESPACE__,
                 )
             )
@@ -51,6 +52,16 @@ class Module implements
                 'UnidadMedidaMapper' => function ($sm) {
                     $dbAdapter = $sm->get('Zend\Db\Adapter\Adapter');
                     $mapper = new UnidadMedidaMapper($dbAdapter);
+                    return $mapper;
+                },
+                'MarcaMapper' => function ($sm) {
+                    $dbAdapter = $sm->get('Zend\Db\Adapter\Adapter');
+                    $mapper = new MarcaMapper($dbAdapter);
+                    return $mapper;
+                },
+                'CreateProduct' => function ($sm) {
+                    $dbAdapter = $sm->get('Zend\Db\Adapter\Adapter');
+                    $mapper = new CreateProduct($dbAdapter);
                     return $mapper;
                 },
             ),

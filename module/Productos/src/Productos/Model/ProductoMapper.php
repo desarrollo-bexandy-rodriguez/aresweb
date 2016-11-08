@@ -133,4 +133,55 @@ class ProductoMapper
         $statement = $this->sql->prepareStatementForSqlObject($delete);
         return $statement->execute();
     }
+
+    public function getPrecios()
+    {
+        $this->sql->setTable('vista_productos');
+
+        $select = $this->sql->select();
+        $select->columns(array('nombmarca', 'id', 'nombre', 'preciounidad'));
+
+        $statement = $this->sql->prepareStatementForSqlObject($select);
+        $results = $statement->execute();
+        if (!$results) {
+            return null;
+        }
+
+        $entityPrototype = new ProductoEntity();
+        $hydrator = new ClassMethods();
+        $resultset = new HydratingResultSet($hydrator, $entityPrototype);
+        $resultset->initialize($results);
+        return $resultset;
+    }
+
+    public function getProductosFiltro($idcategoria, $idmarca)
+    {
+        $this->sql->setTable('vista_productos');
+
+        $select = $this->sql->select();
+        $where = array();
+
+        if (!empty($idcategoria)){
+            $where['idcategoria'] = $idcategoria;
+        }
+
+        if (!empty($idmarca)){
+            $where['idmarca'] = $idmarca;
+        }
+
+
+        $select->where($where);
+
+        $statement = $this->sql->prepareStatementForSqlObject($select);
+        $results = $statement->execute();
+        if (!$results) {
+            return null;
+        }
+
+        $entityPrototype = new ProductoEntity();
+        $hydrator = new ClassMethods();
+        $resultset = new HydratingResultSet($hydrator, $entityPrototype);
+        $resultset->initialize($results);
+        return $resultset;
+    }
 }

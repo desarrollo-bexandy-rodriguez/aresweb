@@ -24,8 +24,12 @@ return array(
         'Pedidos',
         'Almacen',
         'Despacho',
+        'StickyNotes',
         'ZendDeveloperTools',
-        'SanSessionToolbar'
+        'SanSessionToolbar',
+        'TestAjax',
+        'Reportes',
+
     ),
 
     // These are various options for the listeners attached to the ModuleManager

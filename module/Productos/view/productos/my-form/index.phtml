@@ -1,0 +1,48 @@
+<?php echo $this->headScript()->appendFile($this->basePath().'/js/modules/productos/actualizar-precios.js'); ?>
+<?php
+$form->setAttribute('action', $this->url('my-form'))
+    ->prepare();
+
+echo $this->form()->openTag($form);
+
+$product = $form->get('product');
+
+?>
+<div class="well">
+    <?php
+    echo $this->formRow($form->get('categoria'));
+    echo $this->formRow($form->get('marca'));
+    ?>
+</div>
+
+<div class="well">
+    <button id="add" >Add a new category</button>
+    <div id="productos">
+    <?php
+    echo $this->formCollection($product->get('collection'));
+    ?>
+    </div>
+</div>
+
+<div class="well">
+    <?php
+    $brand = $product->get('brand');
+
+    echo $this->formRow($brand->get('name'));
+    echo $this->formRow($brand->get('url'));
+    ?>
+</div>
+
+
+<div class="well">
+    <?php
+    echo $this->formHidden($form->get('csrf'));
+    echo $this->formElement($form->get('submit'));
+
+    echo $this->form()->closeTag();
+    ?>
+</div>
+
+
+
+

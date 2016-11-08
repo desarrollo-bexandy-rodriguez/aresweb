@@ -1,0 +1,11 @@
+<?php $this->headLink()
+    ->prependStylesheet($this->basePath() . '/js/jqueryUI/themes/base/jquery-ui.min.css'); ?>
+<!-- Js -->
+<?php  $this->headScript()
+    ->appendFile($this->basePath() . '/js/jqueryUI/ui/jquery-ui.min.js')
+    ->appendFile($this->basePath() . '/js/ajaxform.js'); ?>
+
+<a id="showform" href="<?php echo $this->url('TestAjax/default', array('action' => 'showform' , 'controller' => 'skeleton')); ?>">Show Form</a>
+
+<!-- empty div to save dialog temporary -->
+<div id="winpopup"></div>
