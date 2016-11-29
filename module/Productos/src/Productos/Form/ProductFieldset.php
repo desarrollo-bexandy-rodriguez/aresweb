@@ -25,41 +25,11 @@ class ProductFieldset extends Fieldset implements InputFilterProviderInterface
             ->setObject(new Product())
         ;
 
-
-        $this->add(array(
-            'name' => 'name',
-            'options' => array(
-                'label' => 'Name of the product',
-            ),
-            'attributes' => array(
-                'required' => 'required',
-            ),
-        ));
-
-        $this->add(array(
-            'name' => 'price',
-            'options' => array(
-                'label' => 'Price of the product',
-            ),
-            'attributes' => array(
-                'required' => 'required',
-            ),
-        ));
-
-        $this->add(array(
-            'type' => 'Productos\Form\BrandFieldSet',
-            'name' => 'brand',
-            'options' => array(
-                'label' => 'Brand of the product',
-            ),
-        ));
-
         $this->add(array(
             'type' => 'Zend\Form\Element\Collection',
             'name' => 'collection',
             'options' => array(
                 'label' => 'Productos Disponibles',
-                'count' => 2,
                 'should_create_template' => true,
                 'template_placeholder' => '__placeholder__',
                 'allow_add' => true,
@@ -79,17 +49,7 @@ class ProductFieldset extends Fieldset implements InputFilterProviderInterface
     public function getInputFilterSpecification()
     {
         return array(
-            'name' => array(
-                'required' => true,
-            ),
-            'price' => array(
-                'required' => true,
-                'validators' => array(
-                    array(
-                        'name' => 'Float',
-                    ),
-                ),
-            ),
+
         );
     }
 }

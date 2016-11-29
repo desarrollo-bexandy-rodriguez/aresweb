@@ -1,0 +1,17 @@
+<?php echo $this->headLink()->prependStylesheet($this->basePath('/js/jqueryUI/themes/redmond/jquery-ui.css')); ?>
+<?php echo $this->headStyle()->appendStyle($this->basePath('jqueryUI/themes/base/jquery-ui.css')); ?>
+
+<?php echo $this->headScript()->appendFile($this->basePath().'/js/jqueryUI/ui/jquery-ui.js'); ?>
+<?php echo $this->headScript()->appendFile($this->basePath().'/js/jqueryUI/ui/jquery.ui.datepicker-es.js'); ?>
+<?php echo $this->headScript()->appendFile($this->basePath().'/js/highcharts/highcharts.js'); ?>
+<?php echo $this->headScript()->appendFile($this->basePath().'/js/highcharts/highcharts-3d.js'); ?>
+<?php echo $this->headScript()->appendFile($this->basePath().'/js/highcharts/modules/exporting.js'); ?>
+<?php echo $this->headScript()->appendFile($this->basePath().'/js/reportes/basic-colm-ajax.js'); ?>
+
+
+<a class="link_header" href="<?php echo $this->url('application/default', array('controller' =>'index','action' => 'admin'));?>">&lt;&lt; Volver a Administración</a>
+<div class="menu_top" >
+    <p>Desde: <input type="text" id="desde" value="01/09/2016"></p>
+    <p>Hasta: <input type="text" id="hasta" value="<?php echo Date('d/m/Y');?>"></p>
+</div>
+<div id="contenedor" style="min-width: 400px; height: 400px; margin: 0 auto;"></div>

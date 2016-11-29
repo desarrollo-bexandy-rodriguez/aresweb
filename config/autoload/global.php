@@ -24,5 +24,8 @@ return array(
             PDO::MYSQL_ATTR_INIT_COMMAND => 'SET NAMES \'UTF8\''
         ),
     ),
+    'translator' => array(
+        'locale' => 'es_ES'
+    ),
 );
 

@@ -65,7 +65,7 @@ class DisponibilidadAlmacenEntity
      */
     public function getReservado()
     {
-        return $this->reservado;
+        return (float) $this->reservado;
     }
 
     /**
@@ -73,7 +73,7 @@ class DisponibilidadAlmacenEntity
      */
     public function setReservado($reservado)
     {
-        $this->reservado = $reservado;
+        $this->reservado = (float) $reservado;
     }
 
     /**
@@ -81,7 +81,7 @@ class DisponibilidadAlmacenEntity
      */
     public function getDisponible()
     {
-        return $this->disponible;
+        return (float) $this->disponible;
     }
 
     /**
@@ -89,7 +89,7 @@ class DisponibilidadAlmacenEntity
      */
     public function setDisponible($disponible)
     {
-        $this->disponible = $disponible;
+        $this->disponible = (float) $disponible;
     }
 
     /**
@@ -273,7 +273,7 @@ class DisponibilidadAlmacenEntity
      */
     public function getCantidad()
     {
-        return $this->cantidad;
+        return (float) $this->cantidad;
     }
 
     /**
@@ -281,7 +281,7 @@ class DisponibilidadAlmacenEntity
      */
     public function setCantidad($cantidad)
     {
-        $this->cantidad = $cantidad;
+        $this->cantidad = (float) $cantidad;
     }
 
 

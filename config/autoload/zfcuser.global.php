@@ -11,6 +11,9 @@ $settings = array(
     'enable_default_entities' => false,
     'enable_username' => true,
     'auth_identity_fields' => array( 'username' ),
+    'login_redirect_route' => 'home',
+    'use_redirect_parameter_if_present' => true,
+    'enable_display_name' => true,
 
     //'auth_adapters' => array( 100 => 'ZfcUser\Authentication\Adapter\Db' ),
 

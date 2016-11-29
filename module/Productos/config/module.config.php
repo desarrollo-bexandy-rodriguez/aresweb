@@ -33,7 +33,7 @@ return array(
                     ),
                 ),
                 'constraints' => array(
-                    'action'    =>  '(add|edit|delete)',
+                    'action'    =>  '(add|edit|delete|crear-producto|editar-producto)',
                     'id'    =>  '[0-9]*',
                     'cat'    =>  '[0-9]*',
                     'det'    =>  '[0-9]*',
@@ -80,7 +80,7 @@ return array(
                         'action'        => 'index',
                     ),
                     'constraints' => array(
-                        'action'    =>  '(categoria|marca)',
+                        'action'    =>  '(categoria|marca|filtros)',
                         'categoria'    =>  '[1-9][0-9]*',
                         'marca'    =>  '[1-9][0-9]*',
                     ),

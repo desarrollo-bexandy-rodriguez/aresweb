@@ -4,8 +4,8 @@
         "Read more about it at https://getcomposer.org/doc/01-basic-usage.md#composer-lock-the-lock-file",
         "This file is @generated automatically"
     ],
-    "hash": "74d2da649221b7f103f30cdb939a1193",
-    "content-hash": "1f6f6432b4f2a620faeaf7bbd821e43c",
+    "hash": "bc8bc436f09959a2e8d87739024919e5",
+    "content-hash": "cf2efced0f646bc71296a7f39003738f",
     "packages": [
         {
             "name": "bjyoungblood/bjy-authorize",
@@ -1151,6 +1151,101 @@
             "time": "2014-11-20 16:49:30"
         },
         {
+            "name": "jfloff/highroller-zf2",
+            "version": "dev-master",
+            "source": {
+                "type": "git",
+                "url": "https://github.com/jfloff/highroller-zf2.git",
+                "reference": "cf57ffe67bf2e9e89af91b8454e37db34652ed65"
+            },
+            "dist": {
+                "type": "zip",
+                "url": "https://api.github.com/repos/jfloff/highroller-zf2/zipball/cf57ffe67bf2e9e89af91b8454e37db34652ed65",
+                "reference": "cf57ffe67bf2e9e89af91b8454e37db34652ed65",
+                "shasum": ""
+            },
+            "require": {
+                "php": ">=5.3",
+                "zendframework/zendframework": "2.*"
+            },
+            "type": "library",
+            "autoload": {
+                "psr-0": {
+                    "HighRoller": "src/"
+                },
+                "classmap": [
+                    "./Module.php"
+                ]
+            },
+            "notification-url": "https://packagist.org/downloads/",
+            "license": [
+                "Apache-2.0"
+            ],
+            "authors": [
+                {
+                    "name": "Joao Loff",
+                    "email": "jfloff@gmail.com",
+                    "homepage": "http://jfloff.github.com/"
+                }
+            ],
+            "description": "Highcharts module for Zend Framework 2 based on HighRoller.",
+            "homepage": "https://github.com/jfloff/highroller-zf2",
+            "keywords": [
+                "highcharts",
+                "highroller",
+                "zend framework 2",
+                "zf2"
+            ],
+            "time": "2014-10-09 08:17:02"
+        },
+        {
+            "name": "masterexploder/phpthumb",
+            "version": "2.1",
+            "source": {
+                "type": "git",
+                "url": "https://github.com/masterexploder/PHPThumb.git",
+                "reference": "01f6aa65aa3d136e175f67da2b4ea3e316770d02"
+            },
+            "dist": {
+                "type": "zip",
+                "url": "https://api.github.com/repos/masterexploder/PHPThumb/zipball/01f6aa65aa3d136e175f67da2b4ea3e316770d02",
+                "reference": "01f6aa65aa3d136e175f67da2b4ea3e316770d02",
+                "shasum": ""
+            },
+            "require": {
+                "php": ">=5.3.0"
+            },
+            "type": "library",
+            "autoload": {
+                "psr-0": {
+                    "PHPThumb": "src",
+                    "PHPThumb\\Tests": "tests"
+                }
+            },
+            "notification-url": "https://packagist.org/downloads/",
+            "license": [
+                "MIT"
+            ],
+            "authors": [
+                {
+                    "name": "Jarrod Nettles",
+                    "email": "jarrod.nettles@icloud.com"
+                },
+                {
+                    "name": "Ian Selby",
+                    "email": "ian@gxdlabs.com"
+                }
+            ],
+            "description": "A library for manipulating images in PHP.",
+            "homepage": "https://github.com/masterexploder/PHPThumb",
+            "keywords": [
+                "image",
+                "resize",
+                "rotate"
+            ],
+            "time": "2015-09-08 22:55:44"
+        },
+        {
             "name": "myclabs/deep-copy",
             "version": "1.5.4",
             "source": {
@@ -1646,16 +1741,16 @@
         },
         {
             "name": "phpunit/phpunit",
-            "version": "5.6.1",
+            "version": "5.6.4",
             "source": {
                 "type": "git",
                 "url": "https://github.com/sebastianbergmann/phpunit.git",
-                "reference": "60c32c5b5e79c2248001efa2560f831da11cc2d7"
+                "reference": "4ddb822f1de421b4cadb47570a525fd7d9359493"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/sebastianbergmann/phpunit/zipball/60c32c5b5e79c2248001efa2560f831da11cc2d7",
-                "reference": "60c32c5b5e79c2248001efa2560f831da11cc2d7",
+                "url": "https://api.github.com/repos/sebastianbergmann/phpunit/zipball/4ddb822f1de421b4cadb47570a525fd7d9359493",
+                "reference": "4ddb822f1de421b4cadb47570a525fd7d9359493",
                 "shasum": ""
             },
             "require": {
@@ -1683,7 +1778,9 @@
                 "symfony/yaml": "~2.1|~3.0"
             },
             "conflict": {
-                "phpdocumentor/reflection-docblock": "3.0.2"
+                "phpdocumentor/reflection-docblock": "3.0.2",
+                "sebastian/object-enumerator": "1.0.1",
+                "sebastian/recursion-context": "1.0.3 || 1.0.4"
             },
             "require-dev": {
                 "ext-pdo": "*"
@@ -1724,7 +1821,7 @@
                 "testing",
                 "xunit"
             ],
-            "time": "2016-10-07 13:03:26"
+            "time": "2016-11-18 09:50:51"
         },
         {
             "name": "phpunit/phpunit-mock-objects",
@@ -2799,6 +2896,77 @@
             "description": "Symfony Yaml Component",
             "homepage": "https://symfony.com",
             "time": "2016-09-25 08:27:07"
+        },
+        {
+            "name": "webino/webino-image-thumb",
+            "version": "dev-develop",
+            "source": {
+                "type": "git",
+                "url": "https://github.com/webino/WebinoImageThumb.git",
+                "reference": "218aa813474811763923a0a4a23aab03bca6f5e1"
+            },
+            "dist": {
+                "type": "zip",
+                "url": "https://api.github.com/repos/webino/WebinoImageThumb/zipball/218aa813474811763923a0a4a23aab03bca6f5e1",
+                "reference": "218aa813474811763923a0a4a23aab03bca6f5e1",
+                "shasum": ""
+            },
+            "require": {
+                "ext-gd": "*",
+                "masterexploder/phpthumb": "2.*",
+                "php": ">=5.5",
+                "zendframework/zend-di": "2.*"
+            },
+            "require-dev": {
+                "webino/webino-debug": "dev-develop",
+                "webino/webino-dev": "dev-develop",
+                "zendframework/zend-console": "2.*",
+                "zendframework/zend-http": "2.*",
+                "zendframework/zend-loader": "2.*",
+                "zendframework/zend-log": "2.*",
+                "zendframework/zend-modulemanager": "2.*",
+                "zendframework/zend-mvc": "2.*",
+                "zendframework/zend-version": "2.*",
+                "zendframework/zend-view": "2.*"
+            },
+            "suggest": {
+                "zendframework/zend-modulemanager": "To use it as a Zend Framework module"
+            },
+            "type": "library",
+            "autoload": {
+                "psr-0": {
+                    "WebinoImageThumb": "src/"
+                }
+            },
+            "notification-url": "https://packagist.org/downloads/",
+            "license": [
+                "BSD-3-Clause"
+            ],
+            "authors": [
+                {
+                    "name": "Webino, s. r. o.",
+                    "email": "info@webino.sk",
+                    "homepage": "http://webino.sk",
+                    "role": "Developer"
+                },
+                {
+                    "name": "Peter Bacinsky",
+                    "email": "peter@bacinsky.sk",
+                    "homepage": "http://bacinsky.sk",
+                    "role": "Developer"
+                }
+            ],
+            "description": "Image Thumbnailer for Zend Framework 2",
+            "homepage": "https://github.com/webino/WebinoImageThumb",
+            "keywords": [
+                "framework",
+                "image",
+                "thumb",
+                "webino",
+                "zend",
+                "zf2"
+            ],
+            "time": "2016-06-08 10:04:03"
         },
         {
             "name": "webmozart/assert",
@@ -6097,7 +6265,9 @@
         "bjyoungblood/bjy-profiler": 20,
         "san/san-session-toolbar": 20,
         "zf-commons/zfc-admin": 20,
-        "danielss89/zfc-user-admin": 20
+        "danielss89/zfc-user-admin": 20,
+        "jfloff/highroller-zf2": 20,
+        "webino/webino-image-thumb": 20
     },
     "prefer-stable": false,
     "prefer-lowest": false,

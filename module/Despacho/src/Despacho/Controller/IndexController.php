@@ -10,6 +10,7 @@ namespace Despacho\Controller;
 
 
 use Almacen\Model\DisponibilidadAlmacenEntity;
+use Almacen\Model\DisponibilidadProductoEntity;
 use Zend\Mvc\Controller\AbstractActionController;
 use Zend\View\Model\ViewModel;
 
@@ -317,6 +318,12 @@ class IndexController extends AbstractActionController
         return $sm->get('ItemMapper');
     }
 
+    public function getDisponibilidadMapper()
+    {
+        $sm = $this->getServiceLocator();
+        return $sm->get('DisponibilidadMapper');
+    }
+
     public function getIngresoMapper()
     {
         $sm = $this->getServiceLocator();
@@ -368,14 +375,26 @@ class IndexController extends AbstractActionController
 
             if ($disponibilidadAlmacen) {
                 $cantAnterior = $disponibilidadAlmacen->getCantidad();
-                $disponibilidadAlmacen->setCantidad($cantAnterior - $item->getCantidad());
+                $cantidad = $cantAnterior - $item->getCantidad();
+                $disponibilidadAlmacen->setCantidad($cantidad);
+                if ($cantidad <= 0 ){
+                    $disponibilidadProducto = new DisponibilidadProductoEntity();
+                    $disponibilidadProducto->setIdproducto($producto);
+                    $disponibilidadProducto->setDisponible(false);
+                    $this->getDisponibilidadMapper()->actualizarProducto($disponibilidadProducto);
+                }
                 $this->getIngresoMapper()->actualizarDisponibilidadAlmacen($disponibilidadAlmacen);
             } else {
                 $disponibilidadAlmacen = new DisponibilidadAlmacenEntity();
                 $disponibilidadAlmacen->setProducto($producto);
                 $disponibilidadAlmacen->setAlmacen($almacen);
-                $disponibilidadAlmacen->setCantidad(0);
-
+                $disponibilidadAlmacen->setCantidad($item->getCantidad());
+                if ($item->getCantidad() <= 0 ){
+                    $disponibilidadProducto = new DisponibilidadProductoEntity();
+                    $disponibilidadProducto->setIdproducto($producto);
+                    $disponibilidadProducto->setDisponible(false);
+                    $this->getDisponibilidadMapper()->actualizarProducto($disponibilidadProducto);
+                }
                 $this->getIngresoMapper()->actualizarDisponibilidadAlmacen($disponibilidadAlmacen);
             }
 

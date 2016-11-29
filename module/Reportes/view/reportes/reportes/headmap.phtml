@@ -4,4 +4,16 @@
 <?php echo $this->headScript()->appendFile($this->basePath().'/js/highcharts/modules/heatmap.js'); ?>
 <?php echo $this->headScript()->appendFile($this->basePath().'/js/reportes/headmap.js'); ?>
 
+
+
 <div id="container"></div>
+
+$.getJSON("traer", {desde: $desde, hasta: $hasta}, function (json) {
+alert("Entre al Json 1");
+if (json.response == true) {
+alert("Entre al Json");
+options.xAxis.categories = json.datos['categorias']; //xAxis: {categories: []}
+options.series[0] = json.datos['series'];
+chart = new Highcharts.Chart(options);
+}
+});

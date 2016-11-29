@@ -1,0 +1,39 @@
+<?php echo $this->headScript()->appendFile($this->basePath().'/js/modules/almacen/ingreso-productos-lote.js'); ?>
+<?php
+$form->setAttribute('action', $this->url('ingreso-productos'))
+    ->prepare();
+
+echo $this->form()->openTag($form);
+
+$productoCollection = $form->get('ingreso-producto-lote-collection');
+
+?>
+<div class="well">
+    <?php
+    echo $this->formRow($form->get('marca'));
+    echo ("&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;");
+    echo $this->formRow($form->get('categoria'));
+    echo ("&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;");
+    echo $this->formRow($form->get('almacen'));
+    ?>
+
+</div>
+
+<div class="well">
+
+    <div id="productos">
+        <?php
+        echo $this->formCollection($productoCollection->get('collection'));
+        ?>
+    </div>
+</div>
+
+
+<div class="well">
+    <a href="<?php echo $this->url('application/default',array('controller' => 'index', 'action' => 'admin')); ?>" class="btn btn-default">Volver</a>
+    <?php
+    echo $this->formElement($form->get('submit'));
+
+    echo $this->form()->closeTag();
+    ?>
+</div>

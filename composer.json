@@ -19,6 +19,11 @@
         "san/san-session-toolbar":"dev-master",
         "hrevert/ht-profile-image": "2.3.*",
         "zf-commons/zfc-admin": "dev-master",
-        "danielss89/zfc-user-admin": "dev-master"
+        "danielss89/zfc-user-admin": "dev-master",
+        "jfloff/highroller-zf2": "dev-master",
+        "webino/webino-image-thumb": "dev-develop"
+    },
+    "require-dev": {
+        "phpunit/phpunit": "^5.6"
     }
 }

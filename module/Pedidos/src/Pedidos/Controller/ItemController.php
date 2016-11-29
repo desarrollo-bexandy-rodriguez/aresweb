@@ -82,6 +82,10 @@ class ItemController extends AbstractActionController
                     $item->setSubtotal($form->get('precio')->getValue());
                     $item->setCantidad($cantidad);
                 }
+                $cantidad = str_replace(",", ".", $item->getCantidad());
+                $subtotal = str_replace(",", ".", $item->getSubtotal());
+                $item->setCantidad($cantidad);
+                $item->setSubtotal($subtotal);
 
                 $this->getItemMapper()->saveitem($item);
 
@@ -100,6 +104,9 @@ class ItemController extends AbstractActionController
             }
         }
 
+        $form->get('seleccion')->setValue('cantidad');
+        $form->get('precio')->setAttributes(array('readonly' => true, 'disabled' => true));
+
         return array(
             'form' => $form,
             'producto' => $producto,
@@ -112,7 +119,7 @@ class ItemController extends AbstractActionController
     {
         $idpedido = $this->params('pedido');
         $idproducto = $this->params('producto');
-
+/*
         $request = $this->getRequest();
         $referer = $request->getHeader('referer');
         $refererUri = $referer->getUri();
@@ -131,8 +138,10 @@ class ItemController extends AbstractActionController
         }
         if (is_null($urlpedido)) {$urlpedido = 0;}
         if (is_null($urlproducto)) {$urlproducto = 0;}
-
+*/
         if (!($idpedido && $idproducto)) {
+            return $this->redirect()->toRoute('pedido', array('action'=>'edit', 'id' => $idpedido));
+            /*
             if ($route === 'pedido'){
                 return $this->redirect()->toRoute($route, array('action'=>$urlaction, 'id' => $urlid));
             } elseif ($route === 'item') {
@@ -140,7 +149,7 @@ class ItemController extends AbstractActionController
             } else {
                 return $this->redirect()->toRoute('pedido');
             }
-
+*/
         }
 
         $producto = $this->getProductoMapper()->getProducto($idproducto,true);
@@ -148,6 +157,8 @@ class ItemController extends AbstractActionController
         $item = $this->getItemMapper()->getItem($idpedido,$idproducto);
 
         if (!$item) {
+            return $this->redirect()->toRoute('pedido', array('action'=>'edit', 'id' => $idpedido));
+            /*
             if ($route === 'pedido'){
                 return $this->redirect()->toRoute($route, array('action'=>$urlaction, 'id' => $urlid));
             } elseif ($route === 'item') {
@@ -155,7 +166,7 @@ class ItemController extends AbstractActionController
             } else {
                 return $this->redirect()->toRoute('pedido');
             }
-
+            */
         }
 
         $form = new ItemForm();
@@ -167,13 +178,13 @@ class ItemController extends AbstractActionController
             if ($form->isValid()) {
 
                 if ($form->get('seleccion')->getValue() === 'cantidad'){
-                    $form->get('cantidad')->setAttributes(array('readonly'=>true,'disabled'=>true));
+                    //$form->get('cantidad')->setAttributes(array('readonly'=>true,'disabled'=>true));
                     $subtotal = $item->getCantidad() * $producto->getPreciounidad();
                     $item->setSubtotal($subtotal);
                 }
 
                 if ($form->get('seleccion')->getValue() === 'precio'){
-                    $form->get('precio')->setAttributes(array('readonly'=>true,'disabled'=>true));
+                    //$form->get('precio')->setAttributes(array('readonly'=>true,'disabled'=>true));
                     $cantidad_temp = $form->get('precio')->getValue() / $producto->getPreciounidad();
                     $cantidad = round($cantidad_temp,3);
                     $item->setSubtotal($form->get('precio')->getValue());
@@ -193,7 +204,8 @@ class ItemController extends AbstractActionController
                 $pedido->setPreciototal($total);
                 $this->getPedidoMapper()->savePedido($pedido);
 
-
+                return $this->redirect()->toRoute('pedido', array('action'=>'edit', 'id' => $idpedido));
+                /*
                 if ($route === 'pedido'){
                     return $this->redirect()->toRoute($route, array('action'=>$urlaction, 'id' => $urlid));
                 } elseif ($route === 'item') {
@@ -201,19 +213,25 @@ class ItemController extends AbstractActionController
                 } else {
                     return $this->redirect()->toRoute('pedido');
                 }
+                */
             }
         }
+
+        $form->get('seleccion')->setValue('cantidad');
+        $form->get('precio')->setAttributes(array('readonly' => true, 'disabled' => true));
 
         return array(
             'form' => $form,
             'producto' => $producto,
             'idpedido' => $idpedido,
             'idproducto' => $idproducto,
+            /*
             'route' => $route,
             'urlaction' => $urlaction,
             'urlpedido' => $urlpedido,
             'urlproducto' => $urlproducto,
             'urlid' => $urlid,
+            */
         );
 
     }

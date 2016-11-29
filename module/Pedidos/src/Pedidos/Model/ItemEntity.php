@@ -95,7 +95,7 @@ class ItemEntity
      */
     public function setCantidad($cantidad)
     {
-        $this->cantidad = (float) $cantidad;
+        $this->cantidad = (float) str_replace(",", ".", $cantidad);
     }
 
     /**
@@ -103,7 +103,7 @@ class ItemEntity
      */
     public function getSubtotal()
     {
-        return $this->subtotal;
+        return (float) $this->subtotal;
     }
 
     /**
@@ -111,7 +111,7 @@ class ItemEntity
      */
     public function setSubtotal($subtotal)
     {
-        $this->subtotal = $subtotal;
+        $this->subtotal = (float) $subtotal;
     }
 
 

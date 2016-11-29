@@ -1,0 +1,44 @@
+<?php echo $this->headScript()->appendFile($this->basePath().'/js/modules/almacen/traslado-lote.js'); ?>
+<?php
+$form->setAttribute('action', $this->url('traslado-productos'))
+    ->prepare();
+
+echo $this->form()->openTag($form);
+
+$productoCollection = $form->get('traslado-lote-collection');
+
+?>
+<div class="well">
+    <?php
+    echo $this->formRow($form->get('marca'));
+    echo ("&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;");
+    echo $this->formRow($form->get('categoria'));
+    echo ("&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;");
+    echo $this->formRow($form->get('mayor'));
+    echo ("&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;");
+    echo $this->formRow($form->get('detal'));
+    ?>
+
+</div>
+
+<div class="well">
+
+    <div id="productos">
+        <table>
+
+        </table>
+        <?php
+        echo $this->formCollection($productoCollection->get('collection'));
+        ?>
+    </div>
+</div>
+
+
+<div class="well">
+    <a href="<?php echo $this->url('application/default',array('controller' => 'index', 'action' => 'admin')); ?>" class="btn btn-default">Volver</a>
+    <?php
+    echo $this->formElement($form->get('submit'));
+
+    echo $this->form()->closeTag();
+    ?>
+</div>

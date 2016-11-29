@@ -4,13 +4,55 @@
 </div>
 
 <div class="container">
-<div class="jumbotron box">
 
-		<div class="ribbon"><span>Popular</span></div>
+	<div class="jumbotron text-center box">
 
-	<h1 class="text-center text-primary">Bienvenido</h1>
+		<div class="row placeholders">
 
-</div>
+			<div class="col-xs-4 col-sm-4 col-md-4 placeholder">
+				<a href="<?php echo $this->url('application/default',array('controller' => 'index', 'action' => 'tienda')); ?>">
+					<div class="panel panel-primary">
+						<div class="panel-heading">
+							<h3 class="panel-title">Tienda</h3>
+						</div>
+						<div class="panel-body text-center">
+							<i class="icon-shoppingcartalt" style="font-size: 100px; "></i>
+						</div>
+					</div>
+				</a>
+			</div>
+
+			<div class="col-xs-4 col-sm-4 col-md-4 placeholder">
+				<a href="<?php echo $this->url('application/default',array('controller' => 'index', 'action' => 'admin')); ?>">
+					<div class="panel panel-primary">
+						<div class="panel-heading">
+							<h3 class="panel-title">Administración</h3>
+						</div>
+						<div class="panel-body text-center">
+							<i class="icon-settingsthree-gears" style="font-size: 100px; "></i>
+						</div>
+					</div>
+				</a>
+			</div>
+
+			<div class="col-xs-4 col-sm-4 col-md-4 placeholder">
+				<a href="<?php echo $this->url('reportes');?>">
+					<div class="panel panel-primary">
+						<div class="panel-heading">
+							<h3 class="panel-title">Reportes</h3>
+						</div>
+						<div class="panel-body text-center">
+							<i class="icon-report" style="font-size: 100px; "></i>
+						</div>
+					</div>
+				</a>
+			</div>
+
+
+		</div>
+
+	</div>
+
 </div>
 
 <div class="row well well-sm text-center">

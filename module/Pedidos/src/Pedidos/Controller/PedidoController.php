@@ -136,6 +136,9 @@ class PedidoController extends AbstractActionController
                     return $this->redirect()->toRoute('pedido');
                 } else {
                     $productos = $productoMapper->fetchAll();
+                    $paginator = $productoMapper->fetchAll(true,true);
+                    $paginator->setCurrentPageNumber((int) $this->params()->fromQuery('page', 1));
+                    $paginator->setItemCountPerPage(12);
                 }
             } else {
                 $cat = str_replace(" ", "_", $selcat);
@@ -143,13 +146,22 @@ class PedidoController extends AbstractActionController
 
                 if ($idcat === "0") {
                     $productos = $productoMapper->fetchAll();
+                    $paginator = $productoMapper->fetchAll(true,true);
+                    $paginator->setCurrentPageNumber((int) $this->params()->fromQuery('page', 1));
+                    $paginator->setItemCountPerPage(12);
                 } else {
                     $productos = $productoMapper->getProductosCategoria($idcat);
+                    $paginator = $productoMapper->getProductosCategoria($idcat,true,true);
+                    $paginator->setCurrentPageNumber((int) $this->params()->fromQuery('page', 1));
+                    $paginator->setItemCountPerPage(12);
                 }
             }
 
         } else {
             $productos = $productoMapper->fetchAll();
+            $paginator = $productoMapper->fetchAll(true,true);
+            $paginator->setCurrentPageNumber((int) $this->params()->fromQuery('page', 1));
+            $paginator->setItemCountPerPage(12);
         }
 
         return new ViewModel(array(
@@ -158,6 +170,7 @@ class PedidoController extends AbstractActionController
             'productos' =>  $productos,
             'pedidoForm' => $pedidoForm,
             'categorias' => $categorias,
+            'paginator' => $paginator
         ));
     }
 

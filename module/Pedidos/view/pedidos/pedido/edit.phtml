@@ -61,11 +61,11 @@ $form->prepare();
                     <h3 class="panel-title">
 
                         <div class="row">
-                            <div class="col-sm-3 col-md-3">
+                            <div class="col-sm-2 col-md-2">
                                 <h3>Seleccione Categoría</h3>
                             </div>
 
-                            <div class="col-sm-9 col-md-9">
+                            <div class="col-sm-10 col-md-10">
 
                                 <div class="btn-group" >
                                     <input type="submit" class="btn btn-primary" name="selcat" value="Todos" />
@@ -81,11 +81,23 @@ $form->prepare();
 
 
                 <div class="panel-body text-center">
+                    <div class="row">
+                        <div class="col-sm-4 col-md-4"><h3>Productos Disponibles</h3></div>
+                        <div class="col-sm-8 col-md-8">
+                            <?php echo $this->paginationControl($this->paginator,'sliding','partial/paginator-parameter.phtml',array('route' => 'pedido', 'parameters' =>array('action' => 'edit','id' => $pedido->getId()) )); ?>
+                        </div>
+
+                    </div>
                     <div class="row well well-sm" >
-                        <?php foreach ($productos as $producto ): ?>
+                        <?php foreach ($paginator as $producto ): ?>
                             <div class="col-sm-4 col-md-3 producto">
                                 <a href="<?php echo $this->url('item', array('action'=>'add', 'pedido' => $pedido->getId(), 'producto' => $producto->getId()));?>" class="thumbnail box" >
+                                    <?php if (($producto->getModificado() !== '0000-00-00') && (((floor(abs(strtotime($producto->getModificado())-strtotime(date('Y-m-d')))))/86400) < 5)) :?>
+                                        <div class="ribbon orange"><span>Actualizado</span></div>
+                                    <?php endif ?>
+                                    <?php if ($producto->getDisponible() !== '1')  :?>
                                         <div class="ribbon red"><span>Agotado</span></div>
+                                    <?php endif ?>
                                         <img src="<?= $producto->getImagen() ?>" alt="<?= $producto->getNombre() ?>" >
                                         <div class="caption">
                                             <h4 id="producto<?= $producto->getId() ?>"><?= $producto->getNombre() ?></h4>

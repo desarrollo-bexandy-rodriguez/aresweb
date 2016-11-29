@@ -1,5 +1,6 @@
 CREATE VIEW `vista_productos_disponibles` AS
 SELECT
+  `disponiblidad_productos`.`disponible`,
   `productos`.`id`,
   `productos`.`nombre`,
   `categorias`.`id` AS `idcategoria`,
@@ -12,7 +13,10 @@ SELECT
   `productos`.`relacionunidad`,
   `productos`.`imagen` AS `imagen`,
   `productos`.`idmarca`,
-  `marca`.`nombre` AS `nombmarca`
+  `marca`.`nombre` AS `nombmarca`,
+  `productos`.`codpremium`,
+  `productos`.`modificado`,
+  `productos`.`vencimiento`
 FROM `productos`
  LEFT JOIN `categorias` ON `productos`.`idcategoria` = `categorias`.`id`
  LEFT JOIN `unidad_medida` AS `ventas` ON `productos`.`unidadmedidaventas` = `ventas`.`id`

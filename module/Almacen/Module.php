@@ -9,6 +9,8 @@
 namespace Almacen;
 
 
+use Almacen\Form\IngresoLoteForm;
+use Almacen\Form\TrasladoLoteForm;
 use Almacen\Model\AlmacenMapper;
 use Almacen\Model\DetalleProductoEntity;
 use Almacen\Model\DisponibilidadMapper;
@@ -64,6 +66,22 @@ class Module implements
                 'DisponibilidadMapper' => function ($sm) {
                     $dbAdapter = $sm->get('Zend\Db\Adapter\Adapter');
                     $mapper = new DisponibilidadMapper($dbAdapter);
+                    return $mapper;
+                },
+                'IngresoLoteForm' => function ($sm) {
+                    $dbAdapter = $sm->get('Zend\Db\Adapter\Adapter');
+                    $categoriaMapper = $sm->get('CategoriaMapper');
+                    $marcaMapper = $sm->get('MarcaMapper');
+                    $almacenMapper = $sm->get('AlmacenMapper');
+                    $mapper = new IngresoLoteForm($dbAdapter, $categoriaMapper, $marcaMapper, $almacenMapper);
+                    return $mapper;
+                },
+                'TrasladoLoteForm' => function ($sm) {
+                    $dbAdapter = $sm->get('Zend\Db\Adapter\Adapter');
+                    $categoriaMapper = $sm->get('CategoriaMapper');
+                    $marcaMapper = $sm->get('MarcaMapper');
+                    $almacenMapper = $sm->get('AlmacenMapper');
+                    $mapper = new TrasladoLoteForm($dbAdapter, $categoriaMapper, $marcaMapper, $almacenMapper);
                     return $mapper;
                 },
             ),

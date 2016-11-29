@@ -9,155 +9,19 @@
 namespace Productos\Form;
 
 use Zend\Form\Form;
-use Zend\Stdlib\Hydrator\ClassMethods;
 
 class ProductoForm extends Form
 {
     public function __construct($name = null, $options = array())
     {
-        parent::__construct('producto');
-
-        $this->setAttribute('method', 'post');
-        $this->setInputFilter(new ProductoFilter());
-        $this->setHydrator(new ClassMethods());
+        parent::__construct($name,$options);
 
         $this->add(array(
-            'name' => 'id',
-            'type' => 'hidden',
-        ));
-
-        $this->add(array(
-            'name' => 'idcategoria',
-            'type' => 'hidden',
-        ));
-
-        $this->add(array(
-            'name' => 'nombcategoria',
-            'type' => 'text',
-            'options' => array(
-                'label' => 'Categoría',
+            'name'  =>  'producto',
+            'type'  =>  'Productos\Form\ProductoFieldset',
+            'options' =>    array(
+                'use_as_base_fieldset' => true,
             ),
-            'attributes' => array(
-                'id' => 'nombcategoria',
-                'maxlength' => 100,
-                'readonly' => true,
-                'disabled' => true,
-                'class' => 'form-control',
-            )
-        ));
-
-        $this->add(array(
-            'name' => 'nombre',
-            'type' => 'text',
-            'options' => array(
-                'label' => 'Nombre del Producto',
-            ),
-            'attributes' => array(
-                'id' => 'nombre',
-                'maxlength' => 100,
-                'class' => 'form-control',
-            )
-        ));
-
-        $this->add(array(
-            'name' => 'unidadmedidaventas',
-            'type' => 'hidden',
-        ));
-
-        $this->add(array(
-            'name' => 'nombunidmedventas',
-            'type' => 'text',
-            'options' => array(
-                'label' => 'Unidad de Medida (Ventas al Detal)',
-            ),
-            'attributes' => array(
-                'id' => 'nombunidmedventas',
-                'maxlength' => 100,
-                'readonly' => true,
-                'disabled' => true,
-                'class' => 'form-control',
-            )
-        ));
-
-        $this->add(array(
-            'name' => 'unidadmedidaalmacen',
-            'type' => 'hidden',
-        ));
-
-
-        $this->add(array(
-            'name' => 'nombunidmedalmacen',
-            'type' => 'text',
-            'options' => array(
-                'label' => 'Unidad de Medida (Almacen al _Mayor)',
-            ),
-            'attributes' => array(
-                'id' => 'nombunidmedalmacen',
-                'maxlength' => 100,
-                'readonly' => true,
-                'disabled' => true,
-                'class' => 'form-control',
-            )
-        ));
-
-        $this->add(array(
-            'name' => 'preciounidad',
-            'type' => 'text',
-            'options' => array(
-                'label' => 'Precio por Unidad',
-            ),
-            'attributes' => array(
-                'id' => 'nombre',
-                'maxlength' => 100,
-                'class' => 'form-control'
-            )
-        ));
-
-        $this->add(array(
-            'type'  =>  'text',
-            'name'  =>  'imagen',
-            'options'   =>  array(
-                'label' =>  'Ruta de la Foto del Producto',
-            ),
-            'attributes' => array(
-                'id' => 'imagen',
-                'maxlength' => 100,
-                'class' => 'form-control',
-            )
-        ));
-
-        $this->add(array(
-            'name' => 'idmarca',
-            'type' => 'hidden',
-        ));
-
-
-        $this->add(array(
-            'name' => 'nombmarca',
-            'type' => 'text',
-            'options' => array(
-                'label' => 'Marca del Producto',
-            ),
-            'attributes' => array(
-                'id' => 'nombmarca',
-                'maxlength' => 100,
-                'readonly' => true,
-                'disabled' => true,
-                'class' => 'form-control',
-            )
-        ));
-
-        $this->add(array(
-            'name' => 'relacionunidad',
-            'type' => 'text',
-            'options' => array(
-                'label' => 'Constante de Conversión Unid. Medida Mayor->Detal',
-            ),
-            'attributes' => array(
-                'id' => 'relacionunidad',
-                'maxlength' => 100,
-                'class' => 'form-control',
-            )
         ));
 
         $this->add(array(

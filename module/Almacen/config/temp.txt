@@ -1,28 +1,44 @@
-            'disponibilidad' => array(
-                'type'    => 'Segment',
-                'options' => array(
-                    'route'    => '/inventario/:action/:idalmacen',
-                    'defaults' => array(
-                        '__NAMESPACE__' => 'Almacen\Controller',
-                        'controller'    => 'Inventario',
-                    ),
-                ),
-                'constraints' => array(
-                    'action' => '(disponibilidad-almacen|ver-ingresos)',
-                    'idalmacen'    =>  '[0-9]*',
-                ),
-            ),
-            'movimiento' => array(
-                'type'    => 'Segment',
-                'options' => array(
-                    'route'    => '/inventario/:action/:idalmacen',
-                    'defaults' => array(
-                        '__NAMESPACE__' => 'Almacen\Controller',
-                        'controller'    => 'Inventario',
-                    ),
-                ),
-                'constraints' => array(
-                    'action' => '(movimiento|ver-movimientos)',
-                    'idalmacen'    =>  '[0-9]*',
-                ),
-            ),
+<fieldset>
+<input type=\"hidden\" value=\"\" name=\"traslado-lote-collection[collection]["+i+"][idalmacenmayor]\">
+<input type=\"hidden\" value=\"\" name=\"traslado-lote-collection[collection]["+i+"][idalmacendetal]\">
+<input type=\"text\" value=\""+data.productos[i].nombmarca+"\" disabled=\"disabled\" readonly=\"readonly\" size=\"20\" name=\"traslado-lote-collection[collection]["+i+"][nombmarca]\">
+<input type=\"text\" value=\""+data.productos[i].nombcategoria+"\" disabled=\"disabled\" readonly=\"readonly\" size=\"20\" name=\"traslado-lote-collection[collection]["+i+"][nombcategoria]\">
+<input type=\"hidden\" value=\""+data.productos[i].idproducto+"\" name=\"traslado-lote-collection[collection]["+i+"][idproducto]\">
+<input class=\"actualizado\" type=\"hidden\" value=\"\" name=\"traslado-lote-collection[collection]["+i+"][actualizado]\">
+<input type=\"text\" value=\""+data.productos[i].nombproducto+"\" disabled=\"disabled\" readonly=\"readonly\" maxlength=\"45\" size=\"45\" name=\"traslado-lote-collection[collection]["+i+"][nombproducto]\">
+<input class=\"disponible\" type=\"text\" value=\""+data.productos[i].disponible+"\" disabled=\"disabled\" readonly=\"readonly\" maxlength=\"10\" size=\"5\" name=\"traslado-lote-collection[collection]["+i+"][disponible]\">
+<label>
+<span>Cantidad</span>
+<input class=\"cantidad\" type=\"text\" value=\"\" size=\"20\" name=\"traslado-lote-collection[collection]["+i+"][cantidad]\">
+</label>
+<input type=\"text\" value=\""+data.productos[i].unidmed+"\" disabled=\"disabled\" readonly=\"readonly\" maxlength=\"10\" size=\"4\" name=\"traslado-lote-collection[collection]["+i+"][unidmed]\">
+</fieldset>
+
+"+i+"
+
+"+data.productos[i].nombcategoria+"
+
+
+        alert("La cantidad a Tralasdar ("+valor+") debe ser menor o igual a la cantidad Disponible ("+disponible+") para el Producto Seleccionado");
+        $entrada.val("");
+        if (valor <= disponible){
+            alert("La cantidad a Tralasdar ("+valor+") debe ser menor o igual a la cantidad Disponible ("+disponible+") para el Producto Seleccionado");
+            $entrada.val("");
+        } else{
+            var nombre = "traslado-lote-collection[collection]["+pos+"][actualizado]";
+            var $actualizar = $("[name=\'"+nombre+"\']");
+            $actualizar.attr("value","actualizado");
+        }
+
+
+                var $nombdisponible = "traslado-lote-collection[collection]["+pos+"][disponible]";
+                var disponible = $nombdisponible.val();
+
+
+                        <?php
+                        if ($form->get('seleccion')->getValue() === 'cantidad'){
+                            $form->get('cantidad')->setAttributes(array('readonly'=>true,'disabled'=>true));
+                        }
+                        if ($form->get('seleccion')->getValue() === 'precio'){
+                            $form->get('precio')->setAttributes(array('readonly'=>true,'disabled'=>true));
+                        }

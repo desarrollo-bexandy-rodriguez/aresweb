@@ -78,7 +78,8 @@ class ItemForm extends Form
                 'label' => 'Precio: ',
             ),
             'attributes' => array(
-                'id' => 'cantidad',
+                'id' => 'precio',
+                'required' => false,
                 'maxlength' => 100,
             )
         ));
@@ -91,6 +92,7 @@ class ItemForm extends Form
             ),
             'attributes' => array(
                 'id' => 'cantidad',
+                'required' => false,
                 'maxlength' => 100,
             )
         ));
@@ -105,6 +107,9 @@ class ItemForm extends Form
                     'precio' => 'Precio',
                 ),
             ),
+            'attributes' => array(
+                'id' => 'seleccion',
+            )
         ));
 
         $this->add(array(

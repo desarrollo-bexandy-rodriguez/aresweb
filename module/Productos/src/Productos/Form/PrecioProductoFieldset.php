@@ -48,6 +48,14 @@ class PrecioProductoFieldset extends Fieldset implements InputFilterProviderInte
         ));
 
         $this->add(array(
+            'name' => 'actualizado',
+            'type' => 'hidden',
+            'attributes' => array(
+                'class' => 'actualizado',
+            ),
+        ));
+
+        $this->add(array(
             'name' => 'nombre',
             'type' => 'text',
             'attributes' => array(
@@ -64,6 +72,9 @@ class PrecioProductoFieldset extends Fieldset implements InputFilterProviderInte
             'options' => array(
                 'label' => 'Precio',
             ),
+            'attributes' => array(
+                'class' => 'precio',
+            ),
         ));
 
     }
@@ -76,8 +87,8 @@ class PrecioProductoFieldset extends Fieldset implements InputFilterProviderInte
     public function getInputFilterSpecification()
     {
         return array(
-            'name' => array(
-                'required' => true,
+            'nombre' => array(
+                'required' => false,
             ),
         );
     }

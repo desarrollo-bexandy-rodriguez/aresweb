@@ -23,6 +23,74 @@ class ProductoEntity
     protected $idmarca;
     protected $relacionunidad;
     protected $nombmarca;
+    protected $vencimiento;
+    protected $codpremium;
+    protected $modificado;
+    protected $disponible;
+
+    /**
+     * @return mixed
+     */
+    public function getDisponible()
+    {
+        return $this->disponible;
+    }
+
+    /**
+     * @param mixed $disponible
+     */
+    public function setDisponible($disponible)
+    {
+        $this->disponible = $disponible;
+    }
+
+    /**
+     * @return mixed
+     */
+    public function getCodpremium()
+    {
+        return $this->codpremium;
+    }
+
+    /**
+     * @param mixed $codpremium
+     */
+    public function setCodpremium($codpremium)
+    {
+        $this->codpremium = $codpremium;
+    }
+
+    /**
+     * @return mixed
+     */
+    public function getModificado()
+    {
+        return $this->modificado;
+    }
+
+    /**
+     * @param mixed $modificado
+     */
+    public function setModificado($modificado)
+    {
+        $this->modificado = $modificado;
+    }
+
+    /**
+     * @return mixed
+     */
+    public function getVencimiento()
+    {
+        return $this->vencimiento;
+    }
+
+    /**
+     * @param mixed $vencimiento
+     */
+    public function setVencimiento($vencimiento)
+    {
+        $this->vencimiento = $vencimiento;
+    }
 
     /**
      * @return mixed

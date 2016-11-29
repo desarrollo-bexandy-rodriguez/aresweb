@@ -8,6 +8,7 @@
 return array(
     'bjyauthorize' => array(
         'default_role' => 'guest',
+        'login_redirect_route' => '/',
         'identity_provider'  => 'BjyAuthorize\Provider\Identity\AuthenticationIdentityProvider',
         'role_providers' => array(
             'BjyAuthorize\Provider\Role\ObjectRepositoryProvider' => array(
@@ -36,7 +37,7 @@ return array(
         ),
         'guards' => array(
             'BjyAuthorize\Guard\Controller' => array(
-                array('controller' => 'Application\Controller\Index', 'action' => 'index', 'roles' => array('autenticado')),
+                array('controller' => 'Application\Controller\Index', 'action' => 'index', 'roles' => array('autenticado', 'guest')),
                 array(
                     'controller' => array('Pedidos\Controller\Pedido','Pedidos\Controller\Item'),
                     'roles' => array('vendedor','administrador')
@@ -73,11 +74,19 @@ return array(
                 ),
                 array(
                     'controller' => array('Reportes\Controller\Reportes'),
-                    'roles' => array('guest', 'autenticado')
+                    'roles' => array('administrador')
                 ),
                 array(
                     'controller' => array('Productos\Controller\MyForm'),
-                    'roles' => array('guest', 'autenticado')
+                    'roles' => array('administrador')
+                ),
+                array(
+                    'controller' => array('Almacen\Controller\Ingreso'),
+                    'roles' => array('administrador')
+                ),
+                array(
+                    'controller' => array('Almacen\Controller\Traslado'),
+                    'roles' => array('administrador')
                 ),
                 array('controller' => 'zfcuser', 'roles' => array()),
                 array('controller' => 'HtProfileImage\ProfileImage', 'roles' => array()),

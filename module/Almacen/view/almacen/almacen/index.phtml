@@ -20,16 +20,6 @@ $this->headTitle($title);
                         <div class="col-sm-6 col-md-6">
                             <a href="<?php echo $this->url('almacen', array('action' => 'edit', 'id' => $almacen->getId())); ?>" class="btn btn-primary btn-sm">Editar</a>
                             <a href="<?php echo $this->url('almacen', array('action' => 'delete', 'id' => $almacen->getId())); ?>" class="btn btn-danger btn-sm">Eliminar</a>
-                            <?php if ($almacen->getIdtipoalmacen() === '1'): ?>
-                                <a href="<?php echo $this->url('inventario', array('action' => 'disponibilidad-almacen', 'idalmacen' => $almacen->getId())); ?>" class="btn btn-success btn-sm">Inventario</a>
-                                <a href="<?php echo $this->url('inventario', array('action' => 'ver-ingresos', 'idalmacen' => $almacen->getId())); ?>" class="btn btn-warning btn-sm">Ingresos</a>
-                                <a href="<?php echo $this->url('inventario', array('action' =>'ingreso-producto', 'idalmacen' => $almacen->getId())); ?>" class="btn btn-info btn-sm">Ingresar Productos</a>
-                            <?php endif; ?>
-                            <?php if ($almacen->getIdtipoalmacen() === '2'): ?>
-                                <a href="<?php echo $this->url('movimiento', array('action' => 'disponibilidad-detal', 'idmayor' => $almacen->getId())); ?>" class="btn btn-success btn-sm">Inventario</a>
-                                <a href="<?php echo $this->url('movimiento', array('action' => 'ver-movimientos', 'idmayor' => $almacen->getId())); ?>" class="btn btn-warning btn-sm">Movimientos</a>
-                                <a href="<?php echo $this->url('movimiento', array('action' =>'movimiento-producto','idmayor' => '1', 'iddetal' => $almacen->getId())); ?>" class="btn btn-info btn-sm">Movimiento Productos</a>
-                            <?php endif; ?>
                         </div>
                         </div>
 
@@ -37,7 +27,9 @@ $this->headTitle($title);
                 <?php endforeach; ?>
             </div>
             <div class="panel-footer">
-                <a href="<?php echo $this->url('almacen',array('action' => 'add')); ?>" class="btn btn-primary"> Crear <Nuevo></Nuevo> Almacén</a>
+                <a href="<?php echo $this->url('application/default',array('controller' => 'index', 'action' => 'admin')); ?>" class="btn btn-default">Volver</a>
+
+                <a href="<?php echo $this->url('almacen',array('action' => 'add')); ?>" class="btn btn-primary"> Crear Almacén</a>
             </div>
         </div>
     </div>

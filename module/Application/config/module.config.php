@@ -59,6 +59,9 @@ return array(
             'translator' => 'Zend\Mvc\Service\TranslatorServiceFactory',
             'navigation' => 'Zend\Navigation\Service\DefaultNavigationFactory',
         ),
+     //   'aliases' => array(
+     //       'translator' => 'MvcTranslator',
+     //   ),
     ),
     'translator' => array(
         'locale' => 'es_ES',
@@ -153,6 +156,11 @@ return array(
                     ),
                 ),
             ),
+            array(
+                'label' => 'Reportes',
+                'route' => 'reportes',
+            ),
+
         ),
     ),
     'doctrine' => array(

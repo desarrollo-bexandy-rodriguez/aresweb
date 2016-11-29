@@ -28,6 +28,7 @@ class IngresoMapper
         $this->sql = new Sql($dbAdapter);
         $this->sql->setTable($this->tableName);
     }
+
     public function saveIngresoProducto(IngresoEntity $ingresoEntity)
     {
         $this->sql->setTable('ingreso_almacen');

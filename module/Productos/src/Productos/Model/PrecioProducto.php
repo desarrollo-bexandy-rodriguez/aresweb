@@ -14,11 +14,28 @@ class PrecioProducto
     /**
      * @var string
      */
-    protected $name;
+    protected $nombre;
     protected $id;
     protected $nombcategoria;
     protected $nombmarca;
     protected $preciounidad;
+    protected $actualizado = false;
+
+    /**
+     * @return boolean
+     */
+    public function isActualizado()
+    {
+        return $this->actualizado;
+    }
+
+    /**
+     * @param boolean $actualizado
+     */
+    public function setActualizado($actualizado)
+    {
+        $this->actualizado = $actualizado;
+    }
 
 
 
@@ -87,20 +104,20 @@ class PrecioProducto
     }
 
     /**
-     * @param string $name
-     * @return Category
+     * @return string
      */
-    public function setName($name)
+    public function getNombre()
     {
-        $this->name = $name;
-        return $this;
+        return $this->nombre;
     }
 
     /**
-     * @return string
+     * @param string $nombre
      */
-    public function getName()
+    public function setNombre($nombre)
     {
-        return $this->name;
+        $this->nombre = $nombre;
     }
+
+
 }

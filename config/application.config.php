@@ -24,11 +24,13 @@ return array(
         'Pedidos',
         'Almacen',
         'Despacho',
-        'StickyNotes',
-        'ZendDeveloperTools',
-        'SanSessionToolbar',
+        //'StickyNotes',
+        //'ZendDeveloperTools',
+        //'SanSessionToolbar',
         'TestAjax',
         'Reportes',
+        'EdpSuperluminal',
+        'WebinoImageThumb',
 
     ),
 

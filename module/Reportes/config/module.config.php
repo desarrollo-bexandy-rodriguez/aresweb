@@ -7,11 +7,11 @@ return array(
     ),
     'router' => array(
         'routes' => array(
-            'Reportes' => array(
-                'type'    => 'Literal',
+            'reportes' => array(
+                'type'    => 'Segment',
                 'options' => array(
                     // Change this to something specific to your module
-                    'route'    => '/reportes',
+                    'route'    => '/reportes[/:action]',
                     'defaults' => array(
                         // Change this value to reflect the namespace in which
                         // the controllers for your module are found
@@ -19,27 +19,12 @@ return array(
                         'controller'    => 'Reportes',
                         'action'        => 'index',
                     ),
-                ),
-                'may_terminate' => true,
-                'child_routes' => array(
-                    // This route is a sane default when developing a module;
-                    // as you solidify the routes for your module, however,
-                    // you may want to remove it and replace it with more
-                    // specific routes.
-                    'default' => array(
-                        'type'    => 'Segment',
-                        'options' => array(
-                            'route'    => '/[:controller[/:action[/:id]]]',
-                            'constraints' => array(
-                                'controller' => '[a-zA-Z][a-zA-Z0-9_-]*',
-                                'action'     => '[a-zA-Z][a-zA-Z0-9_-]*',
-                                'id'        =>  '[0-9]*',
-                            ),
-                            'defaults' => array(
-                            ),
+                    'options' => array(
+                        'route'    => '/',
+                        'constraints' => array(
+                            'action'     => '(index|headmap|column-stacked|pedidos-despachador|torta|prueba|datos-top-productos|datos-pedidos-diarios-despachador)',
                         ),
                     ),
-
                 ),
             ),
         ),
@@ -49,16 +34,5 @@ return array(
             'Reportes' => __DIR__ . '/../view',
         ),
     ),
-
-    /*
-     * if you're using AssetManager module, you can save assets in your module's public
-     * assetmanager module can be install by require "rwoverdijk/assetmanager": "*" in your composer.json
-     * 'asset_manager' => array(
-         'resolver_configs' => array(
-             'paths' => array(
-                 'TestAjax' => __DIR__ . '/../public',
-             ),
-         ),
-     ), */
 
 );

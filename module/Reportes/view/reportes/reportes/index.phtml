@@ -1,7 +1,154 @@
-<?php echo $this->headScript()->appendFile($this->basePath().'/js/highcharts/highcharts.js'); ?>
-<?php echo $this->headScript()->appendFile($this->basePath().'/js/highcharts/highcharts-3d.js'); ?>
-<?php echo $this->headScript()->appendFile($this->basePath().'/js/highcharts/modules/exporting.js'); ?>
-<?php echo $this->headScript()->appendFile($this->basePath().'/js/highcharts/modules/heatmap.js'); ?>
-<?php echo $this->headScript()->appendFile($this->basePath().'/js/reportes/combo.js'); ?>
+<div class="row well well-sm text-center text-primary">
+    <h1>Sistema de Pedidos Ares</h1>
+</div>
 
-<div id="container" style="width:100%; height:400px;"></div>
+<div class="jumbotron text-center">
+
+    <h3 class="text-center">Reportes</h3>
+
+    <div class="row placeholders">
+
+        <div class="col-xs-3 col-sm-3 col-md-3 placeholder">
+            <a href="<?php echo $this->url('reportes', array('action' => 'prueba'));?>">
+                <div class="panel panel-info">
+                    <div class="panel-heading">
+                        <h3 class="panel-title">Pedidos x Despachador</h3>
+                    </div>
+                    <div class="panel-body text-center">
+                        <i class="icon-barchart" style="font-size: 100px; "></i>
+                    </div>
+                </div>
+            </a>
+        </div>
+
+        <div class="col-xs-3 col-sm-3 col-md-3 placeholder">
+            <a href="<?php echo $this->url('reportes', array('action' => 'pedidosDespachador'));?>">
+                <div class="panel panel-info">
+                    <div class="panel-heading">
+                        <h3 class="panel-title">Despachador Diario</h3>
+                    </div>
+                    <div class="panel-body text-center">
+                        <i class="icon-barchartalt" style="font-size: 100px; "></i>
+                    </div>
+                </div>
+            </a>
+        </div>
+
+        <div class="col-xs-3 col-sm-3 col-md-3 placeholder">
+            <a href="<?php echo $this->url('reportes', array('action' => 'torta'));?>">
+                <div class="panel panel-info">
+                    <div class="panel-heading">
+                        <h3 class="panel-title">Top 20 Productos</h3>
+                    </div>
+                    <div class="panel-body text-center">
+                        <i class="icon-analytics-piechart" style="font-size: 100px; "></i>
+                    </div>
+                </div>
+            </a>
+        </div>
+
+        <div class="col-xs-3 col-sm-3 col-md-3 placeholder">
+            <a href="<?php echo $this->url('reportes', array('action' => 'headmap'));?>">
+                <div class="panel panel-info">
+                    <div class="panel-heading">
+                        <h3 class="panel-title">Headmap</h3>
+                    </div>
+                    <div class="panel-body text-center">
+                        <i class="icon-calendaralt-cronjobs" style="font-size: 100px; "></i>
+                    </div>
+                </div>
+            </a>
+        </div>
+
+    </div>
+
+    <div class="row placeholders">
+
+        <div class="col-xs-3 col-sm-3 col-md-3 placeholder">
+            <a href="<?php echo $this->url('reportes', array('action' => 'column-stacked'));?>">
+                <div class="panel panel-info">
+                    <div class="panel-heading">
+                        <h3 class="panel-title">Columnas</h3>
+                    </div>
+                    <div class="panel-body text-center">
+                        <i class="icon-report" style="font-size: 100px; "></i>
+                    </div>
+                </div>
+            </a>
+        </div>
+
+        <div class="col-xs-3 col-sm-3 col-md-3 placeholder">
+            <a href="<?php echo $this->url('reportes');?>">
+                <div class="panel panel-info">
+                    <div class="panel-heading">
+                        <h3 class="panel-title">Combo</h3>
+                    </div>
+                    <div class="panel-body text-center">
+                        <i class="icon-report" style="font-size: 100px; "></i>
+                    </div>
+                </div>
+            </a>
+        </div>
+
+        <div class="col-xs-3 col-sm-3 col-md-3 placeholder">
+            <a href="<?php echo $this->url('inventario', array('action' => 'disponibilidad-almacen', 'idalmacen' => '1')); ?>">
+                <div class="panel panel-info">
+                    <div class="panel-heading">
+                        <h3 class="panel-title">Inventario Depósito</h3>
+                    </div>
+                    <div class="panel-body text-center">
+                        <i class="icon-clipboardalt" style="font-size: 100px; "></i>
+                    </div>
+                </div>
+            </a>
+        </div>
+
+        <div class="col-xs-3 col-sm-3 col-md-3 placeholder">
+            <a href="<?php echo $this->url('movimiento', array('action' => 'disponibilidad-detal', 'idmayor' => '2')); ?>">
+                <div class="panel panel-info">
+                    <div class="panel-heading">
+                        <h3 class="panel-title">Inventario Tienda</h3>
+                    </div>
+                    <div class="panel-body text-center">
+                        <i class="icon-clipboardalt" style="font-size: 100px; "></i>
+                    </div>
+                </div>
+            </a>
+        </div>
+    </div>
+
+    <div class="row placeholders">
+
+        <div class="col-xs-3 col-sm-3 col-md-3 placeholder">
+            <a href="<?php echo $this->url('inventario', array('action' => 'ver-ingresos', 'idalmacen' => '1')); ?>">
+                <div class="panel panel-info">
+                    <div class="panel-heading">
+                        <h3 class="panel-title">Ver Ingresos Depósito</h3>
+                    </div>
+                    <div class="panel-body text-center">
+                        <i class="icon-enteralt" style="font-size: 100px; "></i>
+                    </div>
+                </div>
+            </a>
+        </div>
+
+        <div class="col-xs-3 col-sm-3 col-md-3 placeholder">
+            <a href="<?php echo $this->url('movimiento', array('action' => 'ver-movimientos', 'idmayor' => '2')); ?>">
+                <div class="panel panel-info">
+                    <div class="panel-heading">
+                        <h3 class="panel-title">Ver Movimientos Tienda</h3>
+                    </div>
+                    <div class="panel-body text-center">
+                        <i class="icon-refreshalt" style="font-size: 100px; "></i>
+                    </div>
+                </div>
+            </a>
+        </div>
+
+    </div>
+
+</div>
+
+<div class="row well well-sm text-center">
+    <br><br><br>
+</div>

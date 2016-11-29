@@ -89,7 +89,7 @@ class ItemMapper
             $action->values($data);
         }
         $statement = $this->sql->prepareStatementForSqlObject($action);
-        // echo $action->getSqlString($this->dbAdapter->getPlatform()); die();
+        $sql = $action->getSqlString($this->dbAdapter->getPlatform());
         $result = $statement->execute();
 
         return $result;

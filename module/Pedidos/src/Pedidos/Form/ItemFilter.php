@@ -22,6 +22,7 @@ class ItemFilter extends InputFilter
     {
         $this->add(array(
             'name' => 'cantidad',
+            'required' => false,
             'filters' => array(
                 array('name' => 'StripTags'),
                 array('name' => 'StringTrim'),
@@ -30,12 +31,41 @@ class ItemFilter extends InputFilter
                 array(
                     'name' => 'Float',
                     'options' => array(
-                        'locale' => 'es_ES',
+                        'locale' => 'en_US',
                     ),
                 ),
             ),
         ));
 
+        $this->add(array(
+            'name' => 'precio',
+            'required' => false,
+            'filters' => array(
+                array('name' => 'StripTags'),
+                array('name' => 'StringTrim'),
+            ),
+            'validators' => array(
+                array(
+                    'name' => 'Float',
+                    'options' => array(
+                        'locale' => 'en_US',
+                    ),
+                ),
+            ),
+        ));
+
+        $this->add(array(
+            'name' => 'subtotal',
+            'required' => false,
+            'validators' => array(
+                array(
+                    'name' => 'Float',
+                    'options' => array(
+                        'locale' => 'en_US',
+                    ),
+                ),
+            ),
+        ));
 
 
     }

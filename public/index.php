@@ -11,6 +11,9 @@
  * to the application root now.
  */
 chdir(dirname(__DIR__));
+define('ZF_CLASS_CACHE', 'data/cache/classes.php.cache'); if (file_exists(ZF_CLASS_CACHE)) require_once ZF_CLASS_CACHE;
+define('BASE_PATH', realpath(dirname(__DIR__)));
+define('PUBLIC_PATH', BASE_PATH.'/public');
 
 // Decline static file requests back to the PHP built-in webserver
 if (php_sapi_name() === 'cli-server') {

@@ -1,0 +1,113 @@
+<?php echo $this->headLink()->prependStylesheet($this->basePath('/js/jqueryUI/themes/redmond/jquery-ui.css')); ?>
+<?php echo $this->headStyle()->appendStyle($this->basePath('jqueryUI/themes/base/jquery-ui.css')); ?>
+
+<?php echo $this->headScript()->appendFile($this->basePath().'/js/jqueryUI/ui/jquery-ui.js'); ?>
+<?php echo $this->headScript()->appendFile($this->basePath().'/js/jqueryUI/ui/jquery.ui.datepicker-es.js'); ?>
+<?php echo $this->headScript()->appendFile($this->basePath().'/js/modules/productos/crear-productos.js'); ?>
+
+<?php
+$title = 'Editar Producto';
+$this->headTitle($title);
+?>
+
+<div class="panel panel-primary">
+    <div class="panel-heading text-center"><h3><?php echo $this->escapeHtml($title); ?></h3></div>
+    <div class="panel-body">
+        <?php
+        $form = $this->form;
+        $producto = $form->get('producto');
+        $form->setAttribute('action', $this->url('producto', array('action' => 'editar-producto', 'id' => $id)));
+        $form->get('submit')->setAttribute('value', 'Editar Producto');
+        $formLabel = $this->plugin('formLabel');
+        $form->prepare();
+        ?>
+        <?php echo $this->form()->openTag($form); ?>
+
+        <?php echo $this->formHidden($producto->get('id'));?>
+        <?php echo $this->formHidden($producto->get('idcategoria')); ?>
+        <?php echo $this->formHidden($producto->get('unidadmedidaventas')); ?>
+        <?php echo $this->formHidden($producto->get('unidadmedidaalmacen')); ?>
+        <?php echo $this->formHidden($producto->get('idmarca')); ?>
+        <?php echo $this->formHidden($producto->get('imagen')); ?>
+
+
+        <div class="row">
+            <div class="col-sm-3 col-md-3 ">
+                <?php echo $this->formRow($form->get('categoria')); ?>
+
+            </div>
+
+            <div class="col-sm-3 col-md-3 ">
+                <?php echo $this->formRow($form->get('marca')); ?>
+            </div>
+
+            <div class="col-sm-3 col-md-3 ">
+                <?php echo $this->formRow($form->get('fileupload')); ?>
+            </div>
+
+            <div class="col-sm-3 col-md-3 ">
+                <img id="imageupload" src="<?php echo $producto->get('imagen')->getValue() ?>" style="max-height: 72px; max-width: 100px;" />
+            </div>
+
+        </div>
+
+        <div class="row">
+            <div class="col-sm-6 col-md-6" >
+                <div class="row">
+                    <div class="col-sm-6 col-md-6 ">
+                        <div class="form-group">
+                            <?php echo $this->formRow($form->get('detal')); ?>
+                        </div>
+                    </div>
+
+                    <div class="col-sm-6 col-md-6 ">
+                        <div class="form-group">
+                            <?php echo $this->formRow($form->get('mayor')); ?>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="row">
+                    <div class="col-sm-6 col-md-6 ">
+                        <div class="form-group">
+                            <?php echo $this->formRow($producto->get('relacionunidad')); ?>
+                        </div>
+                    </div>
+
+                    <div class="col-sm-6 col-md-6 ">
+                        <div class="form-group">
+                            <?php echo $this->formRow($producto->get('codpremium')); ?>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="row">
+                    <div class="col-sm-12 col-md-12 ">
+                        <div class="form-group">
+                            <?php echo $this->formRow($producto->get('vencimiento')); ?>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <div class="col-sm-6 col-md-6">
+
+                <div class="form-group">
+                    <?php echo $this->formRow($producto->get('nombre')); ?>
+                </div>
+
+                <div class="form-group">
+                    <?php echo $this->formRow($producto->get('preciounidad')); ?>
+                </div>
+            </div>
+        </div>
+
+    </div>
+
+    <div class="panel-footer text-right">
+        <a href="<?php echo $this->url('producto') ?>" class="btn btn-default">Volver</a>
+        <?php echo $this->formInput($form->get('submit')); ?>
+    </div>
+    <?php echo $this->form()->closeTag($form); ?>
+</div>
+

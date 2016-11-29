@@ -8,6 +8,7 @@ $this->headTitle($title);
     <div class="panel-body">
         <?php
         $form = $this->form;
+        $producto = $form->get('producto');
         $form->setAttribute('action', $this->url('producto', array('action' => 'add','id' => $id, 'cat' => $cat, 'det' => $det, 'may' => $may)));
         $form->get('submit')->setAttribute('value', 'Crear Producto');
         $formLabel = $this->plugin('formLabel');
@@ -15,40 +16,46 @@ $this->headTitle($title);
         ?>
         <?php echo $this->form()->openTag($form); ?>
 
-        <?php echo $this->formHidden($form->get('id'));?>
-        <?php echo $this->formHidden($form->get('idcategoria')); ?>
-        <?php echo $this->formHidden($form->get('unidadmedidaventas')); ?>
-        <?php echo $this->formHidden($form->get('unidadmedidaalmacen')); ?>
+        <?php echo $this->formHidden($producto->get('id'));?>
+        <?php echo $this->formHidden($producto->get('idcategoria')); ?>
+        <?php echo $this->formHidden($producto->get('unidadmedidaventas')); ?>
+        <?php echo $this->formHidden($producto->get('unidadmedidaalmacen')); ?>
+        <?php echo $this->formHidden($producto->get('idmarca')); ?>
 
         <div class="row">
             <div class="col-sm-6 col-md-6 well">
                 <div class="form-group">
-                    <?php echo $this->formRow($form->get('nombcategoria')); ?>
+                    <?php echo $this->formRow($producto->get('nombcategoria')); ?>
                     <p><a href="<?php echo $this->url('categoria', array('action'=>'select'));?>">Seleccionar Categoria</a></p>
                 </div>
 
                 <div class="form-group">
-                    <?php echo $this->formRow($form->get('nombunidmedventas')); ?>
+                    <?php echo $this->formRow($producto->get('nombmarca')); ?>
+                    <p><a href="<?php echo $this->url('categoria', array('action'=>'select'));?>">Seleccionar Marca</a></p>
+                </div>
+
+                <div class="form-group">
+                    <?php echo $this->formRow($producto->get('nombunidmedventas')); ?>
                     <p><a href="<?php echo $this->url('unidad-medida', array('action'=>'select','id' => $id, 'tipo' => 'det'));?>">Seleccionar Unidad de Medida</a></p>
                 </div>
 
                 <div class="form-group">
-                    <?php echo $this->formRow($form->get('nombunidmedalmacen')); ?>
+                    <?php echo $this->formRow($producto->get('nombunidmedalmacen')); ?>
                     <p><a href="<?php echo $this->url('unidad-medida', array('action'=>'select','id' => $id, 'tipo' => 'may'));?>">Seleccionar Unidad de Medida</a></p>
                 </div>
             </div>
 
             <div class="col-sm-6 col-md-6">
                 <div class="form-group">
-                    <?php echo $this->formRow($form->get('nombre')); ?>
+                    <?php echo $this->formRow($producto->get('nombre')); ?>
                 </div>
 
                 <div class="form-group">
-                    <?php echo $this->formRow($form->get('preciounidad')); ?>
+                    <?php echo $this->formRow($producto->get('preciounidad')); ?>
                 </div>
 
                 <div class="form-group">
-                    <?php echo $this->formRow($form->get('imagen')); ?>
+                    <?php echo $this->formRow($producto->get('imagen')); ?>
                 </div>
             </div>
         </div>

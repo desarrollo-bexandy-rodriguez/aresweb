@@ -1,70 +1,72 @@
+<?php echo $this->headScript()->appendFile($this->basePath().'/js/modules/pedidos/add-item.js'); ?>
+
 <?php
 $title = 'Añadir Item';
 $this->headTitle($title);
 ?>
 
-<div class="panel panel-default">
-    <div class="panel-heading text-center"><h1><?php echo $this->escapeHtml($title); ?></h1></div>
-    <div class="panel-body">
-        <div class="row">
-            <div class="col-sm-8 col-md-8 well">
-                <div class="thumbnail">
-                    <img src="<?= $producto->getImagen(); ?>" alt="<?= $producto->getNombre() ?>">
-                    <div class="caption text-center">
-                        <h3 id="producto<?= $producto->getId() ?>"><?= $producto->getNombre() ?></h3>
-                        <p>Categoría:<?= $producto->getNombcategoria() ?></p>
-                        <p>Precio:<?= $producto->getPreciounidad() ?> BsF por  <?= $producto->getNombunidmedventas() ?></p>
+<div class="row">
+    <div class="col-sm-3 col-md-3"></div>
+    <div class="col-sm-6 col-md-6">
+        <div class="panel panel-primary">
+            <div class="panel-heading text-center"><h1><?php echo $this->escapeHtml($title); ?></h1></div>
+            <div class="panel-body">
+                <div class="row">
+                    <div class="col-sm-4 col-md-4">
+                        <div class="thumbnail well well-sm">
+                            <img src="<?= $producto->getImagen(); ?>" alt="<?= $producto->getNombre() ?>">
+                            <div class="caption text-center">
+                                <h3 id="producto<?= $producto->getId() ?>"><?= $producto->getNombre() ?></h3>
+                                <p>Categoría:<?= $producto->getNombcategoria() ?></p>
+                                <p>Precio:<?= $producto->getPreciounidad() ?> BsF por  <?= $producto->getNombunidmedventas() ?></p>
 
+                            </div>
+                        </div>
+                    </div>
+                    <div class="col-sm-8 col-md-8">
+                        <div class="well">
+                            <?php
+                            $form = $this->form;
+                            $url = $this->url('item', array('action' => 'add', 'pedido' => $idpedido, 'producto' => $idproducto));
+                            $form->setAttribute('action', $url);
+                            $form->get('submit')->setAttribute('value', 'Añadir Item');
+                            $form->prepare();
+
+                            echo $this->form()->openTag($form);
+                            echo $this->formHidden($form->get('pedido'));
+                            echo $this->formHidden($form->get('producto'));
+                            ?>
+                            <div class="row">
+                                <?php echo $this->formRow($form->get('seleccion')); ?>
+                            </div>
+                            <div class="row">
+
+                                <?php echo $this->formRow($form->get('cantidad')).' '.$producto->getNombunidmedventas() ; ?>
+                            </div>
+
+                            <div class="row">
+                                <?php echo $this->formRow($form->get('precio')).' BsF'; ?>
+                            </div>
+                        </div>
                     </div>
                 </div>
+
+
             </div>
-            <div class="col-sm-4 col-md-4">
-                <div class="well">
-                    <?php
-                    $form = $this->form;
-                    $url = $this->url('item', array('action' => 'add', 'pedido' => $idpedido, 'producto' => $idproducto));
-                    $form->setAttribute('action', $url);
-                    $form->get('submit')->setAttribute('value', 'Añadir Item');
-                    $form->prepare();
 
-                    echo $this->form()->openTag($form);
-                    echo $this->formHidden($form->get('pedido'));
-                    echo $this->formHidden($form->get('producto'));
-                ?>
-                    <div class="row">
-                        <?php echo $this->formRow($form->get('seleccion')); ?>
-                        <?php
-                        if ($form->get('seleccion')->getValue() === 'cantidad'){
-                            $form->get('cantidad')->setAttributes(array('readonly'=>true,'disabled'=>true));
-                        }
-                        if ($form->get('seleccion')->getValue() === 'precio'){
-                            $form->get('precio')->setAttributes(array('readonly'=>true,'disabled'=>true));
-                        }
-                        ?>
-                    </div>
-                    <div class="row">
+            <div class="panel-footer text-center">
 
-                        <?php echo $this->formRow($form->get('cantidad')).' '.$producto->getNombunidmedventas() ; ?>
-                    </div>
-
-                    <div class="row">
-                        <?php echo $this->formRow($form->get('precio')).' BsF'; ?>
-                    </div>
+                <div class="row">
+                    <div class="col-sm-6 col-md-6"><a href="<?php echo $this->url('pedido', array('action' =>'edit','id' => $idpedido));?>" class="btn btn-default">Cancelar</a></div>
+                    <div class="col-sm-6 col-md-6"><?php echo $this->formInput($form->get('submit')); ?></div>
                 </div>
+                <?php
+                echo $this->form()->closeTag($form); ?>
             </div>
         </div>
-
-
     </div>
-
-    <div class="panel-footer text-center">
-
-        <div class="row">
-            <div class="col-sm-6 col-md-6"><a href="<?php echo $this->url('pedido', array('action' =>'edit','id' => $idpedido));?>" class="btn btn-default">Cancelar</a></div>
-            <div class="col-sm-6 col-md-6"><?php echo $this->formInput($form->get('submit')); ?></div>
-        </div>
-        <?php
-        echo $this->form()->closeTag($form); ?>
-    </div>
+    <div class="col-sm-3 col-md-3"></div>
 </div>
+
+
 

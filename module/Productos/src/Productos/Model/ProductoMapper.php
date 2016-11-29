@@ -8,7 +8,10 @@
 
 namespace Productos\Model;
 
+use Almacen\Model\TrasladoLoteEntity;
 use Zend\Db\Adapter\Adapter;
+use Zend\Paginator\Adapter\DbSelect;
+use Zend\Paginator\Paginator;
 use Zend\Stdlib\Hydrator\ClassMethods;
 use Zend\Db\Sql\Sql;
 use Zend\Db\Sql\Select;
@@ -27,7 +30,7 @@ class ProductoMapper
         $this->sql->setTable($this->tableName);
     }
 
-    public function fetchAll($verTodos = false)
+    public function fetchAll($verTodos = false, $paginated=false)
     {
         if ($verTodos) {
             $this->sql->setTable('vista_productos');
@@ -35,13 +38,22 @@ class ProductoMapper
             $this->sql->setTable('vista_productos_disponibles');
         }
 
-        $select = $this->sql->select();
-        $statement = $this->sql->prepareStatementForSqlObject($select);
-        $results = $statement->execute();
-
         $entityPrototype = new ProductoEntity();
         $hydrator = new ClassMethods();
         $resultset = new HydratingResultSet($hydrator, $entityPrototype);
+
+        $select = $this->sql->select();
+
+
+        if ($paginated) {
+
+            $paginatorAdapter = new DbSelect($select,$this->dbAdapter, $resultset);
+            $paginator = new Paginator($paginatorAdapter);
+            return $paginator;
+        }
+
+        $statement = $this->sql->prepareStatementForSqlObject($select);
+        $results = $statement->execute();
         $resultset->initialize($results);
         return $resultset;
     }
@@ -56,8 +68,10 @@ class ProductoMapper
             // update action
             $action = $this->sql->update();
             unset($data['nombcategoria']);
+            unset($data['nombmarca']);
             unset($data['nombunidmedventas']);
             unset($data['nombunidmedalmacen']);
+            unset($data['disponible']);
             $action->set($data);
             $action->where(array('id' => $producto->getId()));
         } else {
@@ -65,8 +79,10 @@ class ProductoMapper
             $action = $this->sql->insert();
             unset($data['id']);
             unset($data['nombcategoria']);
+            unset($data['nombmarca']);
             unset($data['nombunidmedventas']);
             unset($data['nombunidmedalmacen']);
+            unset($data['disponible']);
             $action->values($data);
         }
         $statement = $this->sql->prepareStatementForSqlObject($action);
@@ -102,15 +118,26 @@ class ProductoMapper
         return $producto;
     }
 
-    public function getProductosCategoria($idcategoria, $verTodos = false)
+    public function getProductosCategoria($idcategoria, $verTodos = false, $paginated=false)
     {
         if ($verTodos) {
             $this->sql->setTable('vista_productos');
         } else {
             $this->sql->setTable('vista_productos_disponibles');
         }
+        $entityPrototype = new ProductoEntity();
+        $hydrator = new ClassMethods();
+        $resultset = new HydratingResultSet($hydrator, $entityPrototype);
+
         $select = $this->sql->select();
         $select->where(array('idcategoria' => $idcategoria));
+
+        if ($paginated) {
+
+            $paginatorAdapter = new DbSelect($select,$this->dbAdapter, $resultset);
+            $paginator = new Paginator($paginatorAdapter);
+            return $paginator;
+        }
 
         $statement = $this->sql->prepareStatementForSqlObject($select);
         $results = $statement->execute();
@@ -118,9 +145,6 @@ class ProductoMapper
             return null;
         }
 
-        $entityPrototype = new ProductoEntity();
-        $hydrator = new ClassMethods();
-        $resultset = new HydratingResultSet($hydrator, $entityPrototype);
         $resultset->initialize($results);
         return $resultset;
     }
@@ -179,6 +203,76 @@ class ProductoMapper
         }
 
         $entityPrototype = new ProductoEntity();
+        $hydrator = new ClassMethods();
+        $resultset = new HydratingResultSet($hydrator, $entityPrototype);
+        $resultset->initialize($results);
+        return $resultset;
+    }
+
+    public function updatePrecio($id, $preciounidad, $modificado)
+    {
+        $this->sql->setTable('productos');
+        $data = array('preciounidad' => $preciounidad, 'modificado' => $modificado);
+
+        $action = $this->sql->update();
+        $action->set($data);
+        $action->where(array('id' => $id));
+
+        $statement = $this->sql->prepareStatementForSqlObject($action);
+        $result = $statement->execute();
+
+        return $result;
+    }
+
+    public function getProductosTraslado($paginated=false)
+    {
+        $this->sql->setTable('vista_productos_traslado');
+
+        $entityPrototype = new TrasladoLoteEntity();
+        $hydrator = new ClassMethods();
+        $resultset = new HydratingResultSet($hydrator, $entityPrototype);
+
+        $select = $this->sql->select();
+
+
+        if ($paginated) {
+
+            $paginatorAdapter = new DbSelect($select,$this->dbAdapter, $resultset);
+            $paginator = new Paginator($paginatorAdapter);
+            return $paginator;
+        }
+
+        $statement = $this->sql->prepareStatementForSqlObject($select);
+        $results = $statement->execute();
+        $resultset->initialize($results);
+        return $resultset;
+    }
+
+    public function getProductosTrasladoFiltro($idcategoria, $idmarca)
+    {
+        $this->sql->setTable('vista_productos_traslado');
+
+        $select = $this->sql->select();
+        $where = array();
+
+        if (!empty($idcategoria)){
+            $where['idcategoria'] = $idcategoria;
+        }
+
+        if (!empty($idmarca)){
+            $where['idmarca'] = $idmarca;
+        }
+
+
+        $select->where($where);
+
+        $statement = $this->sql->prepareStatementForSqlObject($select);
+        $results = $statement->execute();
+        if (!$results) {
+            return null;
+        }
+
+        $entityPrototype = new TrasladoLoteEntity();
         $hydrator = new ClassMethods();
         $resultset = new HydratingResultSet($hydrator, $entityPrototype);
         $resultset->initialize($results);

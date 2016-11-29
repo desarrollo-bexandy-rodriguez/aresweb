@@ -2,60 +2,177 @@
     <h1>Sistema de Pedidos Ares</h1>
 </div>
 
-<div class="jumbotron">
+<div class="jumbotron text-center">
+
+    <h3 class="text-center">Administración</h3>
 
     <div class="row placeholders">
 
-        <div class="col-xs-6 col-sm-6 col-md-6 placeholder">
-            <div class="panel panel-success">
-                <div class="panel-heading">
-                    <h3 class="panel-title">Módulo de Administración</h3>
-                </div>
-                <div class="panel-body text-center">
-                    <i class="icon-settingsthree-gears" style="font-size: 100px; "></i>
-                    <div class="btn-toolbar">
-                        <div class="btn-group btn-group-sm" role="group">
-                            <a class="btn btn-default" href="<?php echo $this->url('producto');?>" >Productos</a>
-                            <a class="btn btn-default" href="<?php echo $this->url('categoria');?>" >Categorias</a>
-                            <a class="btn btn-default" href="<?php echo $this->url('unidad-medida');?>" >Unid/Medida</a>
-                        </div>
-                        <div class="btn-group btn-group-sm" role="group">
-                            <a class="btn btn-default" href="<?php echo $this->url('TestAjax/default', array('action' => 'prueba' , 'controller' => 'skeleton')); ?>" >Productos Ajax</a>
-                            <a class="btn btn-default" href="<?php echo $this->url('almacen');?>" >Almacén</a>
-                        </div>
-                        <div class="btn-group btn-group-sm" role="group">
-                            <a class="btn btn-default" href="<?php echo $this->url('my-form'); ?>" >Cambiar Precios</a>
-                            <a class="btn btn-default" href="<?php echo $this->url('almacen');?>" >Almacén</a>
-                        </div>
+        <div class="col-xs-3 col-sm-3 col-md-3 placeholder">
+            <a href="<?php echo $this->url('zfcadmin/zfcuseradmin/list'); ?>">
+                <div class="panel panel-success">
+                    <div class="panel-heading">
+                        <h3 class="panel-title">Usuarios</h3>
+                    </div>
+                    <div class="panel-body text-center">
+                        <i class="icon-user" style="font-size: 100px; "></i>
                     </div>
                 </div>
-            </div>
+            </a>
         </div>
 
-
-        <div class="col-xs-6 col-sm-6 col-md-6 placeholder">
-            <div class="panel panel-success">
-                <div class="panel-heading">
-                    <h3 class="panel-title">Módulo de Reportes</h3>
-                </div>
-                <div class="panel-body text-center">
-                    <i class="icon-analytics-piechart" style="font-size: 100px; "></i>
-                    <div class="btn-toolbar">
-                        <div class="btn-group" role="group">
-                            <a class="btn btn-default" href="<?php echo $this->url('Reportes');?>" >Combo</a>
-                            <a class="btn btn-default" href="<?php echo $this->url('Reportes', array('controller' => 'Reportes/default','action' => 'headmap'));?>" >HeadMap</a>
-                            <a class="btn btn-default" href="<?php echo $this->url('Reportes', array('action' => 'column-stacked'));?>" >Column-Stacked</a>
-                            <a class="btn btn-default" href="<?php echo $this->url('Reportes', array('action' => 'pedidosDespachador'));?>" >Pedidos x Despachador</a>
-                            <a class="btn btn-default" href="<?php echo $this->url('Reportes', array('action' => 'torta'));?>" >Torta</a>
-                        </div>
+        <div class="col-xs-3 col-sm-3 col-md-3 placeholder">
+            <a href="<?php echo $this->url('categoria');?>">
+                <div class="panel panel-success">
+                    <div class="panel-heading">
+                        <h3 class="panel-title">Categorias</h3>
+                    </div>
+                    <div class="panel-body text-center">
+                        <i class="icon-favoritefolder" style="font-size: 100px; "></i>
                     </div>
                 </div>
-            </div>
+            </a>
+        </div>
+
+        <div class="col-xs-3 col-sm-3 col-md-3 placeholder">
+            <a href="<?php echo $this->url('unidad-medida');?>">
+                <div class="panel panel-success">
+                    <div class="panel-heading">
+                        <h3 class="panel-title">Unidades de Medida</h3>
+                    </div>
+                    <div class="panel-body text-center">
+                        <i class="icon-weight" style="font-size: 100px; "></i>
+                    </div>
+                </div>
+            </a>
+        </div>
+
+        <div class="col-xs-3 col-sm-3 col-md-3 placeholder">
+            <a href="<?php echo $this->url('unidad-medida');?>">
+                <div class="panel panel-success">
+                    <div class="panel-heading">
+                        <h3 class="panel-title">Marcas</h3>
+                    </div>
+                    <div class="panel-body text-center">
+                        <i class="icon-tags" style="font-size: 100px; "></i>
+                    </div>
+                </div>
+            </a>
         </div>
 
     </div>
 
+    <div class="row placeholders">
 
+        <div class="col-xs-3 col-sm-3 col-md-3 placeholder">
+            <a href="<?php echo $this->url('producto');?>">
+                <div class="panel panel-success">
+                    <div class="panel-heading">
+                        <h3 class="panel-title">Productos</h3>
+                    </div>
+                    <div class="panel-body text-center">
+                        <i class="icon-cube" style="font-size: 100px; "></i>
+                    </div>
+                </div>
+            </a>
+        </div>
+
+        <div class="col-xs-3 col-sm-3 col-md-3 placeholder">
+            <a href="<?php echo $this->url('TestAjax/default', array('action' => 'prueba' , 'controller' => 'skeleton')); ?>">
+                <div class="panel panel-success">
+                    <div class="panel-heading">
+                        <h3 class="panel-title">Productos Ajax</h3>
+                    </div>
+                    <div class="panel-body text-center">
+                        <i class="icon-clipboardalt" style="font-size: 100px; "></i>
+                    </div>
+                </div>
+            </a>
+        </div>
+
+        <div class="col-xs-3 col-sm-3 col-md-3 placeholder">
+            <a href="<?php echo $this->url('producto',array('action' => 'crear-producto')); ?>">
+                <div class="panel panel-success">
+                    <div class="panel-heading">
+                        <h3 class="panel-title">Crear Producto</h3>
+                    </div>
+                    <div class="panel-body text-center">
+                        <i class="icon-addtolist" style="font-size: 100px; "></i>
+                    </div>
+                </div>
+            </a>
+        </div>
+
+        <div class="col-xs-3 col-sm-3 col-md-3 placeholder">
+            <a href="<?php echo $this->url('my-form');?>">
+                <div class="panel panel-success">
+                    <div class="panel-heading">
+                        <h3 class="panel-title">Cambiar Precios</h3>
+                    </div>
+                    <div class="panel-body text-center">
+                        <i class="icon-cashregister" style="font-size: 100px; "></i>
+                    </div>
+                </div>
+            </a>
+        </div>
+
+    </div>
+
+    <div class="row placeholders">
+
+        <div class="col-xs-3 col-sm-3 col-md-3 placeholder">
+            <a href="<?php echo $this->url('almacen');?>">
+                <div class="panel panel-success">
+                    <div class="panel-heading">
+                        <h3 class="panel-title">Almacen</h3>
+                    </div>
+                    <div class="panel-body text-center">
+                        <i class="icon-home" style="font-size: 100px; "></i>
+                    </div>
+                </div>
+            </a>
+        </div>
+
+        <div class="col-xs-3 col-sm-3 col-md-3 placeholder">
+            <a href="<?php echo $this->url('almacen',array('action' => 'add')); ?>">
+                <div class="panel panel-success">
+                    <div class="panel-heading">
+                        <h3 class="panel-title">Crear Almacen</h3>
+                    </div>
+                    <div class="panel-body text-center">
+                        <i class="icon-createfile" style="font-size: 100px; "></i>
+                    </div>
+                </div>
+            </a>
+        </div>
+
+        <div class="col-xs-3 col-sm-3 col-md-3 placeholder">
+            <a href="<?php echo $this->url('ingreso-productos'); ?>">
+                <div class="panel panel-success">
+                    <div class="panel-heading">
+                        <h3 class="panel-title">Ingreso Productos</h3>
+                    </div>
+                    <div class="panel-body text-center">
+                        <i class="icon-enter" style="font-size: 100px; "></i>
+                    </div>
+                </div>
+            </a>
+        </div>
+
+        <div class="col-xs-3 col-sm-3 col-md-3 placeholder">
+            <a href="<?php echo $this->url('traslado-productos'); ?>">
+                <div class="panel panel-success">
+                    <div class="panel-heading">
+                        <h3 class="panel-title">Movimiento de Productos</h3>
+                    </div>
+                    <div class="panel-body text-center">
+                        <i class="icon-refresh" style="font-size: 100px; "></i>
+                    </div>
+                </div>
+            </a>
+        </div>
+
+    </div>
 
 </div>
 

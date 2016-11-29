@@ -16,6 +16,8 @@ return array(
             'Almacen\Controller\Almacen' => 'Almacen\Controller\AlmacenController',
             'Almacen\Controller\Inventario' => 'Almacen\Controller\InventarioController',
             'Almacen\Controller\Movimiento' => 'Almacen\Controller\MovimientoController',
+            'Almacen\Controller\Ingreso' => 'Almacen\Controller\IngresoController',
+            'Almacen\Controller\Traslado' => 'Almacen\Controller\TrasladoController',
         ),
     ),
     'router' => array(
@@ -67,6 +69,39 @@ return array(
                     'idproducto'    =>  '[0-9]*',
                 ),
             ),
+            'ingreso-productos'=> array(
+                'type'    => 'Segment',
+                'options' => array(
+                    'route'    => '/ingreso-productos[/:action[/:categoria][/:marca]]',
+                    'defaults' => array(
+                        '__NAMESPACE__' => 'Almacen\Controller',
+                        'controller'    => 'Ingreso',
+                        'action' =>  'index'
+                    ),
+                ),
+                'constraints' => array(
+                    'action'    =>  '(index|filtro)',
+                    'categoria'    =>  '[1-9][0-9]*',
+                    'marca'    =>  '[1-9][0-9]*',
+                ),
+            ),
+            'traslado-productos'=> array(
+                'type'    => 'Segment',
+                'options' => array(
+                    'route'    => '/traslado-productos[/:action[/:categoria][/:marca]]',
+                    'defaults' => array(
+                        '__NAMESPACE__' => 'Almacen\Controller',
+                        'controller'    => 'Traslado',
+                        'action' =>  'index'
+                    ),
+                ),
+                'constraints' => array(
+                    'action'    =>  '(index|filtro)',
+                    'categoria'    =>  '[1-9][0-9]*',
+                    'marca'    =>  '[1-9][0-9]*',
+                ),
+            ),
         ),
+
     ),
 );

@@ -15,6 +15,7 @@ use Zend\Authentication\Adapter\DbTable as DbTableAuthAdapter;
 use Zend\Authentication\AuthenticationService;
 use Zend\Mvc\ModuleRouteListener;
 use Zend\Mvc\MvcEvent;
+use Zend\Validator\AbstractValidator;
 
 class Module
 {
@@ -25,7 +26,11 @@ class Module
         $moduleRouteListener->attach($eventManager);
 
         $strategy = new RedirectionStrategy();
+        //$strategy->setRedirectRoute('/home');
         $eventManager->attach($strategy);
+
+        $translator = $e->getApplication()->getServiceManager()->get('translator');
+        AbstractValidator::setDefaultTranslator($translator);
     }
 
     public function getConfig()

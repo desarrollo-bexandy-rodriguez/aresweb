@@ -55,3 +55,12 @@ $(function () {
         }]
     });
 });
+
+$.getJSON("traer", {desde: $id, hasta: $hasta}, function (json) {
+    if (json.response == true) {
+        console.log("entre al json");
+        options.xAxis.categories = json.datos['categorias']; //xAxis: {categories: []}
+        options.series[0] = json.datos['series'];
+        chart = new Highcharts.Chart(options);
+    }
+});

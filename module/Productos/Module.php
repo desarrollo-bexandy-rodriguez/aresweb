@@ -7,6 +7,7 @@
  */
 namespace Productos;
 
+use Productos\Form\CrearProductoForm;
 use Productos\Form\CreateProduct;
 use Productos\Model\CategoriaMapper;
 use Productos\Model\MarcaMapper;
@@ -61,9 +62,20 @@ class Module implements
                 },
                 'CreateProduct' => function ($sm) {
                     $dbAdapter = $sm->get('Zend\Db\Adapter\Adapter');
-                    $mapper = new CreateProduct($dbAdapter);
+                    $categoriaMapper = $sm->get('CategoriaMapper');
+                    $marcaMapper = $sm->get('MarcaMapper');
+                    $mapper = new CreateProduct($dbAdapter, $categoriaMapper, $marcaMapper);
                     return $mapper;
                 },
+                'CrearProductoForm' => function ($sm) {
+                    $dbAdapter = $sm->get('Zend\Db\Adapter\Adapter');
+                    $categoriaMapper = $sm->get('CategoriaMapper');
+                    $marcaMapper = $sm->get('MarcaMapper');
+                    $medidaMapper = $sm->get('UnidadMedidaMapper');
+                    $mapper = new CrearProductoForm($dbAdapter, $categoriaMapper, $marcaMapper, $medidaMapper);
+                    return $mapper;
+                }
+
             ),
         );
     }

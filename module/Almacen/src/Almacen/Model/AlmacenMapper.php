@@ -90,6 +90,40 @@ class AlmacenMapper
         return $almacen;
     }
 
+    public function getAlmacenMayor()
+    {
+        $this->sql->setTable('vista_almacen');
+        $select = $this->sql->select();
+        $select->where(array('idtipoalmacen' => '1'));
+
+        $statement = $this->sql->prepareStatementForSqlObject($select);
+        $results = $statement->execute();
+
+        $entityPrototype = new AlmacenEntity();
+        $hydrator = new ClassMethods();
+        $resultset = new HydratingResultSet($hydrator, $entityPrototype);
+        $resultset->initialize($results);
+        return $resultset;
+
+    }
+
+    public function getAlmacenDetal()
+    {
+        $this->sql->setTable('vista_almacen');
+        $select = $this->sql->select();
+        $select->where(array('idtipoalmacen' => '2'));
+
+        $statement = $this->sql->prepareStatementForSqlObject($select);
+        $results = $statement->execute();
+
+        $entityPrototype = new AlmacenEntity();
+        $hydrator = new ClassMethods();
+        $resultset = new HydratingResultSet($hydrator, $entityPrototype);
+        $resultset->initialize($results);
+        return $resultset;
+
+    }
+
     public function deleteAlmacen($id)
     {
         $this->sql->setTable('almacen');
