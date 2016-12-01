@@ -13,9 +13,6 @@ return array(
                 'params' => array(
                     'host' => 'localhost',
                     'port' => '3306',
-                    'user' => 'root',
-                    'password' => 'p3lk4x',
-                    'dbname' => 'app_ares'
                 ),
             ),
         ),
