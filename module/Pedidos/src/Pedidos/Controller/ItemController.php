@@ -107,6 +107,7 @@ class ItemController extends AbstractActionController
         $form->get('seleccion')->setValue('cantidad');
         $form->get('precio')->setAttributes(array('readonly' => true, 'disabled' => true));
 
+        
         return array(
             'form' => $form,
             'producto' => $producto,
